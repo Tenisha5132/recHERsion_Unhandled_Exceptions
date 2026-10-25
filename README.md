@@ -39,6 +39,10 @@ The app is split into focused pages instead of one long screen:
 - `/privacy` — what is stored, what stays in the browser and what leaves the device
 - `/login` — optional display-name cookie; no password or email
 
+## Diagrams
+- [Multi-agent workflow](docs/multi_agent_workflow.mmd) — request path through router, safety, extraction, retrieval, insight, remedy, mood and final safety.
+- [Features and guardrails](docs/features_and_guardrails.mmd) — what was added and the safety/privacy protections kept in place.
+
 ## Seed
 ```bash
 make seed
