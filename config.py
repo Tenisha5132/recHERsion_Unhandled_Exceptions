@@ -72,4 +72,5 @@ REDIS_URL = os.getenv("REDIS_URL", "")
 TOP_K = 3
 MIN_RETRIEVAL_SCORE = env_float("MIN_RETRIEVAL_SCORE", 0.30, minimum=0.0, maximum=1.0)
 CHUNK_WORDS = 170
+MAX_MESSAGE_CHARS = 2000
 EMBED_MODEL = "all-MiniLM-L6-v2"

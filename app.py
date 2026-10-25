@@ -16,6 +16,7 @@ from health import health_snapshot
 from observability import RequestIdMiddleware
 from security import SecurityHeadersMiddleware
 from support import EMERGENCY_INDIA, FIND_A_HELPLINE, TELE_MANAS, build_support
+from validation import validate_message
 from sounds import SOUND_PROFILES, ensure_builtin_sounds, sound_cards, write_sound
 
 app = FastAPI(title="recHERsion MVP")
@@ -343,9 +344,10 @@ async def api_chat(request: Request):
         data = await request.json()
     except Exception:
         return JSONResponse({'error': 'Invalid JSON'}, status_code=400)
-    message = str((data or {}).get('message') or '').strip()
-    if not message:
-        return JSONResponse({'error': 'message is required'}, status_code=400)
+    payload = data if isinstance(data, dict) else {}
+    message, error, status = validate_message(payload.get('message'))
+    if error:
+        return JSONResponse({'error': error}, status_code=status)
     anon = get_anon_id(request)
     result = orch.run(message, anon_id=anon)
     resp = JSONResponse(build_api_payload(result, message))
@@ -355,6 +357,9 @@ async def api_chat(request: Request):
 
 @app.post("/chat")
 async def chat(request: Request, message: str = Form(...)):
+    message, error, status = validate_message(message)
+    if error:
+        raise HTTPException(status_code=status, detail=error)
     anon = get_anon_id(request)
     res = orch.run(message, anon_id=anon)
     resp = templates.TemplateResponse(request, "chat_result.html", {
