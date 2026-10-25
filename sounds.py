@@ -24,6 +24,19 @@ SOUND_PROFILES = [
         'volume': 0.55,
         'drift': 0.22,
     },
+    {
+        'slug': 'deep-focus',
+        'title': 'Deep focus',
+        'category': 'Focus',
+        'icon': '🎯',
+        'description': 'A steady, low pulse for one task at a time.',
+        'kind': 'pulse',
+        'duration': 12.0,
+        'frequencies': [110.0, 220.0, 330.0],
+        'volume': 0.46,
+        'drift': 0.08,
+        'beat': 0.5,
+    },
 ]
 
 
