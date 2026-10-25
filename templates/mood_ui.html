@@ -36,6 +36,11 @@ body {
 #urgentBar { background: #8f1810; font-size: 1rem; padding: 12px 16px; }
 
 header.top { display: flex; align-items: center; gap: 18px; padding: 22px 22px 8px; max-width: 880px; width: 100%; margin: 0 auto; }
+.top-actions { margin-left: auto; display: flex; align-items: center; justify-content: flex-end; flex-wrap: wrap; gap: 8px; }
+.top-actions button, .top-actions a.ghost-link { min-height: 38px; padding: 6px 12px; border-radius: 10px; font-size: .82rem; font-weight: 700; }
+.top-actions a.ghost-link { border: 2px solid var(--accent); color: var(--accent); text-decoration: none; display: inline-flex; align-items: center; }
+.user-chip { max-width: 150px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: .84rem; font-weight: 700; color: var(--accent); }
+.top-actions form { margin: 0; }
 .orb {
   flex: none; width: 76px; height: 76px; border-radius: 50%; display: grid; place-items: center;
   font-size: 2.3rem; background: var(--paper); border: 3px solid var(--accent);
@@ -100,7 +105,8 @@ button:disabled { opacity: .55; cursor: wait; }
 .try button { padding: 4px 10px; font-size: .82rem; margin: 3px 4px 0 0; font-weight: 600; }
 
 @media (max-width: 560px) {
-  header.top { padding: 16px 14px 4px; gap: 12px; } .orb { width: 60px; height: 60px; font-size: 1.8rem; }
+  header.top { padding: 16px 14px 4px; gap: 12px; flex-wrap: wrap; } .orb { width: 60px; height: 60px; font-size: 1.8rem; }
+  .top-actions { width: 100%; margin-left: 0; justify-content: flex-start; }
   main { padding: 6px 14px 16px; } .msg { max-width: 100%; }
   .support-card { flex-direction: column; } .support-card a { align-self: flex-start; }
 }
@@ -118,6 +124,15 @@ button:disabled { opacity: .55; cursor: wait; }
   <div class="brand">
     <h1>rec<b>HER</b>sion</h1>
     <p id="moodLabel" aria-live="polite">Tell me how you have been feeling.</p>
+  </div>
+  <div class="top-actions">
+    <button type="button" class="ghost" id="soundBtn" aria-pressed="false">Play calm sound</button>
+    {% if display_name %}
+    <span class="user-chip" title="{{ display_name }}">Hi, {{ display_name }}</span>
+    <form method="post" action="/logout"><button type="submit" class="ghost">Log out</button></form>
+    {% else %}
+    <a class="ghost-link" href="/login">Sign in</a>
+    {% endif %}
   </div>
 </header>
 
@@ -163,10 +178,134 @@ const MOODS = {
   trace:   [{ agent, mode: 'rules|llm|fallback', summary, ms }]
 } */
 
+const USER_NAME = {{ display_name|default('', true)|tojson }};
 const $ = id => document.getElementById(id);
 const log = $('log'), form = $('form'), msg = $('msg'), sendBtn = $('sendBtn');
 function h(tag, cls, text) { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
 function safeUrl(u) { return /^https?:\/\//i.test(u || '') ? u : null; }
+
+/* ---------- Calm sound engine ---------- */
+const SOUND_CHORDS = {
+  neutral:  [261.63, 329.63, 392.00],
+  mild:     [293.66, 369.99, 440.00],
+  low:      [220.00, 261.63, 329.63, 392.00],
+  discuss:  [174.61, 220.00, 261.63, 349.23],
+  distress: [220.00, 261.63, 329.63],
+  urgent:   []
+};
+const soundEngine = (() => {
+  let audio = null, master = null, voices = [], enabled = false, current = 'neutral', clearTimer = null;
+  function ensure() {
+    if (!audio) {
+      const AudioCtor = window.AudioContext || window.webkitAudioContext;
+      if (!AudioCtor) return false;
+      audio = new AudioCtor();
+      master = audio.createGain();
+      master.gain.value = 0.0001;
+      master.connect(audio.destination);
+    }
+    if (audio.state === 'suspended') audio.resume();
+    return true;
+  }
+  function disconnectVoices() {
+    voices.forEach(v => { try { v.stop(); } catch (e) {} try { v.disconnect(); } catch (e) {} });
+    voices = [];
+  }
+  function build(theme) {
+    if (clearTimer) { clearTimeout(clearTimer); clearTimer = null; }
+    disconnectVoices();
+    const chord = SOUND_CHORDS[theme] || SOUND_CHORDS.neutral;
+    if (!audio || !chord.length) return;
+    const now = audio.currentTime;
+    const filter = audio.createBiquadFilter();
+    filter.type = 'lowpass';
+    filter.frequency.value = theme === 'distress' ? 650 : 900;
+    filter.Q.value = 0.5;
+    filter.connect(master);
+    const delay = audio.createDelay(1.2);
+    delay.delayTime.value = 0.42;
+    const feedback = audio.createGain();
+    feedback.gain.value = 0.2;
+    const wet = audio.createGain();
+    wet.gain.value = 0.16;
+    filter.connect(delay); delay.connect(feedback); feedback.connect(delay); delay.connect(wet); wet.connect(master);
+    chord.forEach((frequency, index) => {
+      const osc = audio.createOscillator();
+      osc.type = index === 0 ? 'sine' : 'triangle';
+      osc.frequency.value = frequency;
+      osc.detune.value = index % 2 ? 3 : -3;
+      const voiceGain = audio.createGain();
+      voiceGain.gain.value = 0;
+      voiceGain.gain.linearRampToValueAtTime(0.03 / Math.sqrt(chord.length), now + 2.2);
+      osc.connect(voiceGain); voiceGain.connect(filter);
+      osc.start(now);
+      voices.push({
+        stop: () => osc.stop(),
+        disconnect: () => { osc.disconnect(); voiceGain.disconnect(); }
+      });
+    });
+    if (theme === 'distress' || theme === 'low') {
+      const lfo = audio.createOscillator();
+      const lfoGain = audio.createGain();
+      lfo.frequency.value = theme === 'distress' ? 0.125 : 0.08;
+      lfoGain.gain.value = theme === 'distress' ? 220 : 110;
+      lfo.connect(lfoGain); lfoGain.connect(filter.frequency);
+      lfo.start(now);
+      voices.push({
+        stop: () => lfo.stop(),
+        disconnect: () => { lfo.disconnect(); lfoGain.disconnect(); }
+      });
+    }
+    voices.push({
+      stop: () => {},
+      disconnect: () => { filter.disconnect(); delay.disconnect(); feedback.disconnect(); wet.disconnect(); }
+    });
+  }
+  function fadeMaster(target, seconds) {
+    if (!audio || !master) return;
+    const now = audio.currentTime;
+    master.gain.cancelScheduledValues(now);
+    master.gain.setValueAtTime(Math.max(master.gain.value, 0.0001), now);
+    master.gain.exponentialRampToValueAtTime(Math.max(target, 0.0001), now + seconds);
+  }
+  function play(theme) {
+    current = theme;
+    if (!enabled || !ensure()) return;
+    if (!SOUND_CHORDS[theme] || !SOUND_CHORDS[theme].length) { fadeMaster(0.0001, 0.4); return; }
+    build(theme);
+    fadeMaster(0.5, 1.8);
+  }
+  function toggle(theme) {
+    if (enabled) {
+      enabled = false;
+      fadeMaster(0.0001, 0.7);
+      clearTimer = setTimeout(() => { disconnectVoices(); clearTimer = null; }, 800);
+      return false;
+    }
+    enabled = true;
+    play(theme);
+    return true;
+  }
+  function setTheme(theme) {
+    current = theme;
+    if (enabled) play(theme);
+  }
+  return { toggle, setTheme, get enabled() { return enabled; } };
+})();
+
+function syncSoundButton(theme) {
+  const btn = $('soundBtn');
+  if (!btn) return;
+  if (theme === 'urgent') {
+    btn.disabled = true;
+    btn.textContent = 'Sound paused';
+    btn.setAttribute('aria-pressed', 'false');
+    return;
+  }
+  btn.disabled = false;
+  btn.textContent = soundEngine.enabled ? 'Pause calm sound' : 'Play calm sound';
+  btn.setAttribute('aria-pressed', soundEngine.enabled ? 'true' : 'false');
+}
 
 /* ---------- Mood engine ---------- */
 function applyMood(theme, emoji) {
@@ -176,6 +315,8 @@ function applyMood(theme, emoji) {
   orb.classList.remove('pop'); void orb.offsetWidth; orb.classList.add('pop');
   $('moodLabel').textContent = MOODS[theme].label;
   $('urgentBar').hidden = theme !== 'urgent';
+  soundEngine.setTheme(theme);
+  syncSoundButton(theme);
 }
 
 /* ---------- Rendering ---------- */
@@ -319,6 +460,12 @@ async function send(text) {
 }
 form.addEventListener('submit', e => { e.preventDefault(); const v = msg.value.trim(); if (!v) return; msg.value = ''; send(v); });
 msg.addEventListener('keydown', e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); form.requestSubmit(); } });
+$('soundBtn').addEventListener('click', () => {
+  const theme = document.documentElement.dataset.mood || 'neutral';
+  if (theme === 'urgent') return;
+  soundEngine.toggle(theme);
+  syncSoundButton(theme);
+});
 
 $('delBtn').addEventListener('click', async () => {
   if (!confirm('Delete all your saved entries? This cannot be undone.')) return;
@@ -330,7 +477,8 @@ $('delBtn').addEventListener('click', async () => {
 Object.keys(MOODS).forEach(k => { const b = h('button', 'ghost', k); b.type = 'button'; b.addEventListener('click', () => applyMood(k)); $('try').appendChild(b); });
 
 function greet(extra) {
-  const b = h('div', 'msg bot'); b.appendChild(h('p', null, (extra ? extra + ' ' : '') + 'Describe your symptoms in your own words. I will log them, look for patterns, and cite the sources I use.'));
+  const hello = USER_NAME ? 'Hi ' + USER_NAME + '. ' : '';
+  const b = h('div', 'msg bot'); b.appendChild(h('p', null, (extra ? extra + ' ' : '') + hello + 'Describe your symptoms in your own words. I will log them, look for patterns, and cite the sources I use.'));
   log.appendChild(b);
 }
 greet();
