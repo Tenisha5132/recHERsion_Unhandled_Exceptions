@@ -6,7 +6,7 @@ from datetime import datetime, timezone
 from urllib.parse import quote, unquote
 
 from fastapi import FastAPI, Request, Form, HTTPException
-from fastapi.responses import HTMLResponse, FileResponse, RedirectResponse, JSONResponse
+from fastapi.responses import HTMLResponse, FileResponse, RedirectResponse, JSONResponse, PlainTextResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from starlette.exceptions import HTTPException as StarletteHTTPException
@@ -306,6 +306,11 @@ async def unhandled_error_handler(request: Request, exc: Exception):
         "display_name": get_display_name(request),
         "nav_page": "",
     }, status_code=500)
+
+
+@app.get("/robots.txt", response_class=PlainTextResponse)
+async def robots():
+    return PlainTextResponse("User-agent: *\nDisallow: /\n")
 
 
 @app.get("/healthz")

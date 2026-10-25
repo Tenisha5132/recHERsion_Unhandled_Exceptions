@@ -1,10 +1,11 @@
+import asyncio
 import sys
 import unittest
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from app import app, templates
+from app import app, robots, templates
 
 ROOT = Path(__file__).resolve().parents[1]
 TEMPLATES = ROOT / 'templates'
@@ -30,6 +31,11 @@ class TestSitePages(unittest.TestCase):
     def test_generic_error_template_is_registered(self):
         self.assertIn(Exception, app.exception_handlers)
         self.assertIn('Something went wrong', (TEMPLATES / '500.html').read_text())
+
+    def test_robots_file_disallows_crawling(self):
+        self.assertIn('/robots.txt', {route.path for route in app.routes})
+        response = asyncio.run(robots())
+        self.assertIn(b'Disallow: /', response.body)
 
     def test_generated_sound_route_exists(self):
         paths = {route.path for route in app.routes}
