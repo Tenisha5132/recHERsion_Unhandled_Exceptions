@@ -75,6 +75,21 @@ SOUND_PROFILES = [
         'volume': 0.56,
         'drift': 0.08,
     },
+    {
+        'slug': 'rain-on-leaves',
+        'title': 'Rain on leaves',
+        'category': 'Nature',
+        'icon': '🌧️',
+        'description': 'Soft rain texture with a warm pad underneath.',
+        'kind': 'rain',
+        'duration': 16.0,
+        'frequencies': [196.0, 261.6],
+        'volume': 0.48,
+        'drift': 0.1,
+        'noise': 0.55,
+        'noise_mode': 'brown',
+        'noise_tone': 196.0,
+    },
 ]
 
 
