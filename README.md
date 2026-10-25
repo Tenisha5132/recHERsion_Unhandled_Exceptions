@@ -7,17 +7,27 @@ recHERsion MVP is a multi-agent RAG app for PS1 "Women's Healthcare" (gaps in di
 ```
 User (Browser) -> FastAPI (app.py)
                     |-> Orchestrator
-                        |-> router -> safety(1) -> extraction -> tracker(save) -> retriever -> insight -> remedy -> mood -> safety(2)
+                        |-> router -> safety(1) -> extraction
+                        |     |-> women's health: tracker(save) -> retriever -> insight -> remedy -> mood -> safety(2)
+                        |     |-> general/off-topic: general -> mood -> safety(2)
                     |-> SQLite (tracker.py)
                     |-> RAG (ingest.py, retriever.py) using knowledge_base/ + embeddings/BM25
+                    |-> Optional OpenAI-compatible LLM/SLM (llm_client.py)
                     |-> Templates/Static (HTML/CSS/JS pages)
                     |-> PDF summary (summary_pdf.py via reportlab)
 ```
 
 ## Setup
 ```bash
-pip install fastapi uvicorn pyyaml sentence-transformers rank_bm25 numpy reportlab jinja2 python-multipart
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
 cp .env.example .env
+```
+
+Semantic embeddings are optional. Without them the app uses BM25:
+```bash
+pip install -r requirements-embeddings.txt
 ```
 
 ## Run
@@ -28,6 +38,44 @@ make run
 # or
 uvicorn app:app --host 0.0.0.0 --port 8000
 ```
+
+## Scope-aware replies
+The router keeps menstrual and reproductive health separate from general health:
+
+- Period, cycle, bleeding, pelvic pain, fertility, pregnancy and menopause messages use the KB-grounded RAG path.
+- A cold, cough, headache or other general symptom gets a general-health reply and GP/pharmacy support, without unrelated period sources.
+- Off-topic messages get a short scope reply and no care cards.
+- Urgent red flags and distress language still override every other route.
+- Retrieval now applies stopword filtering and a relevance floor, so unrelated messages do not receive citations.
+
+## LLM / SLM setup
+The app works without a model key. To enable an OpenAI-compatible hosted model or a local SLM, edit `.env`:
+
+```bash
+LLM_API_KEY=your-key
+LLM_MODEL=gpt-4o-mini
+LLM_BASE_URL=https://api.openai.com/v1
+```
+
+For a local Ollama-style endpoint:
+
+```bash
+LLM_API_KEY=
+LLM_MODEL=your-local-model
+LLM_BASE_URL=http://localhost:11434/v1
+```
+
+The LLM is optional and is used for ambiguous routing and general/off-topic replies. Safety checks, red-flag overrides, retrieval and the women's-health insight path remain rule-based.
+
+## Deployment
+`requirements.txt` and `Procfile` are included. A typical hosted setup:
+
+```bash
+pip install -r requirements.txt
+uvicorn app:app --host 0.0.0.0 --port $PORT
+```
+
+Set `LLM_API_KEY`, `LLM_MODEL`, `LLM_BASE_URL`, `LLM_TIMEOUT` and `MIN_RETRIEVAL_SCORE` in the host environment. Do not commit `.env`. Attach a persistent disk if the deployment needs saved journal entries to survive restarts, because SQLite is stored at `data/app.db`.
 
 ## Pages
 The app is split into focused pages instead of one long screen:
@@ -40,7 +88,7 @@ The app is split into focused pages instead of one long screen:
 - `/login` — optional display-name cookie; no password or email
 
 ## Diagrams
-- [Multi-agent workflow](docs/multi_agent_workflow.mmd) — request path through router, safety, extraction, retrieval, insight, remedy, mood and final safety.
+- [Multi-agent workflow](docs/multi_agent_workflow.mmd) — request path through router, safety, extraction, the women's-health RAG branch, the general/off-topic branch, mood and final safety.
 - [Features and guardrails](docs/features_and_guardrails.mmd) — what was added and the safety/privacy protections kept in place.
 
 ## Seed
@@ -67,12 +115,13 @@ The `/sounds` page includes 15 generated ambient loops: calm, focus, sleep, brea
 - Audio is a comfort tool, not treatment.
 
 ## Agents
-- router: classify message
+- router: classify message as women's health, general health, off-topic, urgent or distress
 - safety: red flags + distress first and last; strips diagnostic claims
 - extraction: free text -> structured JSON with nulls
-- retriever: top-3 chunks + recent log entries
+- retriever: top-3 relevant chunks + recent log entries, with a relevance floor
 - insight: rules-based, cites chunks, age-aware, suggests pregnancy test when relevant, never diagnoses
 - remedy: safe self-care from KB only
+- general: non-period health replies, using an optional LLM or a safe rules fallback
 - mood: deterministic, jokes only for mild non-pain cases when safe
 
 ## Privacy & Limitations
@@ -87,7 +136,7 @@ The `/sounds` page includes 15 generated ambient loops: calm, focus, sleep, brea
 ### Libraries
 - FastAPI, Uvicorn, Jinja2, python-multipart - ASGI/web
 - PyYAML - rules/config
-- sentence-transformers (all-MiniLM-L6-v2) - embeddings
+- sentence-transformers (all-MiniLM-L6-v2) - optional embeddings
 - rank_bm25 - BM25 fallback
 - numpy - cosine similarity
 - reportlab - PDF
