@@ -174,6 +174,21 @@ SOUND_PROFILES = [
         'chimes': [0.6, 4.4, 8.2, 12.1],
         'chime_frequencies': [523.25, 659.25, 783.99],
     },
+    {
+        'slug': 'night-rain',
+        'title': 'Night rain',
+        'category': 'Sleep',
+        'icon': '🌙',
+        'description': 'Deeper rain and a quiet drone for late nights.',
+        'kind': 'rain',
+        'duration': 20.0,
+        'frequencies': [65.4, 98.0],
+        'volume': 0.44,
+        'drift': 0.08,
+        'noise': 0.6,
+        'noise_mode': 'brown',
+        'noise_tone': 65.4,
+    },
 ]
 
 
