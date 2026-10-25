@@ -9,8 +9,9 @@ DATA_DIR.mkdir(parents=True, exist_ok=True)
 
 
 def get_conn():
-    conn = sqlite3.connect(str(DB_PATH))
+    conn = sqlite3.connect(str(DB_PATH), timeout=10.0)
     conn.row_factory = sqlite3.Row
+    conn.execute('PRAGMA busy_timeout=10000')
     return conn
 
 
@@ -26,6 +27,8 @@ def db_connection():
 def init_db():
     with db_connection() as conn:
         cur = conn.cursor()
+        cur.execute('PRAGMA journal_mode=WAL')
+        cur.execute('PRAGMA synchronous=NORMAL')
         cur.execute('''CREATE TABLE IF NOT EXISTS entries (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             anonymous_user_id TEXT,
@@ -33,6 +36,8 @@ def init_db():
             raw_text TEXT,
             extracted_json TEXT
         )''')
+        cur.execute('''CREATE INDEX IF NOT EXISTS idx_entries_anon_created
+            ON entries (anonymous_user_id, created_at DESC)''')
         conn.commit()
 
 

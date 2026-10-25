@@ -45,6 +45,26 @@ class TestTracker(unittest.TestCase):
             tracker.save_entry('anon-1', f'entry {index}', {})
         self.assertEqual(len(tracker.get_recent_entries('anon-1', limit=5)), 5)
 
+    def test_database_uses_wal_and_has_lookup_index(self):
+        tracker.init_db()
+        with tracker.db_connection() as conn:
+            self.assertEqual(conn.execute('PRAGMA journal_mode').fetchone()[0].lower(), 'wal')
+            self.assertEqual(conn.execute('PRAGMA busy_timeout').fetchone()[0], 10000)
+            indexes = {row['name'] for row in conn.execute('PRAGMA index_list(entries)')}
+        self.assertIn('idx_entries_anon_created', indexes)
+
+    def test_lookup_uses_the_anonymous_index(self):
+        tracker.init_db()
+        with tracker.db_connection() as conn:
+            plan = ' '.join(
+                row['detail'] for row in conn.execute(
+                    'EXPLAIN QUERY PLAN SELECT * FROM entries '
+                    'WHERE anonymous_user_id=? ORDER BY created_at DESC LIMIT 5',
+                    ('anon-1',),
+                )
+            )
+        self.assertIn('idx_entries_anon_created', plan)
+
 
 if __name__ == '__main__':
     unittest.main(verbosity=2)
