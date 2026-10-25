@@ -120,6 +120,21 @@ SOUND_PROFILES = [
         'noise_mode': 'brown',
         'noise_tone': 65.4,
     },
+    {
+        'slug': 'pink-noise',
+        'title': 'Pink noise',
+        'category': 'Noise',
+        'icon': '🌸',
+        'description': 'A softer, balanced hiss for busy rooms.',
+        'kind': 'noise',
+        'duration': 16.0,
+        'frequencies': [82.5, 130.8],
+        'volume': 0.42,
+        'drift': 0.04,
+        'noise': 0.5,
+        'noise_mode': 'pink',
+        'noise_tone': 82.5,
+    },
 ]
 
 
