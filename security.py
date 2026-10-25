@@ -4,6 +4,16 @@ SECURITY_HEADERS = {
     b'referrer-policy': b'strict-origin-when-cross-origin',
     b'permissions-policy': b'geolocation=(self), camera=(), microphone=()',
     b'cross-origin-opener-policy': b'same-origin',
+    b'cross-origin-resource-policy': b'same-origin',
+    b'x-permitted-cross-domain-policies': b'none',
+    b'x-robots-tag': b'noindex, nofollow',
+    b'content-security-policy': (
+        b"default-src 'self'; base-uri 'self'; object-src 'none'; "
+        b"frame-ancestors 'none'; form-action 'self'; "
+        b"img-src 'self' data:; media-src 'self' blob:; "
+        b"style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; "
+        b"connect-src 'self'"
+    ),
 }
 
 

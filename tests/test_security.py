@@ -29,6 +29,10 @@ class TestSecurityHeaders(unittest.TestCase):
         for key, value in SECURITY_HEADERS.items():
             self.assertEqual(headers[key], value)
         self.assertEqual(headers[b'content-type'], b'text/plain')
+        csp = headers[b'content-security-policy'].decode('ascii')
+        self.assertIn("default-src 'self'", csp)
+        self.assertIn("frame-ancestors 'none'", csp)
+        self.assertIn("media-src 'self' blob:", csp)
 
     def test_headers_do_not_duplicate_existing_values(self):
         async def inner(scope, receive, send):
