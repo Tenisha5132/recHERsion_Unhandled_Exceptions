@@ -22,16 +22,21 @@ class TestSitePages(unittest.TestCase):
         for path in ['/', '/sounds', '/support', '/timeline', '/privacy', '/login', '/logout']:
             self.assertIn(path, paths)
 
+    def test_custom_404_template_is_registered(self):
+        from starlette.exceptions import HTTPException as StarletteHTTPException
+        self.assertIn(StarletteHTTPException, app.exception_handlers)
+        self.assertIn('This page is not here', (TEMPLATES / '404.html').read_text())
+
     def test_generated_sound_route_exists(self):
         paths = {route.path for route in app.routes}
         self.assertIn('/media/sounds/{slug}.wav', paths)
 
     def test_page_templates_compile(self):
-        for name in ['mood_ui.html', 'sounds.html', 'support.html', 'timeline.html', 'privacy.html', 'login.html']:
+        for name in ['mood_ui.html', 'sounds.html', 'support.html', 'timeline.html', 'privacy.html', 'login.html', '404.html']:
             templates.env.get_template(name)
 
     def test_pages_share_navigation(self):
-        for name in ['mood_ui.html', 'sounds.html', 'support.html', 'timeline.html', 'privacy.html', 'login.html']:
+        for name in ['mood_ui.html', 'sounds.html', 'support.html', 'timeline.html', 'privacy.html', 'login.html', '404.html']:
             text = (TEMPLATES / name).read_text()
             self.assertIn('_nav.html', text, name)
 

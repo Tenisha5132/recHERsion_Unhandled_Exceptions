@@ -7,6 +7,7 @@ from fastapi import FastAPI, Request, Form, HTTPException
 from fastapi.responses import HTMLResponse, FileResponse, RedirectResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
+from starlette.exceptions import HTTPException as StarletteHTTPException
 
 from config import STATIC_DIR, TEMPLATES_DIR, ANON_ID_COOKIE, DISPLAY_NAME_COOKIE, SOUNDS_DIR, MAX_MESSAGE_CHARS, COOKIE_MAX_AGE, COOKIE_SECURE
 from orchestrator import Orchestrator
@@ -270,6 +271,16 @@ def build_api_payload(res, message):
         'support': _support_payload(res, theme),
         'trace': _trace_payload(res)
     }
+
+
+@app.exception_handler(StarletteHTTPException)
+async def http_error_handler(request: Request, exc: StarletteHTTPException):
+    if exc.status_code == 404 and not request.url.path.startswith('/api/'):
+        return templates.TemplateResponse(request, "404.html", {
+            "display_name": get_display_name(request),
+            "nav_page": "",
+        }, status_code=404)
+    return JSONResponse({'detail': exc.detail}, status_code=exc.status_code)
 
 
 @app.get("/healthz")
