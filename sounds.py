@@ -148,6 +148,18 @@ SOUND_PROFILES = [
         'drift': 0.06,
         'beat': 0.75,
     },
+    {
+        'slug': 'evening-ease',
+        'title': 'Evening ease',
+        'category': 'Calm',
+        'icon': '🕯️',
+        'description': 'Warm, low tones for the end of a long day.',
+        'kind': 'pad',
+        'duration': 16.0,
+        'frequencies': [174.6, 220.0, 261.6, 349.2],
+        'volume': 0.5,
+        'drift': 0.16,
+    },
 ]
 
 
