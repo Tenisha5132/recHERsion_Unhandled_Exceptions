@@ -328,7 +328,12 @@ async def api_chat(request: Request):
 async def chat(request: Request, message: str = Form(...)):
     anon = get_anon_id(request)
     res = orch.run(message, anon_id=anon)
-    resp = templates.TemplateResponse(request, "chat_result.html", {"result": res, "disclaimer": DISCLAIMER})
+    resp = templates.TemplateResponse(request, "chat_result.html", {
+        "result": res,
+        "display_name": get_display_name(request),
+        "nav_page": "chat",
+        "disclaimer": DISCLAIMER
+    })
     resp.set_cookie(ANON_ID_COOKIE, anon)
     return resp
 
