@@ -105,6 +105,21 @@ SOUND_PROFILES = [
         'noise_mode': 'brown',
         'noise_tone': 98.0,
     },
+    {
+        'slug': 'brown-noise',
+        'title': 'Brown noise',
+        'category': 'Noise',
+        'icon': '🟤',
+        'description': 'A warm, low hiss that masks background sound.',
+        'kind': 'noise',
+        'duration': 16.0,
+        'frequencies': [65.4, 98.0],
+        'volume': 0.46,
+        'drift': 0.05,
+        'noise': 0.55,
+        'noise_mode': 'brown',
+        'noise_tone': 65.4,
+    },
 ]
 
 
