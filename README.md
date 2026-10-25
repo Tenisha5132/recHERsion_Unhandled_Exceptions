@@ -53,6 +53,15 @@ make ingest
 python ingest.py
 ```
 
+## Sound library
+The `/sounds` page includes 15 generated ambient loops: calm, focus, sleep, breathing, grounding, nature, noise, uplift and mindful categories. The WAV files are generated locally on first use by `sounds.py`; they are not committed to git.
+
+- The built-in player supports volume, looping and a 15/30/60/90 minute sleep timer.
+- Your own music can be added with the file picker.
+- Uploaded audio stays in the browser using IndexedDB. It is not uploaded to the server.
+- Removing a track deletes it from that browser.
+- Audio is a comfort tool, not treatment.
+
 ## Agents
 - router: classify message
 - safety: red flags + distress first and last; strips diagnostic claims
