@@ -1,6 +1,7 @@
 import asyncio
 import re
 import uuid
+from datetime import datetime, timezone
 from urllib.parse import quote, unquote
 
 from fastapi import FastAPI, Request, Form, HTTPException
@@ -9,7 +10,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
-from config import STATIC_DIR, TEMPLATES_DIR, ANON_ID_COOKIE, DISPLAY_NAME_COOKIE, SOUNDS_DIR, MAX_MESSAGE_CHARS, MAX_REQUEST_BYTES, COOKIE_MAX_AGE, COOKIE_SECURE
+from config import APP_VERSION, STATIC_DIR, TEMPLATES_DIR, ANON_ID_COOKIE, DISPLAY_NAME_COOKIE, SOUNDS_DIR, MAX_MESSAGE_CHARS, MAX_REQUEST_BYTES, COOKIE_MAX_AGE, COOKIE_SECURE
 from orchestrator import Orchestrator
 from tracker import delete_entries, get_entries, init_db
 from disclaimer import DISCLAIMER
@@ -262,6 +263,15 @@ def _support_payload(res, theme):
     return build_support(theme, res)
 
 
+def _export_payload(anon_id):
+    return {
+        'app': 'recHERsion',
+        'version': APP_VERSION,
+        'exported_at': datetime.now(timezone.utc).isoformat(timespec='seconds'),
+        'entries': get_entries(anon_id, limit=100),
+    }
+
+
 def build_api_payload(res, message):
     theme = _theme_for(res, message)
     return {
@@ -426,6 +436,16 @@ async def timeline(request: Request):
         "display_name": get_display_name(request),
         "nav_page": "journal",
         "disclaimer": DISCLAIMER
+    })
+    _set_anon_cookie(resp, anon)
+    return resp
+
+
+@app.get("/export.json")
+async def export_data(request: Request):
+    anon = get_anon_id(request)
+    resp = JSONResponse(_export_payload(anon), headers={
+        'Content-Disposition': 'attachment; filename="rechersion-journal.json"',
     })
     _set_anon_cookie(resp, anon)
     return resp

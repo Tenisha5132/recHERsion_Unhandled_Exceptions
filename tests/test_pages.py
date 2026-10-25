@@ -71,7 +71,7 @@ class TestSitePages(unittest.TestCase):
 
     def test_journal_page_has_empty_state_and_actions(self):
         text = (TEMPLATES / 'timeline.html').read_text()
-        for marker in ['Your journal is quiet', 'Download doctor summary', 'Delete my data']:
+        for marker in ['Your journal is quiet', 'Download doctor summary', 'Download JSON copy', 'Delete my data']:
             self.assertIn(marker, text)
 
 
