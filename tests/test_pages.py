@@ -40,6 +40,13 @@ class TestSitePages(unittest.TestCase):
             text = (TEMPLATES / name).read_text()
             self.assertIn('_nav.html', text, name)
 
+    def test_pages_have_skip_link_target(self):
+        nav = (TEMPLATES / '_nav.html').read_text()
+        self.assertIn('class="skip-link"', nav)
+        self.assertIn('href="#main"', nav)
+        for name in ['mood_ui.html', 'sounds.html', 'support.html', 'timeline.html', 'privacy.html', 'login.html']:
+            self.assertIn('id="main"', (TEMPLATES / name).read_text(), name)
+
     def test_navigation_links_all_primary_pages(self):
         text = (TEMPLATES / '_nav.html').read_text()
         for path in ['href="/"', 'href="/sounds"', 'href="/timeline"', 'href="/support"', 'href="/privacy"']:

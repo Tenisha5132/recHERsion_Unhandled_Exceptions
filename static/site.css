@@ -22,6 +22,22 @@ body.site-page {
     var(--site-bg);
 }
 
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 100;
+  padding: 10px 14px;
+  border-radius: 0 0 10px 0;
+  background: #fff;
+  color: var(--site-accent);
+  font-weight: 800;
+}
+
+.skip-link:focus {
+  left: 0;
+}
+
 .site-nav {
   position: sticky;
   top: 0;
