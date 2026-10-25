@@ -1,0 +1,20 @@
+<nav class="site-nav" aria-label="Primary">
+  <div class="site-nav-inner">
+    <a class="site-brand" href="/">rec<b>HER</b>sion</a>
+    <div class="site-links">
+      <a href="/" {% if nav_page == 'chat' %}aria-current="page"{% endif %}>Talk</a>
+      <a href="/sounds" {% if nav_page == 'sounds' %}aria-current="page"{% endif %}>Sounds</a>
+      <a href="/timeline" {% if nav_page == 'journal' %}aria-current="page"{% endif %}>Journal</a>
+      <a href="/support" {% if nav_page == 'support' %}aria-current="page"{% endif %}>Support</a>
+      <a href="/privacy" {% if nav_page == 'privacy' %}aria-current="page"{% endif %}>Privacy</a>
+    </div>
+    <div class="site-user">
+      {% if display_name %}
+      <span class="site-user-name" title="{{ display_name }}">{{ display_name }}</span>
+      <form method="post" action="/logout"><button class="site-link-button" type="submit">Log out</button></form>
+      {% else %}
+      <a class="site-signin" href="/login" {% if nav_page == 'login' %}aria-current="page"{% endif %}>Sign in</a>
+      {% endif %}
+    </div>
+  </div>
+</nav>
