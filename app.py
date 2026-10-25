@@ -13,10 +13,12 @@ from orchestrator import Orchestrator
 from tracker import get_entries, init_db
 from disclaimer import DISCLAIMER
 from health import health_snapshot
+from security import SecurityHeadersMiddleware
 from support import EMERGENCY_INDIA, FIND_A_HELPLINE, TELE_MANAS, build_support
 from sounds import SOUND_PROFILES, ensure_builtin_sounds, sound_cards, write_sound
 
 app = FastAPI(title="recHERsion MVP")
+app.add_middleware(SecurityHeadersMiddleware)
 app.mount("/static", StaticFiles(directory=str(STATIC_DIR)), name="static")
 templates = Jinja2Templates(directory=str(TEMPLATES_DIR))
 
