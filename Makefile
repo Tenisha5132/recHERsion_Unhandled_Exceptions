@@ -7,4 +7,10 @@ seed:
 ingest:
 	python ingest.py
 
-.PHONY: run seed ingest
+test:
+	python -m unittest discover -s tests -v
+
+sounds:
+	python -c "from sounds import ensure_builtin_sounds; print('generated', len(ensure_builtin_sounds()), 'sound files')"
+
+.PHONY: run seed ingest test sounds
