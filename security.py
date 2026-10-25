@@ -38,3 +38,30 @@ class SecurityHeadersMiddleware:
             await send(message)
 
         await self.app(scope, receive, send_with_headers)
+
+
+class NoStoreMiddleware:
+    CACHEABLE_PREFIXES = ('/static/', '/media/sounds/')
+
+    def __init__(self, app):
+        self.app = app
+
+    async def __call__(self, scope, receive, send):
+        if scope.get('type') != 'http':
+            await self.app(scope, receive, send)
+            return
+
+        path = scope.get('path') or ''
+        cacheable = path.startswith(self.CACHEABLE_PREFIXES)
+
+        async def send_with_cache_headers(message):
+            if message.get('type') == 'http.response.start' and not cacheable:
+                headers = list(message.get('headers') or [])
+                present = {key.lower() for key, _ in headers}
+                if b'cache-control' not in present:
+                    headers.append((b'cache-control', b'no-store'))
+                message = dict(message)
+                message['headers'] = headers
+            await send(message)
+
+        await self.app(scope, receive, send_with_cache_headers)
