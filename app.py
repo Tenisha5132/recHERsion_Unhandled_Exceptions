@@ -1,4 +1,5 @@
 import asyncio
+import logging
 import re
 import uuid
 from datetime import datetime, timezone
@@ -30,6 +31,7 @@ app.mount("/static", StaticFiles(directory=str(STATIC_DIR)), name="static")
 templates = Jinja2Templates(directory=str(TEMPLATES_DIR))
 
 orch = Orchestrator()
+logger = logging.getLogger(__name__)
 
 SNAKE_CASE = re.compile(r'\b[a-z]+(?:_[a-z]+)+\b')
 PAIN_OR_CYCLE = re.compile(
@@ -293,6 +295,17 @@ async def http_error_handler(request: Request, exc: StarletteHTTPException):
             "nav_page": "",
         }, status_code=404)
     return JSONResponse({'detail': exc.detail}, status_code=exc.status_code)
+
+
+@app.exception_handler(Exception)
+async def unhandled_error_handler(request: Request, exc: Exception):
+    logger.exception('Unhandled error on %s', request.url.path)
+    if request.url.path.startswith('/api/'):
+        return JSONResponse({'error': 'internal server error'}, status_code=500)
+    return templates.TemplateResponse(request, "500.html", {
+        "display_name": get_display_name(request),
+        "nav_page": "",
+    }, status_code=500)
 
 
 @app.get("/healthz")
