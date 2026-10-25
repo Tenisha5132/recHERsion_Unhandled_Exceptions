@@ -1,0 +1,27 @@
+.privacy-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 12px;
+}
+.privacy-card {
+  padding: 18px;
+  border: 1px solid var(--site-line);
+  border-radius: 16px;
+  background: #fff;
+}
+.privacy-card h2 { margin: 4px 0 7px; font-size: 1.08rem; }
+.privacy-card p { margin: 0 0 8px; color: var(--site-muted); font-size: 0.86rem; }
+.privacy-card p:last-child { margin-bottom: 0; }
+.privacy-card a { color: var(--site-accent); font-weight: 700; }
+
+.privacy-note {
+  margin-top: 18px;
+  padding: 16px 18px;
+  border-left: 4px solid var(--site-accent);
+  border-radius: 0 12px 12px 0;
+  background: var(--site-accent-soft);
+  color: #3d2a70;
+}
+.privacy-note p { margin: 0; }
+
+.privacy-actions { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 20px; }
