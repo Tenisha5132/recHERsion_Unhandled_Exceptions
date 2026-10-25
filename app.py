@@ -12,6 +12,7 @@ from config import STATIC_DIR, TEMPLATES_DIR, ANON_ID_COOKIE, DISPLAY_NAME_COOKI
 from orchestrator import Orchestrator
 from tracker import get_entries, init_db
 from disclaimer import DISCLAIMER
+from health import health_snapshot
 from support import EMERGENCY_INDIA, FIND_A_HELPLINE, TELE_MANAS, build_support
 from sounds import SOUND_PROFILES, ensure_builtin_sounds, sound_cards, write_sound
 
@@ -252,6 +253,11 @@ def build_api_payload(res, message):
         'support': _support_payload(res, theme),
         'trace': _trace_payload(res)
     }
+
+
+@app.get("/healthz")
+async def healthz():
+    return JSONResponse(health_snapshot(), headers={'Cache-Control': 'no-store'})
 
 
 @app.get("/", response_class=HTMLResponse)

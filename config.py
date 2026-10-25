@@ -3,6 +3,7 @@ import os
 from pathlib import Path
 
 BASE_DIR = Path(__file__).parent
+APP_VERSION = os.getenv("APP_VERSION", "1.0.0")
 
 
 def env_float(name, default, minimum=None, maximum=None):
