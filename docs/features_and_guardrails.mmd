@@ -1,0 +1,67 @@
+flowchart LR
+    subgraph FEATURES["Features added"]
+        direction TB
+        NAV["Multi-page shell<br/>Talk, Sounds, Journal, Support, Privacy"]
+        CHAT["Chat screening<br/>POST /api/chat"]
+        MOOD["Mood-aware UI<br/>result cards and gentle audio"]
+        KBQ["Knowledge-base insight and remedy<br/>patterns, questions, sources"]
+        SOUNDS["Sound library<br/>15 ambient profiles"]
+        PLAYER["Player controls<br/>volume, loop, sleep timer"]
+        UPLOAD["Own music<br/>IndexedDB uploads, 20 MB limit"]
+        JOURNAL["Journal<br/>timeline, PDF summary, delete"]
+        SUPPORT["Support page<br/>112, Tele-MANAS, findahelpline, maps"]
+        LOGIN["Name-only login<br/>display-name cookie"]
+        PRIVACY["Privacy page<br/>plain-language disclosures"]
+        WARM["Generated WAV route<br/>background warmup, gitignored audio"]
+    end
+
+    subgraph GUARDRAILS["Guardrails kept"]
+        direction TB
+        G1["Safety passes before<br/>and after the agents"]
+        G2["Urgent red flags<br/>override the normal flow"]
+        G3["Distress is not saved<br/>only the urgent override persists"]
+        G4["No diagnosis<br/>diagnostic claims are stripped"]
+        G5["No medication advice<br/>unsafe remedy text is filtered"]
+        G6["Clinical advice stays KB-grounded<br/>with source citations"]
+        G7["Rule-based agents work<br/>without an LLM key"]
+        G8["Optional LLM path documents<br/>de-identified text sharing"]
+        G9["Verified helplines only<br/>TODO placeholders are hidden"]
+        G10["Map results marked unvetted<br/>location stays in the browser"]
+        G11["Uploads stay local<br/>never sent to the server"]
+        G12["No autoplay<br/>urgent state skips audio"]
+        G13["Anonymous ID cookie<br/>no password, email, or phone"]
+        G14["Local debug trace<br/>disclosed on the privacy page"]
+        G15["Not-a-diagnosis disclaimer<br/>on relevant pages"]
+        G16["45 automated tests<br/>safety, support, login, sounds, pages"]
+        G17["Sound framed as comfort<br/>not treatment"]
+        G18["Under-18 support adds<br/>adolescent-friendly care options"]
+    end
+
+    CHAT --> G1
+    CHAT --> G2
+    CHAT --> G7
+    CHAT --> G8
+    KBQ --> G4
+    KBQ --> G5
+    KBQ --> G6
+    KBQ --> G15
+    MOOD --> G12
+    SOUNDS --> G12
+    PLAYER --> G12
+    WARM --> G12
+    SOUNDS --> G17
+    UPLOAD --> G11
+    JOURNAL --> G3
+    JOURNAL --> G13
+    SUPPORT --> G9
+    SUPPORT --> G10
+    SUPPORT --> G18
+    LOGIN --> G13
+    PRIVACY --> G14
+    PRIVACY --> G15
+    NAV --> G16
+
+    classDef feature fill:#e8f7f3,stroke:#12705c,color:#0b3b30
+    classDef guard fill:#ffe8e5,stroke:#b33a2b,color:#5c160e
+    class NAV,CHAT,MOOD,KBQ,SOUNDS,PLAYER,UPLOAD,JOURNAL,SUPPORT,LOGIN,PRIVACY,WARM feature
+    class G1,G2,G3,G4,G5,G6,G7,G8,G9,G10,G11,G12,G13,G14,G15,G16,G17,G18 guard
