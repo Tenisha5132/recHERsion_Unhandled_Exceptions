@@ -137,9 +137,10 @@ button:disabled { opacity: .55; cursor: wait; }
 
   <form class="send" id="form">
     <label for="msg" class="notice" style="position:absolute;left:-9999px">Describe your symptoms</label>
-    <textarea id="msg" rows="1" placeholder="For example: my periods are 50 days apart and I feel tired" required></textarea>
+    <textarea id="msg" rows="1" maxlength="{{ max_message_chars }}" aria-describedby="msgHelp" placeholder="For example: my periods are 50 days apart and I feel tired" required></textarea>
     <button id="sendBtn" type="submit">Send</button>
   </form>
+  <p class="notice" id="msgHelp">Up to {{ max_message_chars }} characters.</p>
 
   <div class="actions">
     <a href="/summary.pdf" style="text-decoration:none"><button type="button" class="ghost">Download doctor summary</button></a>

@@ -45,6 +45,13 @@ class TestSitePages(unittest.TestCase):
         for marker in ['id="audio"', 'id="sleepTimer"', 'id="musicUpload"', 'id="trackList"', 'data-src=']:
             self.assertIn(marker, text)
 
+    def test_chat_input_has_length_limit_and_hint(self):
+        text = (TEMPLATES / 'mood_ui.html').read_text()
+        self.assertIn('maxlength="{{ max_message_chars }}"', text)
+        self.assertIn('id="msgHelp"', text)
+        legacy = (TEMPLATES / 'index.html').read_text()
+        self.assertIn('maxlength="2000"', legacy)
+
     def test_support_page_contains_emergency_and_map_actions(self):
         text = (TEMPLATES / 'support.html').read_text()
         for marker in ['{{ item.label }}', 'id="locateSupport"', 'data-map-query', 'Call emergency services']:

@@ -8,7 +8,7 @@ from fastapi.responses import HTMLResponse, FileResponse, RedirectResponse, JSON
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
-from config import STATIC_DIR, TEMPLATES_DIR, ANON_ID_COOKIE, DISPLAY_NAME_COOKIE, SOUNDS_DIR
+from config import STATIC_DIR, TEMPLATES_DIR, ANON_ID_COOKIE, DISPLAY_NAME_COOKIE, SOUNDS_DIR, MAX_MESSAGE_CHARS
 from orchestrator import Orchestrator
 from tracker import get_entries, init_db
 from disclaimer import DISCLAIMER
@@ -270,7 +270,8 @@ async def index(request: Request):
     anon = get_anon_id(request)
     resp = templates.TemplateResponse(request, "mood_ui.html", {
         "display_name": get_display_name(request),
-        "nav_page": "chat"
+        "nav_page": "chat",
+        "max_message_chars": MAX_MESSAGE_CHARS
     })
     resp.set_cookie(ANON_ID_COOKIE, anon)
     return resp
