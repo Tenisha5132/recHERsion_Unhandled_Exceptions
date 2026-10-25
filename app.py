@@ -11,6 +11,7 @@ from orchestrator import Orchestrator
 from tracker import get_entries, init_db
 from curated_loader import load_curated
 from disclaimer import DISCLAIMER
+from support import build_support
 
 app = FastAPI(title="recHERsion MVP")
 app.mount("/static", StaticFiles(directory=str(STATIC_DIR)), name="static")
@@ -201,6 +202,10 @@ def _trace_payload(res):
     return entries
 
 
+def _support_payload(res, theme):
+    return build_support(theme, res)
+
+
 def build_api_payload(res, message):
     theme = _theme_for(res, message)
     return {
@@ -208,6 +213,7 @@ def build_api_payload(res, message):
         'safety': _safety_payload(res),
         'insight': _insight_payload(res),
         'remedy': _remedy_payload(res),
+        'support': _support_payload(res, theme),
         'trace': _trace_payload(res)
     }
 

@@ -59,6 +59,14 @@ main { flex: 1; width: 100%; max-width: 880px; margin: 0 auto; padding: 8px 22px
 .insight h3 { margin: 6px 0 2px; font-size: .95rem; }
 .insight ul { margin: 4px 0 0; padding-left: 20px; }
 .insight a { color: var(--accent); }
+.support { border: 1px solid var(--line); border-radius: 14px; padding: 12px 14px; background: color-mix(in srgb, var(--accent) 5%, #fff); }
+.support h3 { margin: 0 0 4px; font-size: 1rem; }
+.support-list { display: grid; gap: 8px; margin-top: 10px; }
+.support-card { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; padding: 9px 10px; border: 1px solid var(--line); border-radius: 10px; background: var(--paper); }
+.support-card p { margin: 2px 0 0; font-size: .84rem; color: var(--muted); }
+.support-card a { flex: none; display: inline-block; padding: 7px 12px; border-radius: 9px; background: var(--accent); color: #fff; text-decoration: none; font-size: .85rem; font-weight: 700; }
+.support-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
+.support-actions button { padding: 7px 12px; font-size: .85rem; }
 .notice { font-size: .82rem; color: var(--muted); }
 .safety { border-radius: 12px; padding: 12px 14px; border: 2px solid var(--accent); background: color-mix(in srgb, var(--accent) 8%, #fff); }
 .joke { font-style: italic; color: var(--muted); }
@@ -94,6 +102,7 @@ button:disabled { opacity: .55; cursor: wait; }
 @media (max-width: 560px) {
   header.top { padding: 16px 14px 4px; gap: 12px; } .orb { width: 60px; height: 60px; font-size: 1.8rem; }
   main { padding: 6px 14px 16px; } .msg { max-width: 100%; }
+  .support-card { flex-direction: column; } .support-card a { align-self: flex-start; }
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
@@ -148,6 +157,9 @@ const MOODS = {
   insight: { flag_level: 'none|discuss|urgent', pattern: '...', reasoning: '...',
              citations: [{title, source_url}], questions_for_doctor: ['...'] },
   remedy:  { advice: ['...'], citations: [{title, source_url}] },
+  support: { title: '...', note: '...', location_note: '...',
+             options: [{ kind: 'phone|maps|link', label: '...', description: '...',
+                         phone: 'optional', maps_query: 'optional', url: '...' }] },
   trace:   [{ agent, mode: 'rules|llm|fallback', summary, ms }]
 } */
 
@@ -178,6 +190,62 @@ function links(list) {
   });
   return ul.children.length ? ul : null;
 }
+function mapsUrl(query, coords) {
+  const target = query + (coords ? ' near ' + coords : ' near me');
+  return 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(target);
+}
+function renderSupport(support) {
+  if (!support || !Array.isArray(support.options) || !support.options.length) return null;
+  const wrap = h('div', 'support');
+  wrap.appendChild(h('h3', null, support.title || 'Find nearby care'));
+  if (support.note) wrap.appendChild(h('p', 'notice', support.note));
+  const list = h('div', 'support-list');
+  const mapLinks = [];
+  support.options.forEach(o => {
+    const card = h('div', 'support-card');
+    const copy = h('div');
+    copy.appendChild(h('strong', null, o.label || 'Support option'));
+    if (o.description) copy.appendChild(h('p', null, o.description));
+    card.appendChild(copy);
+    let action = null;
+    if (o.kind === 'phone' && o.phone) {
+      action = h('a', null, 'Call');
+      action.href = 'tel:' + String(o.phone).replace(/[^\d+]/g, '');
+    } else if (o.maps_query) {
+      action = h('a', null, 'Map');
+      action.href = mapsUrl(o.maps_query);
+      action.dataset.mapQuery = o.maps_query;
+      action.target = '_blank'; action.rel = 'noopener noreferrer';
+      mapLinks.push(action);
+    } else if (safeUrl(o.url)) {
+      action = h('a', null, 'Open');
+      action.href = o.url; action.target = '_blank'; action.rel = 'noopener noreferrer';
+    }
+    if (action) card.appendChild(action);
+    list.appendChild(card);
+  });
+  wrap.appendChild(list);
+  if (mapLinks.length) {
+    const row = h('div', 'support-actions');
+    const locBtn = h('button', 'ghost', 'Use my location');
+    locBtn.type = 'button';
+    const status = h('span', 'notice', '');
+    locBtn.addEventListener('click', () => {
+      if (!navigator.geolocation) { status.textContent = 'Location is not available in this browser.'; return; }
+      status.textContent = 'Getting location…';
+      navigator.geolocation.getCurrentPosition(pos => {
+        const coords = pos.coords.latitude.toFixed(4) + ',' + pos.coords.longitude.toFixed(4);
+        mapLinks.forEach(a => { a.href = mapsUrl(a.dataset.mapQuery, coords); });
+        status.textContent = 'Location added in your browser only. It was not sent to recHERsion.';
+      }, () => { status.textContent = 'Could not get location. Map links will search near you.'; }, { timeout: 8000, maximumAge: 300000 });
+    });
+    row.appendChild(locBtn); row.appendChild(status);
+    wrap.appendChild(row);
+    if (support.location_note) wrap.appendChild(h('p', 'notice', support.location_note));
+    wrap.appendChild(h('p', 'notice', 'Map results are not vetted by recHERsion. Choose a registered doctor or recognised hospital.'));
+  }
+  return wrap;
+}
 function renderBot(r) {
   const theme = (r.mood && r.mood.theme) || 'neutral';
   const box = h('div', 'msg bot');
@@ -204,6 +272,9 @@ function renderBot(r) {
     // Jokes: shown only on the mild theme, never alongside urgent, distress or a flag
     if (theme === 'mild' && ins.flag_level !== 'discuss' && r.mood && r.mood.joke) box.appendChild(h('p', 'joke', r.mood.joke));
   }
+
+  const supportBox = renderSupport(r.support);
+  if (supportBox) box.appendChild(supportBox);
 
   if (Array.isArray(r.trace) && r.trace.length) {
     const d = h('details', 'trace'); d.appendChild(h('summary', null, 'How this was answered (' + r.trace.length + ' agents)'));
