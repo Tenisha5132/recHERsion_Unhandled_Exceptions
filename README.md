@@ -1,7 +1,5 @@
 # recHERsion MVP
 
-[![tests](https://github.com/Tenisha5132/recHERsion_Unhandled_Exceptions/actions/workflows/tests.yml/badge.svg)](https://github.com/Tenisha5132/recHERsion_Unhandled_Exceptions/actions/workflows/tests.yml)
-
 ## Problem
 recHERsion MVP is a multi-agent RAG app for PS1 "Women's Healthcare" (gaps in diagnosis, symptom tracking, health awareness, access to clinical insights). This app is screening/awareness support only — not a diagnosis.
 
