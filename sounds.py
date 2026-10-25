@@ -63,6 +63,18 @@ SOUND_PROFILES = [
         'breath_cycles': 2,
         'noise': 0.04,
     },
+    {
+        'slug': 'grounding-hum',
+        'title': 'Grounding hum',
+        'category': 'Ground',
+        'icon': '🌳',
+        'description': 'A low, even hum to anchor a spiralling moment.',
+        'kind': 'pad',
+        'duration': 16.0,
+        'frequencies': [55.0, 82.5, 110.0, 164.8],
+        'volume': 0.56,
+        'drift': 0.08,
+    },
 ]
 
 
