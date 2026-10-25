@@ -1,5 +1,7 @@
 # recHERsion MVP
 
+[![tests](https://github.com/Tenisha5132/recHERsion_Unhandled_Exceptions/actions/workflows/tests.yml/badge.svg)](https://github.com/Tenisha5132/recHERsion_Unhandled_Exceptions/actions/workflows/tests.yml)
+
 ## Problem
 recHERsion MVP is a multi-agent RAG app for PS1 "Women's Healthcare" (gaps in diagnosis, symptom tracking, health awareness, access to clinical insights). This app is screening/awareness support only — not a diagnosis.
 
@@ -75,7 +77,30 @@ pip install -r requirements.txt
 uvicorn app:app --host 0.0.0.0 --port $PORT
 ```
 
-Set `LLM_API_KEY`, `LLM_MODEL`, `LLM_BASE_URL`, `LLM_TIMEOUT` and `MIN_RETRIEVAL_SCORE` in the host environment. Do not commit `.env`. Attach a persistent disk if the deployment needs saved journal entries to survive restarts, because SQLite is stored at `data/app.db`.
+Set `LLM_API_KEY`, `LLM_MODEL`, `LLM_BASE_URL`, `LLM_TIMEOUT`, `MIN_RETRIEVAL_SCORE` and `COOKIE_SECURE` in the host environment. Do not commit `.env`. Attach a persistent disk if saved journal entries must survive restarts, because SQLite is stored at `data/app.db`.
+
+The health endpoint is `GET /healthz`. After deployment, verify the running app:
+
+```bash
+python scripts/smoke_test.py --base-url https://your-host
+```
+
+### Docker
+```bash
+docker build -t rechersion .
+docker run --rm -p 8000:8000 --env-file .env rechersion
+```
+
+The image runs as a non-root user and checks `/healthz` with Docker's healthcheck. Mount a private volume at `/app/data` if you need durable journal storage.
+
+## Tests
+```bash
+make check
+# or
+python -m unittest discover -s tests -v
+```
+
+The suite covers extraction, scope routing, retrieval relevance, general replies, config parsing, LLM fallbacks, cookies, tracker access, deployment health, security headers and page contracts. GitHub Actions runs it on Python 3.11 and 3.12.
 
 ## Pages
 The app is split into focused pages instead of one long screen:
@@ -123,6 +148,15 @@ The `/sounds` page includes 15 generated ambient loops: calm, focus, sleep, brea
 - remedy: safe self-care from KB only
 - general: non-period health replies, using an optional LLM or a safe rules fallback
 - mood: deterministic, jokes only for mild non-pain cases when safe
+
+## Operations and troubleshooting
+- `GET /healthz` reports the app version, retrieval backend, chunk count, and whether an LLM is configured. It never returns a key.
+- `COOKIE_SECURE=true` is required behind HTTPS. Anonymous and display-name cookies are HTTP-only and SameSite=Lax.
+- Security headers and `X-Request-ID` are attached to every HTTP response. Use the request ID when comparing a browser error with server output.
+- If a cold or general-health message still mentions periods, check `tests/test_general_route.py` and `MIN_RETRIEVAL_SCORE`; general and off-topic routes must skip retrieval.
+- If the model is not used, check `GET /healthz` and confirm `LLM_API_KEY` or `LLM_BASE_URL` is set in the running process. Rules fallback is expected without either.
+- Generated sounds are gitignored and created on first use. If `/media/sounds/...` fails, confirm `static/sounds/` is writable by the app user.
+- See [API contract](docs/API.md), [contributing](CONTRIBUTING.md) and [security policy](SECURITY.md).
 
 ## Privacy & Limitations
 - No names/emails/phone. anonymous_user_id in browser cookie. Data in local SQLite DB.
