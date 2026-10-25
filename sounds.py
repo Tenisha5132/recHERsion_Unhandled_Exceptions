@@ -204,6 +204,20 @@ SOUND_PROFILES = [
         'noise_mode': 'pink',
         'noise_tone': 146.8,
     },
+    {
+        'slug': 'soft-chime',
+        'title': 'Soft chime',
+        'category': 'Mindful',
+        'icon': '🔔',
+        'description': 'Sparse bells over a quiet pad for a short reset.',
+        'kind': 'chime',
+        'duration': 20.0,
+        'frequencies': [196.0, 261.6, 329.6],
+        'volume': 0.42,
+        'drift': 0.08,
+        'chimes': [1.0, 6.0, 11.5, 16.2],
+        'chime_frequencies': [392.0, 523.25, 659.25],
+    },
 ]
 
 
