@@ -1,0 +1,14 @@
+.env
+*.db
+__pycache__/
+*.pyc
+node_modules/
+.venv/
+venv/
+vector_cache/
+*.index
+chroma/
+embedding_cache/
+.DS_Store
+raw_data/
+credentials.json

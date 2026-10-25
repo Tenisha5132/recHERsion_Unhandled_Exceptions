@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Result</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <header>
+        <h1>recHERsion</h1>
+        <nav><a href="/">Home</a></nav>
+    </header>
+    <div class="banner">SCREENING SUPPORT ONLY — NOT DIAGNOSIS</div>
+    <main>
+        <section class="result">
+            <h2>Result</h2>
+            {% if result.override == 'urgent' %}
+            <div class="urgent">URGENT: {{result.safety.message}}</div>
+            {% elif result.override == 'distress' %}
+            <div class="distress">{{result.safety.message}}</div>
+            {% else %}
+            {% if result.insight %}
+            <div class="insight-card">
+                <h3>Insight</h3>
+                <div>Flag: {{result.insight.flag_level}}</div>
+                <div>Pattern: {{result.insight.pattern}}</div>
+                <div>Disclaimer: {{result.insight.disclaimer}}</div>
+                <div>Citations:
+                    <ul>
+                    {% for c in result.insight.citations %}
+                    <li><a href="{{c.source_url}}">{{c.title}}</a></li>
+                    {% endfor %}
+                    </ul>
+                </div>
+                <div>Questions for doctor:
+                    <ul>
+                    {% for q in result.insight.questions_for_doctor %}
+                    <li>{{q}}</li>
+                    {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            {% endif %}
+            {% if result.remedy %}
+            <div class="remedy">
+                <h3>Remedy (safe self-care)</h3>
+                <ul>
+                {% for a in result.remedy.advice %}
+                <li>{{a}}</li>
+                {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+            {% if result.mood and result.mood.joke %}
+            <div class="mood">Mood: {{result.mood.emoji}} {{result.mood.joke}}</div>
+            {% endif %}
+            {% endif %}
+            <details class="trace">
+                <summary>Agent trace</summary>
+                <pre>{{result | tojson(indent=2)}}</pre>
+            </details>
+        </section>
+    </main>
+</body>
+</html>

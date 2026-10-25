@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timeline</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <header>
+        <h1>recHERsion</h1>
+        <nav><a href="/">Home</a></nav>
+    </header>
+    <div class="banner">SCREENING SUPPORT ONLY — NOT DIAGNOSIS</div>
+    <main>
+        <h2>Timeline</h2>
+        <canvas id="cycleChart" width="300" height="150" aria-label="Cycle length chart"></canvas>
+        <script src="/static/chart.js"></script>
+        {% for e in entries %}
+        <div class="entry">
+            <div class="time">{{e.created_at}}</div>
+            <div class="text">{{e.raw_text}}</div>
+        </div>
+        {% endfor %}
+    </main>
+</body>
+</html>

@@ -1,0 +1,181 @@
+[
+  {
+    "id": "endometriosis-nhs_0",
+    "source_file": "endometriosis-nhs.md",
+    "title": "Endometriosis",
+    "source_url": "https://www.nhs.uk/conditions/endometriosis/",
+    "publisher": "NHS",
+    "retrieved_date": "2026-10-25",
+    "aliases": [
+      "endometriosis"
+    ],
+    "chunk": "Endometriosis is where cells similar to those in the lining of the womb grow in other parts of the body. It can have a big impact on life, but treatments can help. Patches can grow around the womb, ovaries, fallopian tubes, pelvis, and sometimes elsewhere like bladder, bowel or chest. When they break down and bleed, they can't leave the body causing symptoms. Symptoms may include severe period pain that stops normal activities, heavy periods needing to change pads/tampons every 1-2 hours, pelvic/lower back pain, pain when pooing or peeing, pain during or after sex, extreme tiredness, pain/bleeding elsewhere, difficulty getting pregnant, low mood or anxiety. Diagnosis can take time as symptoms overlap with other conditions; tests may include exam, ultrasound, MRI, or laparoscopy (which can also allow removal). Treatment isn't curative - options include painkillers, hormonal treatments, surgery to remove endometriosis tissue/cysts or in severe cases hysterectomy/oophorectomy, and support for pain, fertility and mental health.",
+    "chunk_idx": 0
+  },
+  {
+    "id": "heavy-periods-diagnosis_0",
+    "source_file": "heavy-periods-diagnosis.md",
+    "title": "Heavy periods - diagnosis",
+    "source_url": "https://www.nhs.uk/conditions/heavy-periods/diagnosis/",
+    "publisher": "NHS",
+    "retrieved_date": "2026-10-25",
+    "aliases": [
+      "menorrhagia diagnosis"
+    ],
+    "chunk": "When seeing a GP about heavy periods, they will usually ask about symptoms, how they affect daily life, and medical history. They may ask about how often pads or tampons are changed, period length, clots, and any other symptoms. A physical examination may be offered, and blood tests may be done to check for iron deficiency anaemia or other underlying causes. Depending on findings, the GP may refer to a specialist or arrange further tests. The goal is to identify any treatable cause while considering how much the bleeding is affecting the person.",
+    "chunk_idx": 0
+  },
+  {
+    "id": "heavy-periods_0",
+    "source_file": "heavy-periods.md",
+    "title": "Heavy periods",
+    "source_url": "https://www.nhs.uk/conditions/heavy-periods/",
+    "publisher": "NHS",
+    "retrieved_date": "2026-10-25",
+    "aliases": [
+      "menorrhagia",
+      "heavy menstrual bleeding"
+    ],
+    "chunk": "Heavy periods, also called menorrhagia, can affect anyone who has periods and may be normal for some people. They become a concern when they interfere with daily life. Signs that bleeding may be heavy include needing to change a pad or tampon every one to two hours, using two types of period products together, periods lasting more than seven days, passing blood clots larger than about the size of a 10p coin, bleeding through clothes or bedding, avoiding activities, or feeling tired or short of breath due to blood loss. Periods can be heavier at certain times - when they first start, after pregnancy, or as someone approaches menopause. Possible causes include conditions affecting the womb or ovaries such as polyendocrine metabolic ovarian syndrome (PMOS/PCOS), fibroids, endometriosis, adenomyosis, or pelvic inflammatory disease. Some people bleed more easily due to conditions like Von Willebrand disease, certain medicines (including anticoagulants), or chemotherapy. Rarely, heavy periods can be a sign of womb cancer. Treatment isn't always needed, but options may include hormonal contraception,",
+    "chunk_idx": 0
+  },
+  {
+    "id": "heavy-periods_1",
+    "source_file": "heavy-periods.md",
+    "title": "Heavy periods",
+    "source_url": "https://www.nhs.uk/conditions/heavy-periods/",
+    "publisher": "NHS",
+    "retrieved_date": "2026-10-25",
+    "aliases": [
+      "menorrhagia",
+      "heavy menstrual bleeding"
+    ],
+    "chunk": "medicines to reduce bleeding such as tranexamic acid, anti-inflammatory painkillers, or specialist treatments if simpler measures don't help. Anyone with heavy periods affecting daily life, persistent heavy bleeding, severe pain, bleeding between periods or after sex, or other concerning symptoms should speak to a GP.",
+    "chunk_idx": 1
+  },
+  {
+    "id": "irregular-periods-treatment_0",
+    "source_file": "irregular-periods-treatment.md",
+    "title": "Irregular periods - treatment",
+    "source_url": "https://www.nhs.uk/conditions/irregular-periods/treatment/",
+    "publisher": "NHS",
+    "retrieved_date": "2026-10-25",
+    "aliases": [
+      "irregular periods treatment"
+    ],
+    "chunk": "Treatment for irregular periods isn't always needed. If treatment is required, it depends on the cause. For example, if polyendocrine metabolic ovarian syndrome (PMOS/PCOS) is causing irregular periods, the combined contraceptive pill may help make periods more regular. If irregular periods are caused by other hormone problems like thyroid issues, medicines can help treat the underlying cause. A GP may refer to a specialist if tests are needed to find out what's causing irregular periods.",
+    "chunk_idx": 0
+  },
+  {
+    "id": "irregular-periods_0",
+    "source_file": "irregular-periods.md",
+    "title": "Irregular periods",
+    "source_url": "https://www.nhs.uk/conditions/irregular-periods/",
+    "publisher": "NHS",
+    "retrieved_date": "2026-10-25",
+    "aliases": [
+      "irregular menstrual cycles",
+      "oligomenorrhoea",
+      "PMOS",
+      "PCOS",
+      "polycystic ovary syndrome"
+    ],
+    "chunk": "Irregular periods are not usually a sign of a problem, but changes in pattern should be discussed with a GP if persistent. The average menstrual cycle is around 28 days, but can be shorter or longer. Periods may be considered irregular if the gap between them is less than 21 days or more than 35 days. Irregular periods are more common when they first start during puberty and when nearing menopause. Common causes include puberty, menopause transition, pregnancy (a missed period can be an early sign), hormonal contraception, weight changes, stress, anxiety, or exercising too much. Sometimes conditions like polyendocrine metabolic ovarian syndrome (PMOS, previously called polycystic ovary syndrome/PCOS) or thyroid problems can cause irregular periods. It can be normal for cycles to be irregular for the first 1-2 years after periods start. Keeping a diary or app of periods can help track patterns. See a GP if periods are irregular and persistent, last longer than 7 days, are accompanied by other symptoms like weight gain, tiredness, excess hair growth,",
+    "chunk_idx": 0
+  },
+  {
+    "id": "irregular-periods_1",
+    "source_file": "irregular-periods.md",
+    "title": "Irregular periods",
+    "source_url": "https://www.nhs.uk/conditions/irregular-periods/",
+    "publisher": "NHS",
+    "retrieved_date": "2026-10-25",
+    "aliases": [
+      "irregular menstrual cycles",
+      "oligomenorrhoea",
+      "PMOS",
+      "PCOS",
+      "polycystic ovary syndrome"
+    ],
+    "chunk": "or oily/dry skin, if there is bleeding between periods, or if struggling to get pregnant. Getting pregnant may be more difficult with irregular periods as ovulation may not happen regularly - having sex every 2-3 days throughout the cycle can help when trying to conceive.",
+    "chunk_idx": 1
+  },
+  {
+    "id": "pcos-pmos-who_0",
+    "source_file": "pcos-pmos-who.md",
+    "title": "Polycystic ovary syndrome",
+    "source_url": "https://www.who.int/news-room/fact-sheets/detail/polycystic-ovary-syndrome",
+    "publisher": "WHO",
+    "retrieved_date": "2026-10-25",
+    "aliases": [
+      "PCOS",
+      "PMOS",
+      "polycystic ovary syndrome",
+      "polyendocrine metabolic ovarian syndrome"
+    ],
+    "chunk": "Polycystic ovary syndrome (PCOS) is a common hormonal disorder affecting women during reproductive years and beyond. WHO notes PCOS is being increasingly recognized; NHS now uses the name polyendocrine metabolic ovarian syndrome (PMOS) in places, but both names refer to the same condition. PCOS affects an estimated 10-13% of reproductive-aged women and up to 70% may be undiagnosed. It is a leading cause of irregular menstrual periods and infertility. Symptoms can include irregular or absent periods, heavy or painful periods for some, difficulty conceiving, excess facial or body hair, hair thinning, acne or oily skin. PCOS is associated with higher risk of gestational diabetes, type 2 diabetes, high blood pressure, high cholesterol, cardiovascular disease, obesity, sleep apnea, endometrial hyperplasia or cancer, and can impact mental health including anxiety and depression. Diagnosis requires at least two of: signs/symptoms of high androgens or elevated testosterone, irregular or absent periods, or polycystic ovaries on ultrasound (ovarian cysts not required). Other causes must be excluded. There is no cure, but lifestyle changes, hormonal treatments,",
+    "chunk_idx": 0
+  },
+  {
+    "id": "pcos-pmos-who_1",
+    "source_file": "pcos-pmos-who.md",
+    "title": "Polycystic ovary syndrome",
+    "source_url": "https://www.who.int/news-room/fact-sheets/detail/polycystic-ovary-syndrome",
+    "publisher": "WHO",
+    "retrieved_date": "2026-10-25",
+    "aliases": [
+      "PCOS",
+      "PMOS",
+      "polycystic ovary syndrome",
+      "polyendocrine metabolic ovarian syndrome"
+    ],
+    "chunk": "and fertility treatments can help manage symptoms and reduce long-term risks.",
+    "chunk_idx": 1
+  },
+  {
+    "id": "pmos-nhs_0",
+    "source_file": "pmos-nhs.md",
+    "title": "Polyendocrine metabolic ovarian syndrome (PMOS)",
+    "source_url": "https://www.nhs.uk/conditions/polyendocrine-metabolic-ovarian-syndrome-pmos/",
+    "publisher": "NHS",
+    "retrieved_date": "2026-10-25",
+    "aliases": [
+      "PMOS",
+      "PCOS",
+      "polycystic ovary syndrome",
+      "polyendocrine metabolic ovarian syndrome"
+    ],
+    "chunk": "Polyendocrine metabolic ovarian syndrome (PMOS) is a hormone condition that can affect hair growth, periods, fertility and mood. PMOS used to be called polycystic ovary syndrome (PCOS). There is no cure, but treatments and lifestyle changes can help. Symptoms usually start in girls and young women at puberty and continue until menopause; some symptoms may change after menopause. Main symptoms include irregular periods or long gaps between periods, excessive hair growth or hair loss, weight gain or difficulty losing weight, difficulty getting pregnant, mental health problems (depression/anxiety), oily skin and acne, feeling very tired, and thick dark patches of skin (acanthosis nigricans). Symptoms can be mild, severe, or absent. Tests may include blood tests to check hormone levels and insulin resistance, and an ultrasound scan to look at the ovaries (ultrasound only done if over 18). Treatment can include hormonal contraception to regulate periods, medicines to help fertility or reduce hair growth, metformin, acne treatments, weight management, or laparoscopic ovarian drilling in some fertility cases. Lifestyle measures like healthy diet,",
+    "chunk_idx": 0
+  },
+  {
+    "id": "pmos-nhs_1",
+    "source_file": "pmos-nhs.md",
+    "title": "Polyendocrine metabolic ovarian syndrome (PMOS)",
+    "source_url": "https://www.nhs.uk/conditions/polyendocrine-metabolic-ovarian-syndrome-pmos/",
+    "publisher": "NHS",
+    "retrieved_date": "2026-10-25",
+    "aliases": [
+      "PMOS",
+      "PCOS",
+      "polycystic ovary syndrome",
+      "polyendocrine metabolic ovarian syndrome"
+    ],
+    "chunk": "regular exercise, weight loss if overweight, and support for mental health can help. Complications can include type 2 diabetes, high blood pressure, cardiovascular disease, non-alcoholic fatty liver disease, and womb cancer - regular check-ups can help reduce risk.",
+    "chunk_idx": 1
+  },
+  {
+    "id": "underactive-thyroid-nhs_0",
+    "source_file": "underactive-thyroid-nhs.md",
+    "title": "Underactive thyroid (hypothyroidism)",
+    "source_url": "https://www.nhs.uk/conditions/underactive-thyroid-hypothyroidism/",
+    "publisher": "NHS",
+    "retrieved_date": "2026-10-25",
+    "aliases": [
+      "hypothyroidism",
+      "underactive thyroid"
+    ],
+    "chunk": "An underactive thyroid (hypothyroidism) is when the thyroid gland doesn't make enough hormones. Symptoms develop slowly and can include tiredness, feeling cold, weight gain, constipation, difficulty concentrating, low mood/depression, dry skin/hair/hair loss, hoarse voice, and irregular or heavy periods. It is commonly caused by Hashimoto's disease (autoimmune). Diagnosis is by blood tests checking TSH and thyroxine. Treatment is usually lifelong levothyroxine tablets to replace thyroid hormone, with regular blood tests to adjust dose. If untreated or under-treated, risks include heart problems and bone problems; very rarely myxoedema coma can occur. If pregnant or planning pregnancy, thyroid treatment needs monitoring as it can affect pregnancy outcomes.",
+    "chunk_idx": 0
+  }
+]

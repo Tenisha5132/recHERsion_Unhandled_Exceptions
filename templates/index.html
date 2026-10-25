@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>recHERsion MVP</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <header>
+        <h1>recHERsion</h1>
+        <nav>
+            <a href="/">Home</a> | <a href="/timeline">Timeline</a> | <a href="/privacy">Privacy</a>
+        </nav>
+    </header>
+    <div class="banner">SCREENING SUPPORT ONLY — NOT DIAGNOSIS</div>
+    <main>
+        <section class="chat">
+            <h2>Chat</h2>
+            <form action="/chat" method="post">
+                <textarea name="message" rows="3" aria-label="Message" placeholder="Tell us about your symptoms..."></textarea>
+                <button type="submit">Send</button>
+            </form>
+        </section>
+        <section class="entries">
+            <h2>Recent entries</h2>
+            {% for e in entries %}
+            <div class="entry">
+                <div class="time">{{e.created_at}}</div>
+                <div class="text">{{e.raw_text}}</div>
+                {% if '[SYNTHETIC]' in e.raw_text %}<span class="synthetic">SYNTHETIC</span>{% endif %}
+            </div>
+            {% endfor %}
+        </section>
+        <section class="curated">
+            <h2>Curated videos</h2>
+            {% if curated and curated|length > 0 %}
+                {% for v in curated %}
+                <div><a href="{{v.url}}">{{v.title}}</a> ({{v.publisher}})</div>
+                {% endfor %}
+            {% else %}
+                <div class="hidden">No curated videos.</div>
+            {% endif %}
+        </section>
+        <section class="actions">
+            <a href="/summary.pdf"><button>Download doctor summary</button></a>
+            <form action="/delete" method="post" onsubmit="return confirm('Delete all your data?');">
+                <button type="submit">Delete my data</button>
+            </form>
+        </section>
+    </main>
+</body>
+</html>

@@ -1,0 +1,86 @@
+# Rules - only values from knowledge base. Every numeric threshold has source_url and kb_file.
+# If source unknown, use TODO_VERIFY.
+
+irregular_cycle:
+  description: "Irregular periods definition per NHS"
+  gap_lt21_days:
+    value: 21
+    op: "<"
+    source_url: "https://www.nhs.uk/conditions/irregular-periods/"
+    kb_file: "irregular-periods.md"
+    note: "NHS states periods may be irregular if gap <21 or >35 days"
+  gap_gt35_days:
+    value: 35
+    op: ">"
+    source_url: "https://www.nhs.uk/conditions/irregular-periods/"
+    kb_file: "irregular-periods.md"
+    note: "NHS states periods may be irregular if gap <21 or >35 days"
+
+heavy_bleeding:
+  description: "Heavy periods (menorrhagia) definition/signs per NHS"
+  soak_pad_tampon_hourly_2h:
+    value: 2
+    unit: "hours_soaking_hourly"
+    source_url: "https://www.nhs.uk/conditions/heavy-periods/"
+    kb_file: "heavy-periods.md"
+    note: "Soaking through a pad/tampon every hour for several hours"
+  passing_large_clots:
+    value: true
+    source_url: "https://www.nhs.uk/conditions/heavy-periods/"
+    kb_file: "heavy-periods.md"
+    note: "Passing large blood clots (per NHS heavy periods signs)"
+
+red_flags:
+  description: "Red flags - urgent care"
+  items:
+    - id: soaking_hourly_2h
+      description: "Soaking through a pad or tampon every hour for 2 or more hours"
+      source_url: "https://www.nhs.uk/conditions/heavy-periods/"
+      kb_file: "heavy-periods.md"
+    - id: fainting_or_dizzy
+      description: "Feeling faint or passing out"
+      source_url: "https://www.nhs.uk/conditions/heavy-periods/"
+      kb_file: "heavy-periods.md"
+    - id: severe_sudden_pelvic_pain
+      description: "Severe sudden pelvic pain"
+      source_url: "TODO_VERIFY"
+      kb_file: "TODO_VERIFY"
+    - id: severe_shortness_of_breath
+      description: "Severe shortness of breath"
+      source_url: "TODO_VERIFY"
+      kb_file: "TODO_VERIFY"
+    - id: chest_pain
+      description: "Chest pain"
+      source_url: "TODO_VERIFY"
+      kb_file: "TODO_VERIFY"
+
+amenorrhoea:
+  description: "Amenorrhoea"
+  definition_missing_3_months:
+    value: 3
+    unit: "months"
+    source_url: "https://www.nhs.uk/conditions/irregular-periods/"
+    kb_file: "irregular-periods.md"
+    note: "NHS mentions missed periods / when to see GP; evaluate case by case"
+
+adolescent_note:
+  description: "Teen note"
+  irregular_first_years:
+    value: 2
+    unit: "years_after_menarche"
+    source_url: "https://www.nhs.uk/conditions/irregular-periods/"
+    kb_file: "irregular-periods.md"
+    note: "Cycles can be irregular for the first 1-2 years after periods start"
+
+pregnancy_test_suggestion:
+  enabled: true
+  note: "Suggest pregnancy test where missed periods apply; not diagnostic"
+  source_url: "https://www.nhs.uk/conditions/irregular-periods/"
+  kb_file: "irregular-periods.md"
+
+helplines:
+  distress:
+    number: "TODO_VERIFY"
+    note: "Configure in config/helpline; provide local emergency/helpline guidance"
+    source_url: "TODO_VERIFY"
+    kb_file: "TODO_VERIFY"

@@ -1,0 +1,22 @@
+[
+  {"id": 1, "text": "My periods have been coming every 40-50 days, I have acne and facial hair. Could this be related to hormones?", "expected_flag_level": "discuss", "expected_kb_source": "pmos"},
+  {"id": 2, "text": "Soaking through a pad every hour for 2 hours and feeling faint", "expected_flag_level": "urgent", "expected_kb_source": "heavy-periods"},
+  {"id": 3, "text": "Severe pelvic pain during periods that stops me from going to work", "expected_flag_level": "discuss", "expected_kb_source": "endometriosis"},
+  {"id": 4, "text": "Feeling tired all the time, gaining weight, periods irregular", "expected_flag_level": "discuss", "expected_kb_source": "underactive-thyroid"},
+  {"id": 5, "text": "I haven't had a period in 4 months", "expected_flag_level": "discuss", "expected_kb_source": "irregular-periods"},
+  {"id": 6, "text": "I'm 14 and just started my periods, they're all over the place", "expected_flag_level": "none", "expected_kb_source": "irregular-periods"},
+  {"id": 7, "text": "My cycles are regular, 28 days, just have mild cramps", "expected_flag_level": "none", "expected_kb_source": "heavy-periods"},
+  {"id": 8, "text": "Periods are weird sometimes", "expected_flag_level": "none", "expected_kb_source": null},
+  {"id": 9, "text": "Bleeding heavily and have bad cramps, not sure", "expected_flag_level": "discuss", "expected_kb_source": "heavy-periods"},
+  {"id": 10, "text": "I want to die, I can't take this anymore", "expected_flag_level": "urgent", "expected_kb_source": null},
+  {"id": 11, "text": "PCOS runs in my family and I have irregular periods", "expected_flag_level": "discuss", "expected_kb_source": "pmos"},
+  {"id": 12, "text": "PMOS diagnosis mentioned, irregular cycles", "expected_flag_level": "discuss", "expected_kb_source": "pmos"},
+  {"id": 13, "text": "Chest pain and can't breathe properly", "expected_flag_level": "urgent", "expected_kb_source": null},
+  {"id": 14, "text": "Periods longer than 7 days, heavy flow", "expected_flag_level": "discuss", "expected_kb_source": "heavy-periods"},
+  {"id": 15, "text": "Pain during sex and bad period pain", "expected_flag_level": "discuss", "expected_kb_source": "endometriosis"},
+  {"id": 16, "text": "Gaining weight, cold all the time, periods changing", "expected_flag_level": "discuss", "expected_kb_source": "underactive-thyroid"},
+  {"id": 17, "text": "Missed period and tired, could be pregnant", "expected_flag_level": "discuss", "expected_kb_source": "irregular-periods"},
+  {"id": 18, "text": "Just feeling tired today, no other symptoms", "expected_flag_level": "none", "expected_kb_source": null},
+  {"id": 19, "text": "Clots bigger than coin with heavy bleeding", "expected_flag_level": "discuss", "expected_kb_source": "heavy-periods"},
+  {"id": 20, "text": "No idea what's wrong, random symptoms", "expected_flag_level": "none", "expected_kb_source": null}
+]

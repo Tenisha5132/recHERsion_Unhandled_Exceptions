@@ -1,0 +1,420 @@
+{"agent": "router", "input_summary": "My periods have been coming every 40-50 days, I have acne and facial hair. Could this be related to hormones?", "output_summary": "symptom related", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "My periods have been coming every 40-50 days, I have acne and facial hair. Could this be related to hormones?", "output_summary": "safe", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "extraction", "input_summary": "My periods have been coming every 40-50 days, I have acne and facial hair. Could this be related to hormones?", "output_summary": "{\"symptoms\": [\"acne\", \"hair\"], \"severity\": null, \"duration\": null, \"last_period_", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "retriever", "input_summary": "My periods have been coming every 40-50 days, I have acne and facial hair. Could this be related to hormones?", "output_summary": "0 chunks", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "insight", "input_summary": "My periods have been coming every 40-50 days, I have acne and facial hair. Could this be related to hormones?", "output_summary": "no guidance", "used_llm": false, "fallback": true, "ms": 7}
+{"agent": "remedy", "input_summary": "My periods have been coming every 40-50 days, I have acne and facial hair. Could this be related to hormones?", "output_summary": "safe advice", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "mood", "input_summary": "My periods have been coming every 40-50 days, I have acne and facial hair. Could this be related to hormones?", "output_summary": "no joke", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "My periods have been coming every 40-50 days, I have acne and facial hair. Could this be related to hormones?", "output_summary": "safe", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "router", "input_summary": "Soaking through a pad every hour for 2 hours and feeling faint", "output_summary": "urgent keywords", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "Soaking through a pad every hour for 2 hours and feeling faint", "output_summary": "urgent", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "Soaking through a pad every hour for 2 hours and feeling faint", "output_summary": "urgent", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "router", "input_summary": "Severe pelvic pain during periods that stops me from going to work", "output_summary": "urgent keywords", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "Severe pelvic pain during periods that stops me from going to work", "output_summary": "urgent", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "Severe pelvic pain during periods that stops me from going to work", "output_summary": "urgent", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "router", "input_summary": "Feeling tired all the time, gaining weight, periods irregular", "output_summary": "symptom related", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "Feeling tired all the time, gaining weight, periods irregular", "output_summary": "safe", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "extraction", "input_summary": "Feeling tired all the time, gaining weight, periods irregular", "output_summary": "{\"symptoms\": [\"tired\"], \"severity\": null, \"duration\": null, \"last_period_date\": ", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "retriever", "input_summary": "Feeling tired all the time, gaining weight, periods irregular", "output_summary": "0 chunks", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "insight", "input_summary": "Feeling tired all the time, gaining weight, periods irregular", "output_summary": "no guidance", "used_llm": false, "fallback": true, "ms": 6}
+{"agent": "remedy", "input_summary": "Feeling tired all the time, gaining weight, periods irregular", "output_summary": "safe advice", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "mood", "input_summary": "Feeling tired all the time, gaining weight, periods irregular", "output_summary": "joke", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "Feeling tired all the time, gaining weight, periods irregular", "output_summary": "safe", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "router", "input_summary": "I haven't had a period in 4 months", "output_summary": "symptom related", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "I haven't had a period in 4 months", "output_summary": "safe", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "extraction", "input_summary": "I haven't had a period in 4 months", "output_summary": "{\"symptoms\": [], \"severity\": null, \"duration\": null, \"last_period_date\": null, \"", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "retriever", "input_summary": "I haven't had a period in 4 months", "output_summary": "0 chunks", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "insight", "input_summary": "I haven't had a period in 4 months", "output_summary": "no guidance", "used_llm": false, "fallback": true, "ms": 6}
+{"agent": "remedy", "input_summary": "I haven't had a period in 4 months", "output_summary": "safe advice", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "mood", "input_summary": "I haven't had a period in 4 months", "output_summary": "no joke", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "I haven't had a period in 4 months", "output_summary": "safe", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "router", "input_summary": "I'm 14 and just started my periods, they're all over the place", "output_summary": "symptom related", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "I'm 14 and just started my periods, they're all over the place", "output_summary": "safe", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "extraction", "input_summary": "I'm 14 and just started my periods, they're all over the place", "output_summary": "{\"symptoms\": [], \"severity\": null, \"duration\": null, \"last_period_date\": null, \"", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "retriever", "input_summary": "I'm 14 and just started my periods, they're all over the place", "output_summary": "0 chunks", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "insight", "input_summary": "I'm 14 and just started my periods, they're all over the place", "output_summary": "no guidance", "used_llm": false, "fallback": true, "ms": 6}
+{"agent": "remedy", "input_summary": "I'm 14 and just started my periods, they're all over the place", "output_summary": "safe advice", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "mood", "input_summary": "I'm 14 and just started my periods, they're all over the place", "output_summary": "no joke", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "I'm 14 and just started my periods, they're all over the place", "output_summary": "safe", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "router", "input_summary": "My cycles are regular, 28 days, just have mild cramps", "output_summary": "symptom related", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "My cycles are regular, 28 days, just have mild cramps", "output_summary": "safe", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "extraction", "input_summary": "My cycles are regular, 28 days, just have mild cramps", "output_summary": "{\"symptoms\": [\"cramp\", \"cramps\"], \"severity\": null, \"duration\": null, \"last_peri", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "retriever", "input_summary": "My cycles are regular, 28 days, just have mild cramps", "output_summary": "0 chunks", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "insight", "input_summary": "My cycles are regular, 28 days, just have mild cramps", "output_summary": "no guidance", "used_llm": false, "fallback": true, "ms": 6}
+{"agent": "remedy", "input_summary": "My cycles are regular, 28 days, just have mild cramps", "output_summary": "safe advice", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "mood", "input_summary": "My cycles are regular, 28 days, just have mild cramps", "output_summary": "no joke", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "My cycles are regular, 28 days, just have mild cramps", "output_summary": "safe", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "router", "input_summary": "Periods are weird sometimes", "output_summary": "symptom related", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "Periods are weird sometimes", "output_summary": "safe", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "extraction", "input_summary": "Periods are weird sometimes", "output_summary": "{\"symptoms\": [], \"severity\": null, \"duration\": null, \"last_period_date\": null, \"", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "retriever", "input_summary": "Periods are weird sometimes", "output_summary": "0 chunks", "used_llm": false, "fallback": true, "ms": 1}
+{"agent": "insight", "input_summary": "Periods are weird sometimes", "output_summary": "no guidance", "used_llm": false, "fallback": true, "ms": 6}
+{"agent": "remedy", "input_summary": "Periods are weird sometimes", "output_summary": "safe advice", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "mood", "input_summary": "Periods are weird sometimes", "output_summary": "no joke", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "Periods are weird sometimes", "output_summary": "safe", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "router", "input_summary": "Bleeding heavily and have bad cramps, not sure", "output_summary": "symptom related", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "Bleeding heavily and have bad cramps, not sure", "output_summary": "safe", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "extraction", "input_summary": "Bleeding heavily and have bad cramps, not sure", "output_summary": "{\"symptoms\": [\"cramp\", \"cramps\", \"bleed\", \"bleeding\"], \"severity\": null, \"durati", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "retriever", "input_summary": "Bleeding heavily and have bad cramps, not sure", "output_summary": "0 chunks", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "insight", "input_summary": "Bleeding heavily and have bad cramps, not sure", "output_summary": "no guidance", "used_llm": false, "fallback": true, "ms": 6}
+{"agent": "remedy", "input_summary": "Bleeding heavily and have bad cramps, not sure", "output_summary": "safe advice", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "mood", "input_summary": "Bleeding heavily and have bad cramps, not sure", "output_summary": "no joke", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "Bleeding heavily and have bad cramps, not sure", "output_summary": "safe", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "router", "input_summary": "I want to die, I can't take this anymore", "output_summary": "distress", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "I want to die, I can't take this anymore", "output_summary": "distress", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "I want to die, I can't take this anymore", "output_summary": "distress", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "router", "input_summary": "PCOS runs in my family and I have irregular periods", "output_summary": "symptom related", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "PCOS runs in my family and I have irregular periods", "output_summary": "safe", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "extraction", "input_summary": "PCOS runs in my family and I have irregular periods", "output_summary": "{\"symptoms\": [], \"severity\": null, \"duration\": null, \"last_period_date\": null, \"", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "retriever", "input_summary": "PCOS runs in my family and I have irregular periods", "output_summary": "0 chunks", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "insight", "input_summary": "PCOS runs in my family and I have irregular periods", "output_summary": "no guidance", "used_llm": false, "fallback": true, "ms": 7}
+{"agent": "remedy", "input_summary": "PCOS runs in my family and I have irregular periods", "output_summary": "safe advice", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "mood", "input_summary": "PCOS runs in my family and I have irregular periods", "output_summary": "no joke", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "PCOS runs in my family and I have irregular periods", "output_summary": "safe", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "router", "input_summary": "PMOS diagnosis mentioned, irregular cycles", "output_summary": "symptom related", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "PMOS diagnosis mentioned, irregular cycles", "output_summary": "safe", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "extraction", "input_summary": "PMOS diagnosis mentioned, irregular cycles", "output_summary": "{\"symptoms\": [], \"severity\": null, \"duration\": null, \"last_period_date\": null, \"", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "retriever", "input_summary": "PMOS diagnosis mentioned, irregular cycles", "output_summary": "0 chunks", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "insight", "input_summary": "PMOS diagnosis mentioned, irregular cycles", "output_summary": "no guidance", "used_llm": false, "fallback": true, "ms": 7}
+{"agent": "remedy", "input_summary": "PMOS diagnosis mentioned, irregular cycles", "output_summary": "safe advice", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "mood", "input_summary": "PMOS diagnosis mentioned, irregular cycles", "output_summary": "no joke", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "PMOS diagnosis mentioned, irregular cycles", "output_summary": "safe", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "router", "input_summary": "Chest pain and can't breathe properly", "output_summary": "urgent keywords", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "Chest pain and can't breathe properly", "output_summary": "urgent", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "Chest pain and can't breathe properly", "output_summary": "urgent", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "router", "input_summary": "Periods longer than 7 days, heavy flow", "output_summary": "symptom related", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "Periods longer than 7 days, heavy flow", "output_summary": "safe", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "extraction", "input_summary": "Periods longer than 7 days, heavy flow", "output_summary": "{\"symptoms\": [\"heavy\"], \"severity\": null, \"duration\": null, \"last_period_date\": ", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "retriever", "input_summary": "Periods longer than 7 days, heavy flow", "output_summary": "0 chunks", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "insight", "input_summary": "Periods longer than 7 days, heavy flow", "output_summary": "no guidance", "used_llm": false, "fallback": true, "ms": 8}
+{"agent": "remedy", "input_summary": "Periods longer than 7 days, heavy flow", "output_summary": "safe advice", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "mood", "input_summary": "Periods longer than 7 days, heavy flow", "output_summary": "no joke", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "Periods longer than 7 days, heavy flow", "output_summary": "safe", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "router", "input_summary": "Pain during sex and bad period pain", "output_summary": "symptom related", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "Pain during sex and bad period pain", "output_summary": "safe", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "extraction", "input_summary": "Pain during sex and bad period pain", "output_summary": "{\"symptoms\": [\"pain\"], \"severity\": null, \"duration\": null, \"last_period_date\": n", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "retriever", "input_summary": "Pain during sex and bad period pain", "output_summary": "0 chunks", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "insight", "input_summary": "Pain during sex and bad period pain", "output_summary": "no guidance", "used_llm": false, "fallback": true, "ms": 7}
+{"agent": "remedy", "input_summary": "Pain during sex and bad period pain", "output_summary": "safe advice", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "mood", "input_summary": "Pain during sex and bad period pain", "output_summary": "no joke", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "Pain during sex and bad period pain", "output_summary": "safe", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "router", "input_summary": "Gaining weight, cold all the time, periods changing", "output_summary": "symptom related", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "Gaining weight, cold all the time, periods changing", "output_summary": "safe", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "extraction", "input_summary": "Gaining weight, cold all the time, periods changing", "output_summary": "{\"symptoms\": [], \"severity\": null, \"duration\": null, \"last_period_date\": null, \"", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "retriever", "input_summary": "Gaining weight, cold all the time, periods changing", "output_summary": "0 chunks", "used_llm": false, "fallback": true, "ms": 1}
+{"agent": "insight", "input_summary": "Gaining weight, cold all the time, periods changing", "output_summary": "no guidance", "used_llm": false, "fallback": true, "ms": 8}
+{"agent": "remedy", "input_summary": "Gaining weight, cold all the time, periods changing", "output_summary": "safe advice", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "mood", "input_summary": "Gaining weight, cold all the time, periods changing", "output_summary": "no joke", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "Gaining weight, cold all the time, periods changing", "output_summary": "safe", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "router", "input_summary": "Missed period and tired, could be pregnant", "output_summary": "symptom related", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "Missed period and tired, could be pregnant", "output_summary": "safe", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "extraction", "input_summary": "Missed period and tired, could be pregnant", "output_summary": "{\"symptoms\": [\"tired\"], \"severity\": null, \"duration\": null, \"last_period_date\": ", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "retriever", "input_summary": "Missed period and tired, could be pregnant", "output_summary": "0 chunks", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "insight", "input_summary": "Missed period and tired, could be pregnant", "output_summary": "no guidance", "used_llm": false, "fallback": true, "ms": 6}
+{"agent": "remedy", "input_summary": "Missed period and tired, could be pregnant", "output_summary": "safe advice", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "mood", "input_summary": "Missed period and tired, could be pregnant", "output_summary": "joke", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "Missed period and tired, could be pregnant", "output_summary": "safe", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "router", "input_summary": "Just feeling tired today, no other symptoms", "output_summary": "default", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "Just feeling tired today, no other symptoms", "output_summary": "safe", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "extraction", "input_summary": "Just feeling tired today, no other symptoms", "output_summary": "{\"symptoms\": [\"tired\"], \"severity\": null, \"duration\": null, \"last_period_date\": ", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "retriever", "input_summary": "Just feeling tired today, no other symptoms", "output_summary": "0 chunks", "used_llm": false, "fallback": true, "ms": 1}
+{"agent": "insight", "input_summary": "Just feeling tired today, no other symptoms", "output_summary": "no guidance", "used_llm": false, "fallback": true, "ms": 6}
+{"agent": "remedy", "input_summary": "Just feeling tired today, no other symptoms", "output_summary": "safe advice", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "mood", "input_summary": "Just feeling tired today, no other symptoms", "output_summary": "joke", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "Just feeling tired today, no other symptoms", "output_summary": "safe", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "router", "input_summary": "Clots bigger than coin with heavy bleeding", "output_summary": "symptom related", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "Clots bigger than coin with heavy bleeding", "output_summary": "safe", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "extraction", "input_summary": "Clots bigger than coin with heavy bleeding", "output_summary": "{\"symptoms\": [\"bleed\", \"bleeding\", \"heavy\", \"clot\", \"clots\"], \"severity\": null, ", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "retriever", "input_summary": "Clots bigger than coin with heavy bleeding", "output_summary": "0 chunks", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "insight", "input_summary": "Clots bigger than coin with heavy bleeding", "output_summary": "no guidance", "used_llm": false, "fallback": true, "ms": 6}
+{"agent": "remedy", "input_summary": "Clots bigger than coin with heavy bleeding", "output_summary": "safe advice", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "mood", "input_summary": "Clots bigger than coin with heavy bleeding", "output_summary": "no joke", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "Clots bigger than coin with heavy bleeding", "output_summary": "safe", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "router", "input_summary": "No idea what's wrong, random symptoms", "output_summary": "info", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "No idea what's wrong, random symptoms", "output_summary": "safe", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "extraction", "input_summary": "No idea what's wrong, random symptoms", "output_summary": "{\"symptoms\": [], \"severity\": null, \"duration\": null, \"last_period_date\": null, \"", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "retriever", "input_summary": "No idea what's wrong, random symptoms", "output_summary": "0 chunks", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "insight", "input_summary": "No idea what's wrong, random symptoms", "output_summary": "no guidance", "used_llm": false, "fallback": true, "ms": 7}
+{"agent": "remedy", "input_summary": "No idea what's wrong, random symptoms", "output_summary": "safe advice", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "mood", "input_summary": "No idea what's wrong, random symptoms", "output_summary": "no joke", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "No idea what's wrong, random symptoms", "output_summary": "safe", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "router", "input_summary": "My periods have been coming every 40-50 days, I have acne and facial hair. Could this be related to hormones?", "output_summary": "symptom related", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "My periods have been coming every 40-50 days, I have acne and facial hair. Could this be related to hormones?", "output_summary": "safe", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "extraction", "input_summary": "My periods have been coming every 40-50 days, I have acne and facial hair. Could this be related to hormones?", "output_summary": "{\"symptoms\": [\"acne\", \"hair\"], \"severity\": null, \"duration\": null, \"last_period_", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "retriever", "input_summary": "My periods have been coming every 40-50 days, I have acne and facial hair. Could this be related to hormones?", "output_summary": "3 chunks", "used_llm": false, "fallback": true, "ms": 89}
+{"agent": "insight", "input_summary": "My periods have been coming every 40-50 days, I have acne and facial hair. Could this be related to hormones?", "output_summary": "none", "used_llm": false, "fallback": true, "ms": 6}
+{"agent": "remedy", "input_summary": "My periods have been coming every 40-50 days, I have acne and facial hair. Could this be related to hormones?", "output_summary": "safe advice", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "mood", "input_summary": "My periods have been coming every 40-50 days, I have acne and facial hair. Could this be related to hormones?", "output_summary": "no joke", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "My periods have been coming every 40-50 days, I have acne and facial hair. Could this be related to hormones?", "output_summary": "safe", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "router", "input_summary": "Soaking through a pad every hour for 2 hours and feeling faint", "output_summary": "urgent keywords", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "Soaking through a pad every hour for 2 hours and feeling faint", "output_summary": "urgent", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "Soaking through a pad every hour for 2 hours and feeling faint", "output_summary": "urgent", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "router", "input_summary": "Severe pelvic pain during periods that stops me from going to work", "output_summary": "urgent keywords", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "Severe pelvic pain during periods that stops me from going to work", "output_summary": "urgent", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "Severe pelvic pain during periods that stops me from going to work", "output_summary": "urgent", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "router", "input_summary": "Feeling tired all the time, gaining weight, periods irregular", "output_summary": "symptom related", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "Feeling tired all the time, gaining weight, periods irregular", "output_summary": "safe", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "extraction", "input_summary": "Feeling tired all the time, gaining weight, periods irregular", "output_summary": "{\"symptoms\": [\"tired\"], \"severity\": null, \"duration\": null, \"last_period_date\": ", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "retriever", "input_summary": "Feeling tired all the time, gaining weight, periods irregular", "output_summary": "3 chunks", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "insight", "input_summary": "Feeling tired all the time, gaining weight, periods irregular", "output_summary": "none", "used_llm": false, "fallback": true, "ms": 3}
+{"agent": "remedy", "input_summary": "Feeling tired all the time, gaining weight, periods irregular", "output_summary": "safe advice", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "mood", "input_summary": "Feeling tired all the time, gaining weight, periods irregular", "output_summary": "joke", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "Feeling tired all the time, gaining weight, periods irregular", "output_summary": "safe", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "router", "input_summary": "I haven't had a period in 4 months", "output_summary": "symptom related", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "I haven't had a period in 4 months", "output_summary": "safe", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "extraction", "input_summary": "I haven't had a period in 4 months", "output_summary": "{\"symptoms\": [], \"severity\": null, \"duration\": null, \"last_period_date\": null, \"", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "retriever", "input_summary": "I haven't had a period in 4 months", "output_summary": "3 chunks", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "insight", "input_summary": "I haven't had a period in 4 months", "output_summary": "none", "used_llm": false, "fallback": true, "ms": 6}
+{"agent": "remedy", "input_summary": "I haven't had a period in 4 months", "output_summary": "safe advice", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "mood", "input_summary": "I haven't had a period in 4 months", "output_summary": "no joke", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "I haven't had a period in 4 months", "output_summary": "safe", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "router", "input_summary": "I'm 14 and just started my periods, they're all over the place", "output_summary": "symptom related", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "I'm 14 and just started my periods, they're all over the place", "output_summary": "safe", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "extraction", "input_summary": "I'm 14 and just started my periods, they're all over the place", "output_summary": "{\"symptoms\": [], \"severity\": null, \"duration\": null, \"last_period_date\": null, \"", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "retriever", "input_summary": "I'm 14 and just started my periods, they're all over the place", "output_summary": "3 chunks", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "insight", "input_summary": "I'm 14 and just started my periods, they're all over the place", "output_summary": "none", "used_llm": false, "fallback": true, "ms": 3}
+{"agent": "remedy", "input_summary": "I'm 14 and just started my periods, they're all over the place", "output_summary": "safe advice", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "mood", "input_summary": "I'm 14 and just started my periods, they're all over the place", "output_summary": "no joke", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "I'm 14 and just started my periods, they're all over the place", "output_summary": "safe", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "router", "input_summary": "My cycles are regular, 28 days, just have mild cramps", "output_summary": "symptom related", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "My cycles are regular, 28 days, just have mild cramps", "output_summary": "safe", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "extraction", "input_summary": "My cycles are regular, 28 days, just have mild cramps", "output_summary": "{\"symptoms\": [\"cramp\", \"cramps\"], \"severity\": null, \"duration\": null, \"last_peri", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "retriever", "input_summary": "My cycles are regular, 28 days, just have mild cramps", "output_summary": "3 chunks", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "insight", "input_summary": "My cycles are regular, 28 days, just have mild cramps", "output_summary": "none", "used_llm": false, "fallback": true, "ms": 3}
+{"agent": "remedy", "input_summary": "My cycles are regular, 28 days, just have mild cramps", "output_summary": "safe advice", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "mood", "input_summary": "My cycles are regular, 28 days, just have mild cramps", "output_summary": "no joke", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "My cycles are regular, 28 days, just have mild cramps", "output_summary": "safe", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "router", "input_summary": "Periods are weird sometimes", "output_summary": "symptom related", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "Periods are weird sometimes", "output_summary": "safe", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "extraction", "input_summary": "Periods are weird sometimes", "output_summary": "{\"symptoms\": [], \"severity\": null, \"duration\": null, \"last_period_date\": null, \"", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "retriever", "input_summary": "Periods are weird sometimes", "output_summary": "3 chunks", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "insight", "input_summary": "Periods are weird sometimes", "output_summary": "none", "used_llm": false, "fallback": true, "ms": 4}
+{"agent": "remedy", "input_summary": "Periods are weird sometimes", "output_summary": "safe advice", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "mood", "input_summary": "Periods are weird sometimes", "output_summary": "no joke", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "Periods are weird sometimes", "output_summary": "safe", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "router", "input_summary": "Bleeding heavily and have bad cramps, not sure", "output_summary": "symptom related", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "Bleeding heavily and have bad cramps, not sure", "output_summary": "safe", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "extraction", "input_summary": "Bleeding heavily and have bad cramps, not sure", "output_summary": "{\"symptoms\": [\"cramp\", \"cramps\", \"bleed\", \"bleeding\"], \"severity\": null, \"durati", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "retriever", "input_summary": "Bleeding heavily and have bad cramps, not sure", "output_summary": "3 chunks", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "insight", "input_summary": "Bleeding heavily and have bad cramps, not sure", "output_summary": "none", "used_llm": false, "fallback": true, "ms": 3}
+{"agent": "remedy", "input_summary": "Bleeding heavily and have bad cramps, not sure", "output_summary": "safe advice", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "mood", "input_summary": "Bleeding heavily and have bad cramps, not sure", "output_summary": "no joke", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "Bleeding heavily and have bad cramps, not sure", "output_summary": "safe", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "router", "input_summary": "I want to die, I can't take this anymore", "output_summary": "distress", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "I want to die, I can't take this anymore", "output_summary": "distress", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "I want to die, I can't take this anymore", "output_summary": "distress", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "router", "input_summary": "PCOS runs in my family and I have irregular periods", "output_summary": "symptom related", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "PCOS runs in my family and I have irregular periods", "output_summary": "safe", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "extraction", "input_summary": "PCOS runs in my family and I have irregular periods", "output_summary": "{\"symptoms\": [], \"severity\": null, \"duration\": null, \"last_period_date\": null, \"", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "retriever", "input_summary": "PCOS runs in my family and I have irregular periods", "output_summary": "3 chunks", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "insight", "input_summary": "PCOS runs in my family and I have irregular periods", "output_summary": "none", "used_llm": false, "fallback": true, "ms": 3}
+{"agent": "remedy", "input_summary": "PCOS runs in my family and I have irregular periods", "output_summary": "safe advice", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "mood", "input_summary": "PCOS runs in my family and I have irregular periods", "output_summary": "no joke", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "PCOS runs in my family and I have irregular periods", "output_summary": "safe", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "router", "input_summary": "PMOS diagnosis mentioned, irregular cycles", "output_summary": "symptom related", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "PMOS diagnosis mentioned, irregular cycles", "output_summary": "safe", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "extraction", "input_summary": "PMOS diagnosis mentioned, irregular cycles", "output_summary": "{\"symptoms\": [], \"severity\": null, \"duration\": null, \"last_period_date\": null, \"", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "retriever", "input_summary": "PMOS diagnosis mentioned, irregular cycles", "output_summary": "3 chunks", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "insight", "input_summary": "PMOS diagnosis mentioned, irregular cycles", "output_summary": "none", "used_llm": false, "fallback": true, "ms": 3}
+{"agent": "remedy", "input_summary": "PMOS diagnosis mentioned, irregular cycles", "output_summary": "safe advice", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "mood", "input_summary": "PMOS diagnosis mentioned, irregular cycles", "output_summary": "no joke", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "PMOS diagnosis mentioned, irregular cycles", "output_summary": "safe", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "router", "input_summary": "Chest pain and can't breathe properly", "output_summary": "urgent keywords", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "Chest pain and can't breathe properly", "output_summary": "urgent", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "Chest pain and can't breathe properly", "output_summary": "urgent", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "router", "input_summary": "Periods longer than 7 days, heavy flow", "output_summary": "symptom related", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "Periods longer than 7 days, heavy flow", "output_summary": "safe", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "extraction", "input_summary": "Periods longer than 7 days, heavy flow", "output_summary": "{\"symptoms\": [\"heavy\"], \"severity\": null, \"duration\": null, \"last_period_date\": ", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "retriever", "input_summary": "Periods longer than 7 days, heavy flow", "output_summary": "3 chunks", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "insight", "input_summary": "Periods longer than 7 days, heavy flow", "output_summary": "none", "used_llm": false, "fallback": true, "ms": 3}
+{"agent": "remedy", "input_summary": "Periods longer than 7 days, heavy flow", "output_summary": "safe advice", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "mood", "input_summary": "Periods longer than 7 days, heavy flow", "output_summary": "no joke", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "Periods longer than 7 days, heavy flow", "output_summary": "safe", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "router", "input_summary": "Pain during sex and bad period pain", "output_summary": "symptom related", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "Pain during sex and bad period pain", "output_summary": "safe", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "extraction", "input_summary": "Pain during sex and bad period pain", "output_summary": "{\"symptoms\": [\"pain\"], \"severity\": null, \"duration\": null, \"last_period_date\": n", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "retriever", "input_summary": "Pain during sex and bad period pain", "output_summary": "3 chunks", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "insight", "input_summary": "Pain during sex and bad period pain", "output_summary": "none", "used_llm": false, "fallback": true, "ms": 7}
+{"agent": "remedy", "input_summary": "Pain during sex and bad period pain", "output_summary": "safe advice", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "mood", "input_summary": "Pain during sex and bad period pain", "output_summary": "no joke", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "Pain during sex and bad period pain", "output_summary": "safe", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "router", "input_summary": "Gaining weight, cold all the time, periods changing", "output_summary": "symptom related", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "Gaining weight, cold all the time, periods changing", "output_summary": "safe", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "extraction", "input_summary": "Gaining weight, cold all the time, periods changing", "output_summary": "{\"symptoms\": [], \"severity\": null, \"duration\": null, \"last_period_date\": null, \"", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "retriever", "input_summary": "Gaining weight, cold all the time, periods changing", "output_summary": "3 chunks", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "insight", "input_summary": "Gaining weight, cold all the time, periods changing", "output_summary": "none", "used_llm": false, "fallback": true, "ms": 6}
+{"agent": "remedy", "input_summary": "Gaining weight, cold all the time, periods changing", "output_summary": "safe advice", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "mood", "input_summary": "Gaining weight, cold all the time, periods changing", "output_summary": "no joke", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "Gaining weight, cold all the time, periods changing", "output_summary": "safe", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "router", "input_summary": "Missed period and tired, could be pregnant", "output_summary": "symptom related", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "Missed period and tired, could be pregnant", "output_summary": "safe", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "extraction", "input_summary": "Missed period and tired, could be pregnant", "output_summary": "{\"symptoms\": [\"tired\"], \"severity\": null, \"duration\": null, \"last_period_date\": ", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "retriever", "input_summary": "Missed period and tired, could be pregnant", "output_summary": "3 chunks", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "insight", "input_summary": "Missed period and tired, could be pregnant", "output_summary": "none", "used_llm": false, "fallback": true, "ms": 7}
+{"agent": "remedy", "input_summary": "Missed period and tired, could be pregnant", "output_summary": "safe advice", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "mood", "input_summary": "Missed period and tired, could be pregnant", "output_summary": "joke", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "Missed period and tired, could be pregnant", "output_summary": "safe", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "router", "input_summary": "Just feeling tired today, no other symptoms", "output_summary": "default", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "Just feeling tired today, no other symptoms", "output_summary": "safe", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "extraction", "input_summary": "Just feeling tired today, no other symptoms", "output_summary": "{\"symptoms\": [\"tired\"], \"severity\": null, \"duration\": null, \"last_period_date\": ", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "retriever", "input_summary": "Just feeling tired today, no other symptoms", "output_summary": "3 chunks", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "insight", "input_summary": "Just feeling tired today, no other symptoms", "output_summary": "none", "used_llm": false, "fallback": true, "ms": 4}
+{"agent": "remedy", "input_summary": "Just feeling tired today, no other symptoms", "output_summary": "safe advice", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "mood", "input_summary": "Just feeling tired today, no other symptoms", "output_summary": "joke", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "Just feeling tired today, no other symptoms", "output_summary": "safe", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "router", "input_summary": "Clots bigger than coin with heavy bleeding", "output_summary": "symptom related", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "Clots bigger than coin with heavy bleeding", "output_summary": "safe", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "extraction", "input_summary": "Clots bigger than coin with heavy bleeding", "output_summary": "{\"symptoms\": [\"bleed\", \"bleeding\", \"heavy\", \"clot\", \"clots\"], \"severity\": null, ", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "retriever", "input_summary": "Clots bigger than coin with heavy bleeding", "output_summary": "3 chunks", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "insight", "input_summary": "Clots bigger than coin with heavy bleeding", "output_summary": "none", "used_llm": false, "fallback": true, "ms": 3}
+{"agent": "remedy", "input_summary": "Clots bigger than coin with heavy bleeding", "output_summary": "safe advice", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "mood", "input_summary": "Clots bigger than coin with heavy bleeding", "output_summary": "no joke", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "Clots bigger than coin with heavy bleeding", "output_summary": "safe", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "router", "input_summary": "No idea what's wrong, random symptoms", "output_summary": "info", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "No idea what's wrong, random symptoms", "output_summary": "safe", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "extraction", "input_summary": "No idea what's wrong, random symptoms", "output_summary": "{\"symptoms\": [], \"severity\": null, \"duration\": null, \"last_period_date\": null, \"", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "retriever", "input_summary": "No idea what's wrong, random symptoms", "output_summary": "3 chunks", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "insight", "input_summary": "No idea what's wrong, random symptoms", "output_summary": "none", "used_llm": false, "fallback": true, "ms": 3}
+{"agent": "remedy", "input_summary": "No idea what's wrong, random symptoms", "output_summary": "safe advice", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "mood", "input_summary": "No idea what's wrong, random symptoms", "output_summary": "no joke", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "No idea what's wrong, random symptoms", "output_summary": "safe", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "router", "input_summary": "My periods have been coming every 40-50 days, I have acne and facial hair. Could this be related to hormones?", "output_summary": "symptom related", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "My periods have been coming every 40-50 days, I have acne and facial hair. Could this be related to hormones?", "output_summary": "safe", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "extraction", "input_summary": "My periods have been coming every 40-50 days, I have acne and facial hair. Could this be related to hormones?", "output_summary": "{\"symptoms\": [\"acne\", \"hair\"], \"severity\": null, \"duration\": null, \"last_period_", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "retriever", "input_summary": "My periods have been coming every 40-50 days, I have acne and facial hair. Could this be related to hormones?", "output_summary": "3 chunks", "used_llm": false, "fallback": true, "ms": 131}
+{"agent": "insight", "input_summary": "My periods have been coming every 40-50 days, I have acne and facial hair. Could this be related to hormones?", "output_summary": "discuss", "used_llm": false, "fallback": true, "ms": 3}
+{"agent": "remedy", "input_summary": "My periods have been coming every 40-50 days, I have acne and facial hair. Could this be related to hormones?", "output_summary": "safe advice", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "mood", "input_summary": "My periods have been coming every 40-50 days, I have acne and facial hair. Could this be related to hormones?", "output_summary": "no joke", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "My periods have been coming every 40-50 days, I have acne and facial hair. Could this be related to hormones?", "output_summary": "safe", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "router", "input_summary": "Soaking through a pad every hour for 2 hours and feeling faint", "output_summary": "urgent keywords", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "Soaking through a pad every hour for 2 hours and feeling faint", "output_summary": "urgent", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "Soaking through a pad every hour for 2 hours and feeling faint", "output_summary": "urgent", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "router", "input_summary": "Severe pelvic pain during periods that stops me from going to work", "output_summary": "urgent keywords", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "Severe pelvic pain during periods that stops me from going to work", "output_summary": "urgent", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "Severe pelvic pain during periods that stops me from going to work", "output_summary": "urgent", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "router", "input_summary": "Feeling tired all the time, gaining weight, periods irregular", "output_summary": "symptom related", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "Feeling tired all the time, gaining weight, periods irregular", "output_summary": "safe", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "extraction", "input_summary": "Feeling tired all the time, gaining weight, periods irregular", "output_summary": "{\"symptoms\": [\"tired\"], \"severity\": null, \"duration\": null, \"last_period_date\": ", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "retriever", "input_summary": "Feeling tired all the time, gaining weight, periods irregular", "output_summary": "3 chunks", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "insight", "input_summary": "Feeling tired all the time, gaining weight, periods irregular", "output_summary": "discuss", "used_llm": false, "fallback": true, "ms": 4}
+{"agent": "remedy", "input_summary": "Feeling tired all the time, gaining weight, periods irregular", "output_summary": "safe advice", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "mood", "input_summary": "Feeling tired all the time, gaining weight, periods irregular", "output_summary": "joke", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "Feeling tired all the time, gaining weight, periods irregular", "output_summary": "safe", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "router", "input_summary": "I haven't had a period in 4 months", "output_summary": "symptom related", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "I haven't had a period in 4 months", "output_summary": "safe", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "extraction", "input_summary": "I haven't had a period in 4 months", "output_summary": "{\"symptoms\": [], \"severity\": null, \"duration\": null, \"last_period_date\": null, \"", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "retriever", "input_summary": "I haven't had a period in 4 months", "output_summary": "3 chunks", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "insight", "input_summary": "I haven't had a period in 4 months", "output_summary": "discuss", "used_llm": false, "fallback": true, "ms": 3}
+{"agent": "remedy", "input_summary": "I haven't had a period in 4 months", "output_summary": "safe advice", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "mood", "input_summary": "I haven't had a period in 4 months", "output_summary": "no joke", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "I haven't had a period in 4 months", "output_summary": "safe", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "router", "input_summary": "I'm 14 and just started my periods, they're all over the place", "output_summary": "symptom related", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "I'm 14 and just started my periods, they're all over the place", "output_summary": "safe", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "extraction", "input_summary": "I'm 14 and just started my periods, they're all over the place", "output_summary": "{\"symptoms\": [], \"severity\": null, \"duration\": null, \"last_period_date\": null, \"", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "retriever", "input_summary": "I'm 14 and just started my periods, they're all over the place", "output_summary": "3 chunks", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "insight", "input_summary": "I'm 14 and just started my periods, they're all over the place", "output_summary": "none", "used_llm": false, "fallback": true, "ms": 3}
+{"agent": "remedy", "input_summary": "I'm 14 and just started my periods, they're all over the place", "output_summary": "safe advice", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "mood", "input_summary": "I'm 14 and just started my periods, they're all over the place", "output_summary": "no joke", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "I'm 14 and just started my periods, they're all over the place", "output_summary": "safe", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "router", "input_summary": "My cycles are regular, 28 days, just have mild cramps", "output_summary": "symptom related", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "My cycles are regular, 28 days, just have mild cramps", "output_summary": "safe", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "extraction", "input_summary": "My cycles are regular, 28 days, just have mild cramps", "output_summary": "{\"symptoms\": [\"cramp\", \"cramps\"], \"severity\": null, \"duration\": null, \"last_peri", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "retriever", "input_summary": "My cycles are regular, 28 days, just have mild cramps", "output_summary": "3 chunks", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "insight", "input_summary": "My cycles are regular, 28 days, just have mild cramps", "output_summary": "none", "used_llm": false, "fallback": true, "ms": 4}
+{"agent": "remedy", "input_summary": "My cycles are regular, 28 days, just have mild cramps", "output_summary": "safe advice", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "mood", "input_summary": "My cycles are regular, 28 days, just have mild cramps", "output_summary": "no joke", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "My cycles are regular, 28 days, just have mild cramps", "output_summary": "safe", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "router", "input_summary": "Periods are weird sometimes", "output_summary": "symptom related", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "Periods are weird sometimes", "output_summary": "safe", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "extraction", "input_summary": "Periods are weird sometimes", "output_summary": "{\"symptoms\": [], \"severity\": null, \"duration\": null, \"last_period_date\": null, \"", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "retriever", "input_summary": "Periods are weird sometimes", "output_summary": "3 chunks", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "insight", "input_summary": "Periods are weird sometimes", "output_summary": "none", "used_llm": false, "fallback": true, "ms": 3}
+{"agent": "remedy", "input_summary": "Periods are weird sometimes", "output_summary": "safe advice", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "mood", "input_summary": "Periods are weird sometimes", "output_summary": "no joke", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "Periods are weird sometimes", "output_summary": "safe", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "router", "input_summary": "Bleeding heavily and have bad cramps, not sure", "output_summary": "symptom related", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "Bleeding heavily and have bad cramps, not sure", "output_summary": "safe", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "extraction", "input_summary": "Bleeding heavily and have bad cramps, not sure", "output_summary": "{\"symptoms\": [\"cramp\", \"cramps\", \"bleed\", \"bleeding\"], \"severity\": null, \"durati", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "retriever", "input_summary": "Bleeding heavily and have bad cramps, not sure", "output_summary": "3 chunks", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "insight", "input_summary": "Bleeding heavily and have bad cramps, not sure", "output_summary": "none", "used_llm": false, "fallback": true, "ms": 3}
+{"agent": "remedy", "input_summary": "Bleeding heavily and have bad cramps, not sure", "output_summary": "safe advice", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "mood", "input_summary": "Bleeding heavily and have bad cramps, not sure", "output_summary": "no joke", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "Bleeding heavily and have bad cramps, not sure", "output_summary": "safe", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "router", "input_summary": "I want to die, I can't take this anymore", "output_summary": "distress", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "I want to die, I can't take this anymore", "output_summary": "distress", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "I want to die, I can't take this anymore", "output_summary": "distress", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "router", "input_summary": "PCOS runs in my family and I have irregular periods", "output_summary": "symptom related", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "PCOS runs in my family and I have irregular periods", "output_summary": "safe", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "extraction", "input_summary": "PCOS runs in my family and I have irregular periods", "output_summary": "{\"symptoms\": [], \"severity\": null, \"duration\": null, \"last_period_date\": null, \"", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "retriever", "input_summary": "PCOS runs in my family and I have irregular periods", "output_summary": "3 chunks", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "insight", "input_summary": "PCOS runs in my family and I have irregular periods", "output_summary": "discuss", "used_llm": false, "fallback": true, "ms": 4}
+{"agent": "remedy", "input_summary": "PCOS runs in my family and I have irregular periods", "output_summary": "safe advice", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "mood", "input_summary": "PCOS runs in my family and I have irregular periods", "output_summary": "no joke", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "PCOS runs in my family and I have irregular periods", "output_summary": "safe", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "router", "input_summary": "PMOS diagnosis mentioned, irregular cycles", "output_summary": "symptom related", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "PMOS diagnosis mentioned, irregular cycles", "output_summary": "safe", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "extraction", "input_summary": "PMOS diagnosis mentioned, irregular cycles", "output_summary": "{\"symptoms\": [], \"severity\": null, \"duration\": null, \"last_period_date\": null, \"", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "retriever", "input_summary": "PMOS diagnosis mentioned, irregular cycles", "output_summary": "3 chunks", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "insight", "input_summary": "PMOS diagnosis mentioned, irregular cycles", "output_summary": "discuss", "used_llm": false, "fallback": true, "ms": 3}
+{"agent": "remedy", "input_summary": "PMOS diagnosis mentioned, irregular cycles", "output_summary": "safe advice", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "mood", "input_summary": "PMOS diagnosis mentioned, irregular cycles", "output_summary": "no joke", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "PMOS diagnosis mentioned, irregular cycles", "output_summary": "safe", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "router", "input_summary": "Chest pain and can't breathe properly", "output_summary": "urgent keywords", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "Chest pain and can't breathe properly", "output_summary": "urgent", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "Chest pain and can't breathe properly", "output_summary": "urgent", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "router", "input_summary": "Periods longer than 7 days, heavy flow", "output_summary": "symptom related", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "Periods longer than 7 days, heavy flow", "output_summary": "safe", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "extraction", "input_summary": "Periods longer than 7 days, heavy flow", "output_summary": "{\"symptoms\": [\"heavy\"], \"severity\": null, \"duration\": null, \"last_period_date\": ", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "retriever", "input_summary": "Periods longer than 7 days, heavy flow", "output_summary": "3 chunks", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "insight", "input_summary": "Periods longer than 7 days, heavy flow", "output_summary": "discuss", "used_llm": false, "fallback": true, "ms": 3}
+{"agent": "remedy", "input_summary": "Periods longer than 7 days, heavy flow", "output_summary": "safe advice", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "mood", "input_summary": "Periods longer than 7 days, heavy flow", "output_summary": "no joke", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "Periods longer than 7 days, heavy flow", "output_summary": "safe", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "router", "input_summary": "Pain during sex and bad period pain", "output_summary": "symptom related", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "Pain during sex and bad period pain", "output_summary": "safe", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "extraction", "input_summary": "Pain during sex and bad period pain", "output_summary": "{\"symptoms\": [\"pain\"], \"severity\": null, \"duration\": null, \"last_period_date\": n", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "retriever", "input_summary": "Pain during sex and bad period pain", "output_summary": "3 chunks", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "insight", "input_summary": "Pain during sex and bad period pain", "output_summary": "discuss", "used_llm": false, "fallback": true, "ms": 3}
+{"agent": "remedy", "input_summary": "Pain during sex and bad period pain", "output_summary": "safe advice", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "mood", "input_summary": "Pain during sex and bad period pain", "output_summary": "no joke", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "Pain during sex and bad period pain", "output_summary": "safe", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "router", "input_summary": "Gaining weight, cold all the time, periods changing", "output_summary": "symptom related", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "Gaining weight, cold all the time, periods changing", "output_summary": "safe", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "extraction", "input_summary": "Gaining weight, cold all the time, periods changing", "output_summary": "{\"symptoms\": [], \"severity\": null, \"duration\": null, \"last_period_date\": null, \"", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "retriever", "input_summary": "Gaining weight, cold all the time, periods changing", "output_summary": "3 chunks", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "insight", "input_summary": "Gaining weight, cold all the time, periods changing", "output_summary": "discuss", "used_llm": false, "fallback": true, "ms": 3}
+{"agent": "remedy", "input_summary": "Gaining weight, cold all the time, periods changing", "output_summary": "safe advice", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "mood", "input_summary": "Gaining weight, cold all the time, periods changing", "output_summary": "no joke", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "Gaining weight, cold all the time, periods changing", "output_summary": "safe", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "router", "input_summary": "Missed period and tired, could be pregnant", "output_summary": "symptom related", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "Missed period and tired, could be pregnant", "output_summary": "safe", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "extraction", "input_summary": "Missed period and tired, could be pregnant", "output_summary": "{\"symptoms\": [\"tired\"], \"severity\": null, \"duration\": null, \"last_period_date\": ", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "retriever", "input_summary": "Missed period and tired, could be pregnant", "output_summary": "3 chunks", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "insight", "input_summary": "Missed period and tired, could be pregnant", "output_summary": "discuss", "used_llm": false, "fallback": true, "ms": 7}
+{"agent": "remedy", "input_summary": "Missed period and tired, could be pregnant", "output_summary": "safe advice", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "mood", "input_summary": "Missed period and tired, could be pregnant", "output_summary": "joke", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "Missed period and tired, could be pregnant", "output_summary": "safe", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "router", "input_summary": "Just feeling tired today, no other symptoms", "output_summary": "default", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "Just feeling tired today, no other symptoms", "output_summary": "safe", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "extraction", "input_summary": "Just feeling tired today, no other symptoms", "output_summary": "{\"symptoms\": [\"tired\"], \"severity\": null, \"duration\": null, \"last_period_date\": ", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "retriever", "input_summary": "Just feeling tired today, no other symptoms", "output_summary": "3 chunks", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "insight", "input_summary": "Just feeling tired today, no other symptoms", "output_summary": "none", "used_llm": false, "fallback": true, "ms": 3}
+{"agent": "remedy", "input_summary": "Just feeling tired today, no other symptoms", "output_summary": "safe advice", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "mood", "input_summary": "Just feeling tired today, no other symptoms", "output_summary": "joke", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "Just feeling tired today, no other symptoms", "output_summary": "safe", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "router", "input_summary": "Clots bigger than coin with heavy bleeding", "output_summary": "symptom related", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "Clots bigger than coin with heavy bleeding", "output_summary": "safe", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "extraction", "input_summary": "Clots bigger than coin with heavy bleeding", "output_summary": "{\"symptoms\": [\"bleed\", \"bleeding\", \"heavy\", \"clot\", \"clots\"], \"severity\": null, ", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "retriever", "input_summary": "Clots bigger than coin with heavy bleeding", "output_summary": "3 chunks", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "insight", "input_summary": "Clots bigger than coin with heavy bleeding", "output_summary": "discuss", "used_llm": false, "fallback": true, "ms": 6}
+{"agent": "remedy", "input_summary": "Clots bigger than coin with heavy bleeding", "output_summary": "safe advice", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "mood", "input_summary": "Clots bigger than coin with heavy bleeding", "output_summary": "no joke", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "Clots bigger than coin with heavy bleeding", "output_summary": "safe", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "router", "input_summary": "No idea what's wrong, random symptoms", "output_summary": "info", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "No idea what's wrong, random symptoms", "output_summary": "safe", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "extraction", "input_summary": "No idea what's wrong, random symptoms", "output_summary": "{\"symptoms\": [], \"severity\": null, \"duration\": null, \"last_period_date\": null, \"", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "retriever", "input_summary": "No idea what's wrong, random symptoms", "output_summary": "3 chunks", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "insight", "input_summary": "No idea what's wrong, random symptoms", "output_summary": "none", "used_llm": false, "fallback": true, "ms": 4}
+{"agent": "remedy", "input_summary": "No idea what's wrong, random symptoms", "output_summary": "safe advice", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "mood", "input_summary": "No idea what's wrong, random symptoms", "output_summary": "no joke", "used_llm": false, "fallback": true, "ms": 0}
+{"agent": "safety", "input_summary": "No idea what's wrong, random symptoms", "output_summary": "safe", "used_llm": false, "fallback": true, "ms": 0}

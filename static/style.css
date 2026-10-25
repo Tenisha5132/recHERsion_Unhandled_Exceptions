@@ -1,0 +1,20 @@
+body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f7f7fa; }
+header { background: #6b46c1; color: white; padding: 10px; }
+header h1 { margin: 0; font-size: 1.5em; }
+nav a { color: white; }
+.banner { background: #ff6b6b; color: white; text-align: center; padding: 5px; font-weight: bold; }
+main { padding: 10px; }
+textarea { width: 100%; max-width: 400px; }
+button { min-height: 44px; min-width: 44px; }
+.entry { background: white; margin: 5px 0; padding: 8px; border-radius: 4px; }
+.urgent { background: #ff6b6b; color: white; padding: 10px; font-weight: bold; }
+.distress { background: #ffd93d; padding: 10px; }
+.insight-card { background: #e7f3ff; padding: 10px; margin: 5px 0; }
+.remedy { background: #d3f9d8; padding: 10px; margin: 5px 0; }
+.mood { background: #fff3bf; padding: 10px; margin: 5px 0; }
+.trace pre { background: #eee; padding: 5px; overflow-x: auto; }
+.synthetic { background: #ffec99; padding: 2px 4px; font-size: 0.8em; }
+.hidden { display: none; }
+@media (min-width: 600px) {
+  main { max-width: 600px; margin: 0 auto; }
+}
