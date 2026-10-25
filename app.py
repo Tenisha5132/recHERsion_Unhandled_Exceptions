@@ -12,7 +12,7 @@ from config import STATIC_DIR, TEMPLATES_DIR, ANON_ID_COOKIE, DISPLAY_NAME_COOKI
 from orchestrator import Orchestrator
 from tracker import get_entries, init_db
 from disclaimer import DISCLAIMER
-from support import build_support
+from support import EMERGENCY_INDIA, FIND_A_HELPLINE, TELE_MANAS, build_support
 from sounds import SOUND_PROFILES, ensure_builtin_sounds, sound_cards, write_sound
 
 app = FastAPI(title="recHERsion MVP")
@@ -238,7 +238,10 @@ def build_api_payload(res, message):
 @app.get("/", response_class=HTMLResponse)
 async def index(request: Request):
     anon = get_anon_id(request)
-    resp = templates.TemplateResponse(request, "mood_ui.html", {"display_name": get_display_name(request)})
+    resp = templates.TemplateResponse(request, "mood_ui.html", {
+        "display_name": get_display_name(request),
+        "nav_page": "chat"
+    })
     resp.set_cookie(ANON_ID_COOKIE, anon)
     return resp
 
@@ -271,6 +274,7 @@ async def builtin_sound(slug: str):
 async def login_page(request: Request):
     resp = templates.TemplateResponse(request, "login.html", {
         "display_name": get_display_name(request),
+        "nav_page": "login",
         "disclaimer": DISCLAIMER
     })
     return resp
@@ -282,6 +286,7 @@ async def login(request: Request, display_name: str = Form(...)):
     if not name:
         return templates.TemplateResponse(request, "login.html", {
             "display_name": "",
+            "nav_page": "login",
             "error": "Please enter a name before continuing.",
             "disclaimer": DISCLAIMER
         }, status_code=400)
@@ -328,11 +333,32 @@ async def chat(request: Request, message: str = Form(...)):
     return resp
 
 
+@app.get("/support", response_class=HTMLResponse)
+async def support_page(request: Request):
+    anon = get_anon_id(request)
+    resp = templates.TemplateResponse(request, "support.html", {
+        "support": build_support('neutral'),
+        "emergency": EMERGENCY_INDIA,
+        "helpline": TELE_MANAS,
+        "global_help": FIND_A_HELPLINE,
+        "display_name": get_display_name(request),
+        "nav_page": "support",
+        "disclaimer": DISCLAIMER
+    })
+    resp.set_cookie(ANON_ID_COOKIE, anon)
+    return resp
+
+
 @app.get("/timeline")
 async def timeline(request: Request):
     anon = get_anon_id(request)
     entries = get_entries(anon, limit=100)
-    resp = templates.TemplateResponse(request, "timeline.html", {"entries": entries, "disclaimer": DISCLAIMER})
+    resp = templates.TemplateResponse(request, "timeline.html", {
+        "entries": entries,
+        "display_name": get_display_name(request),
+        "nav_page": "journal",
+        "disclaimer": DISCLAIMER
+    })
     resp.set_cookie(ANON_ID_COOKIE, anon)
     return resp
 
@@ -362,6 +388,10 @@ async def delete_data(request: Request):
 @app.get("/privacy")
 async def privacy(request: Request):
     anon = get_anon_id(request)
-    resp = templates.TemplateResponse(request, "privacy.html", {"disclaimer": DISCLAIMER})
+    resp = templates.TemplateResponse(request, "privacy.html", {
+        "display_name": get_display_name(request),
+        "nav_page": "privacy",
+        "disclaimer": DISCLAIMER
+    })
     resp.set_cookie(ANON_ID_COOKIE, anon)
     return resp
