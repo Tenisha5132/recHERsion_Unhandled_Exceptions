@@ -1,0 +1,197 @@
+:root {
+  --site-ink: #1d1a2b;
+  --site-muted: #5b556f;
+  --site-accent: #5b3fb0;
+  --site-accent-soft: #f0ebfb;
+  --site-line: #e4ddf3;
+  --site-paper: #ffffff;
+  --site-bg: #f7f4fd;
+}
+
+* { box-sizing: border-box; }
+
+body.site-page {
+  margin: 0;
+  min-height: 100vh;
+  font-family: ui-rounded, "Nunito", "Segoe UI", system-ui, sans-serif;
+  color: var(--site-ink);
+  line-height: 1.55;
+  background:
+    radial-gradient(circle at 8% 0%, #fff6ec 0, transparent 28%),
+    radial-gradient(circle at 96% 8%, #ece4fb 0, transparent 32%),
+    var(--site-bg);
+}
+
+.site-nav {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  background: color-mix(in srgb, #fff 84%, transparent);
+  border-bottom: 1px solid var(--site-line);
+  backdrop-filter: blur(14px);
+}
+
+.site-nav-inner {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.site-brand {
+  color: var(--site-ink);
+  text-decoration: none;
+  font-weight: 800;
+  font-size: 1.12rem;
+  letter-spacing: -0.01em;
+}
+
+.site-brand b { color: var(--site-accent); }
+
+.site-links {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  flex-wrap: wrap;
+}
+
+.site-links a,
+.site-signin,
+.site-link-button {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 5px 10px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--site-muted);
+  text-decoration: none;
+  font: inherit;
+  font-size: 0.86rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.site-links a:hover,
+.site-signin:hover,
+.site-link-button:hover {
+  background: var(--site-accent-soft);
+  color: var(--site-accent);
+}
+
+.site-links a[aria-current="page"],
+.site-signin[aria-current="page"] {
+  background: var(--site-accent);
+  color: #fff;
+}
+
+.site-user {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.site-user form { margin: 0; }
+
+.site-user-name {
+  max-width: 140px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--site-accent);
+  font-size: 0.84rem;
+  font-weight: 800;
+}
+
+.site-signin { border: 1.5px solid var(--site-accent); color: var(--site-accent); }
+
+.page-shell {
+  width: 100%;
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 30px 20px 52px;
+}
+
+.page-head { max-width: 720px; margin-bottom: 24px; }
+.page-head h1 { margin: 4px 0 8px; font-size: clamp(1.9rem, 5vw, 3rem); line-height: 1.08; letter-spacing: -0.035em; }
+.page-head p { margin: 0; color: var(--site-muted); }
+
+.eyebrow {
+  margin: 0;
+  color: var(--site-accent);
+  text-transform: uppercase;
+  letter-spacing: 0.13em;
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+
+.panel {
+  border: 1px solid var(--site-line);
+  border-radius: 20px;
+  background: color-mix(in srgb, var(--site-paper) 92%, transparent);
+  box-shadow: 0 18px 50px #33215a12;
+  padding: 20px;
+}
+
+.chip {
+  display: inline-block;
+  padding: 2px 9px;
+  border-radius: 999px;
+  background: var(--site-accent-soft);
+  color: var(--site-accent);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.notice { color: var(--site-muted); font-size: 0.84rem; }
+
+.button,
+.button:visited {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 42px;
+  padding: 9px 16px;
+  border: 2px solid var(--site-accent);
+  border-radius: 11px;
+  background: var(--site-accent);
+  color: #fff;
+  text-decoration: none;
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.button.ghost { background: transparent; color: var(--site-accent); }
+.button:disabled { opacity: 0.55; cursor: wait; }
+
+:focus-visible { outline: 3px solid #1d6fd8; outline-offset: 2px; }
+
+.site-footer {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 0 20px 32px;
+  color: var(--site-muted);
+  font-size: 0.78rem;
+}
+
+@media (max-width: 720px) {
+  .site-nav { position: static; }
+  .site-nav-inner { padding: 10px 14px; gap: 8px; }
+  .site-links { order: 3; width: 100%; overflow-x: auto; flex-wrap: nowrap; padding-bottom: 2px; }
+  .site-user { margin-left: auto; }
+  .page-shell { padding: 22px 14px 40px; }
+  .panel { padding: 16px; border-radius: 16px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
