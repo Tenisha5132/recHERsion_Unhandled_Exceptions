@@ -1,27 +1,72 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Timeline</title>
-    <link rel="stylesheet" href="/static/style.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Journal · recHERsion</title>
+<link rel="stylesheet" href="/static/site.css">
+<link rel="stylesheet" href="/static/journal.css">
 </head>
-<body>
-    <header>
-        <h1>recHERsion</h1>
-        <nav><a href="/">Home</a></nav>
-    </header>
-    <div class="banner">SCREENING SUPPORT ONLY — NOT DIAGNOSIS</div>
-    <main>
-        <h2>Timeline</h2>
-        <canvas id="cycleChart" width="300" height="150" aria-label="Cycle length chart"></canvas>
-        <script src="/static/chart.js"></script>
-        {% for e in entries %}
-        <div class="entry">
-            <div class="time">{{e.created_at}}</div>
-            <div class="text">{{e.raw_text}}</div>
-        </div>
+<body class="site-page journal-page">
+{% include "_nav.html" %}
+
+<main class="page-shell">
+  <div class="page-head">
+    <p class="eyebrow">Journal</p>
+    <h1>Your saved check-ins.</h1>
+    <p>These are the entries recHERsion saved from your private browser session. Distress messages are not written to this journal.</p>
+  </div>
+
+  <div class="journal-layout">
+    <section aria-labelledby="entriesTitle">
+      <h2 class="visually-hidden" id="entriesTitle">Saved entries</h2>
+      {% if entries %}
+      <div class="entry-list">
+        {% for entry in entries %}
+        <article class="entry-card">
+          <time datetime="{{ entry.created_at }}">{{ entry.created_at }}</time>
+          <p>{{ entry.raw_text }}</p>
+        </article>
         {% endfor %}
-    </main>
+      </div>
+      {% else %}
+      <div class="empty-journal">
+        <span class="chip">Nothing saved yet</span>
+        <h2>Your journal is quiet.</h2>
+        <p>When a check-in is saved, it will appear here with the time. You can download a doctor-ready summary or delete everything at any time.</p>
+        <a class="button" href="/">Start a check-in</a>
+      </div>
+      {% endif %}
+    </section>
+
+    <aside class="journal-side">
+      <section class="panel">
+        <p class="eyebrow">At a glance</p>
+        <h2>Saved entries</h2>
+        <p class="journal-count"><strong>{{ entries|length }}</strong> saved</p>
+        <p class="notice">Entries stay tied to the anonymous cookie in this browser.</p>
+      </section>
+      <section class="panel">
+        <p class="eyebrow">Your data</p>
+        <h2>Take it or clear it</h2>
+        <div class="journal-actions">
+          <a class="button ghost" href="/summary.pdf">Download doctor summary</a>
+          <a class="button ghost" href="/support">Find support</a>
+          <form method="post" action="/delete" onsubmit="return confirm('Delete all your saved entries? This cannot be undone.');">
+            <button class="button ghost danger" type="submit">Delete my data</button>
+          </form>
+        </div>
+      </section>
+      <section class="panel">
+        <p class="eyebrow">Privacy</p>
+        <h2>What is stored</h2>
+        <p class="notice">The journal uses a local SQLite database and an anonymous browser cookie. It does not store your display name.</p>
+        <a class="notice" href="/privacy">Read the privacy page</a>
+      </section>
+    </aside>
+  </div>
+</main>
+
+<footer class="site-footer">{{ disclaimer }}</footer>
 </body>
 </html>
