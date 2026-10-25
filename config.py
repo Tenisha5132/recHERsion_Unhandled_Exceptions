@@ -24,6 +24,13 @@ def env_float(name, default, minimum=None, maximum=None):
     return value
 
 
+def env_bool(name, default=False):
+    raw = os.getenv(name)
+    if raw is None or not str(raw).strip():
+        return bool(default)
+    return str(raw).strip().lower() in ('1', 'true', 'yes', 'on')
+
+
 def _load_env_file(path):
     if not path.exists():
         return
@@ -66,6 +73,8 @@ HELPLINE_NUMBER = os.getenv("HELPLINE_NUMBER", "TODO_VERIFY")
 # Tracking
 ANON_ID_COOKIE = "rechers_anon_id"
 DISPLAY_NAME_COOKIE = "rechers_name"
+COOKIE_MAX_AGE = 60 * 60 * 24 * 30
+COOKIE_SECURE = env_bool("COOKIE_SECURE", False)
 REDIS_URL = os.getenv("REDIS_URL", "")
 
 # Retrieval

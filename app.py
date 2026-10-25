@@ -8,7 +8,7 @@ from fastapi.responses import HTMLResponse, FileResponse, RedirectResponse, JSON
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
-from config import STATIC_DIR, TEMPLATES_DIR, ANON_ID_COOKIE, DISPLAY_NAME_COOKIE, SOUNDS_DIR, MAX_MESSAGE_CHARS
+from config import STATIC_DIR, TEMPLATES_DIR, ANON_ID_COOKIE, DISPLAY_NAME_COOKIE, SOUNDS_DIR, MAX_MESSAGE_CHARS, COOKIE_MAX_AGE, COOKIE_SECURE
 from orchestrator import Orchestrator
 from tracker import get_entries, init_db
 from disclaimer import DISCLAIMER
@@ -55,6 +55,18 @@ async def startup():
         await asyncio.to_thread(ensure_builtin_sounds)
 
     asyncio.create_task(warm_sounds())
+
+
+def _set_anon_cookie(response, anon_id):
+    response.set_cookie(
+        ANON_ID_COOKIE,
+        anon_id,
+        max_age=COOKIE_MAX_AGE,
+        httponly=True,
+        samesite='lax',
+        secure=COOKIE_SECURE,
+    )
+    return response
 
 
 def get_anon_id(request: Request):
@@ -273,7 +285,7 @@ async def index(request: Request):
         "nav_page": "chat",
         "max_message_chars": MAX_MESSAGE_CHARS
     })
-    resp.set_cookie(ANON_ID_COOKIE, anon)
+    _set_anon_cookie(resp, anon)
     return resp
 
 
@@ -286,7 +298,7 @@ async def sounds_page(request: Request):
         "nav_page": "sounds",
         "disclaimer": DISCLAIMER
     })
-    resp.set_cookie(ANON_ID_COOKIE, anon)
+    _set_anon_cookie(resp, anon)
     return resp
 
 
@@ -325,9 +337,10 @@ async def login(request: Request, display_name: str = Form(...)):
     resp.set_cookie(
         DISPLAY_NAME_COOKIE,
         quote(name, safe=''),
-        max_age=60 * 60 * 24 * 30,
+        max_age=COOKIE_MAX_AGE,
         httponly=True,
-        samesite='lax'
+        samesite='lax',
+        secure=COOKIE_SECURE
     )
     return resp
 
@@ -335,7 +348,7 @@ async def login(request: Request, display_name: str = Form(...)):
 @app.post("/logout")
 async def logout():
     resp = RedirectResponse(url='/login', status_code=303)
-    resp.delete_cookie(DISPLAY_NAME_COOKIE)
+    resp.delete_cookie(DISPLAY_NAME_COOKIE, secure=COOKIE_SECURE, samesite='lax')
     return resp
 
 
@@ -352,7 +365,7 @@ async def api_chat(request: Request):
     anon = get_anon_id(request)
     result = orch.run(message, anon_id=anon)
     resp = JSONResponse(build_api_payload(result, message))
-    resp.set_cookie(ANON_ID_COOKIE, anon)
+    _set_anon_cookie(resp, anon)
     return resp
 
 
@@ -369,7 +382,7 @@ async def chat(request: Request, message: str = Form(...)):
         "nav_page": "chat",
         "disclaimer": DISCLAIMER
     })
-    resp.set_cookie(ANON_ID_COOKIE, anon)
+    _set_anon_cookie(resp, anon)
     return resp
 
 
@@ -385,7 +398,7 @@ async def support_page(request: Request):
         "nav_page": "support",
         "disclaimer": DISCLAIMER
     })
-    resp.set_cookie(ANON_ID_COOKIE, anon)
+    _set_anon_cookie(resp, anon)
     return resp
 
 
@@ -399,7 +412,7 @@ async def timeline(request: Request):
         "nav_page": "journal",
         "disclaimer": DISCLAIMER
     })
-    resp.set_cookie(ANON_ID_COOKIE, anon)
+    _set_anon_cookie(resp, anon)
     return resp
 
 
@@ -421,7 +434,7 @@ async def delete_data(request: Request):
     conn.commit()
     conn.close()
     resp = RedirectResponse(url='/', status_code=303)
-    resp.delete_cookie(ANON_ID_COOKIE)
+    resp.delete_cookie(ANON_ID_COOKIE, secure=COOKIE_SECURE, samesite='lax')
     return resp
 
 
@@ -433,5 +446,5 @@ async def privacy(request: Request):
         "nav_page": "privacy",
         "disclaimer": DISCLAIMER
     })
-    resp.set_cookie(ANON_ID_COOKIE, anon)
+    _set_anon_cookie(resp, anon)
     return resp
