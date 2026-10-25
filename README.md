@@ -11,7 +11,6 @@ recHERsion MVP is a multi-agent RAG app for PS1 "Women's Healthcare" (gaps in di
 - [Scope-aware replies](#scope-aware-replies)
 - [LLM / SLM setup](#llm--slm-setup)
 - [Deployment](#deployment)
-- [Tests](#tests)
 - [Pages](#pages)
 - [Workflows](#workflows)
 - [Operations and troubleshooting](#operations-and-troubleshooting)
@@ -105,15 +104,6 @@ docker run --rm -p 8000:8000 --env-file .env rechersion
 ```
 
 The image runs as a non-root user and checks `/healthz` with Docker's healthcheck. Mount a private volume at `/app/data` if you need durable journal storage.
-
-## Tests
-```bash
-make check
-# or
-python -m unittest discover -s tests -v
-```
-
-The 110-test suite covers extraction, scope routing, retrieval relevance, general replies, config parsing, LLM fallbacks, cookies, tracker access, deployment health, security headers, request limits, journal export and page contracts. GitHub Actions runs it on Python 3.11 and 3.12.
 
 ## Pages
 The app is split into focused pages instead of one long screen:
@@ -236,7 +226,7 @@ flowchart LR
         G13["Anonymous ID cookie<br/>no password, email, or phone"]
         G14["Local debug trace<br/>disclosed on the privacy page"]
         G15["Not-a-diagnosis disclaimer<br/>on relevant pages"]
-        G16["110 automated tests<br/>scope, safety, support, login, sounds, pages"]
+        G16["scope, safety, support, login, sounds, pages"]
         G17["Sound framed as comfort<br/>not treatment"]
         G18["Under-18 support adds<br/>adolescent-friendly care options"]
         G19["General and off-topic replies<br/>skip unrelated period retrieval"]
