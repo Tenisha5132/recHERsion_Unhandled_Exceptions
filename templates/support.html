@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Support · recHERsion</title>
+<link rel="stylesheet" href="/static/site.css">
+<link rel="stylesheet" href="/static/support.css">
+</head>
+<body class="site-page support-page">
+{% include "_nav.html" %}
+
+<main class="page-shell">
+  <div class="page-head">
+    <p class="eyebrow">Support</p>
+    <h1>Support, without the runaround.</h1>
+    <p>Start with what feels most urgent. Phone links work on a mobile device. Map links search in your browser and do not send your location to recHERsion.</p>
+  </div>
+
+  <section class="crisis-panel" aria-labelledby="crisisTitle">
+    <div class="crisis-intro">
+      <p class="eyebrow">Right now</p>
+      <h2 id="crisisTitle">If you are in immediate danger</h2>
+      <p>Call emergency services or go to the nearest emergency department. If you might act on thoughts of harming yourself, tell someone nearby and contact crisis support now.</p>
+    </div>
+    <div class="crisis-grid">
+      {% for item in [emergency, helpline, global_help] %}
+      <article class="crisis-card">
+        <span class="chip">{{ 'Phone' if item.kind == 'phone' else 'Global' }}</span>
+        <h3>{{ item.label }}</h3>
+        <p>{{ item.description }}</p>
+        <a class="button" href="{{ item.url }}" {% if item.kind != 'phone' %}target="_blank" rel="noopener noreferrer"{% endif %}>{{ 'Call' if item.kind == 'phone' else 'Open' }}</a>
+      </article>
+      {% endfor %}
+    </div>
+  </section>
+
+  <section class="panel care-panel" aria-labelledby="careTitle">
+    <div class="care-head">
+      <div>
+        <p class="eyebrow">Find care</p>
+        <h2 id="careTitle">Nearby options</h2>
+        <p class="notice">{{ support.note }}</p>
+      </div>
+      <button class="button ghost" type="button" id="locateSupport">Use my location</button>
+    </div>
+    <p class="notice status-line" id="locationStatus" role="status" aria-live="polite"></p>
+    <div class="support-grid">
+      {% for option in support.options %}
+      <article class="support-option">
+        <div>
+          <h3>{{ option.label }}</h3>
+          <p>{{ option.description }}</p>
+        </div>
+        {% if option.kind == 'phone' and option.phone %}
+        <a class="button" href="tel:{{ option.phone }}">Call</a>
+        {% elif option.maps_query %}
+        <a class="button ghost map-link" href="{{ option.url }}" data-map-query="{{ option.maps_query }}" target="_blank" rel="noopener noreferrer">Map</a>
+        {% elif option.url %}
+        <a class="button ghost" href="{{ option.url }}" target="_blank" rel="noopener noreferrer">Open</a>
+        {% endif %}
+      </article>
+      {% endfor %}
+    </div>
+    <p class="notice">{{ support.location_note }}</p>
+    <p class="notice">Map results are not vetted by recHERsion. Choose a registered doctor or recognised hospital.</p>
+  </section>
+
+  <section class="support-cta">
+    <div>
+      <p class="eyebrow">Need to talk it through?</p>
+      <h2>The chat can help you prepare.</h2>
+      <p class="notice">Describe what is happening, get source-backed context, and save a summary for a doctor. Screening support only, never a diagnosis.</p>
+    </div>
+    <a class="button" href="/">Open the chat</a>
+  </section>
+</main>
+
+<footer class="site-footer">{{ disclaimer }}</footer>
+<script src="/static/support.js"></script>
+</body>
+</html>
