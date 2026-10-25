@@ -1,21 +1,77 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privacy</title>
-    <link rel="stylesheet" href="/static/style.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy · recHERsion</title>
+<link rel="stylesheet" href="/static/site.css">
+<link rel="stylesheet" href="/static/privacy.css">
 </head>
-<body>
-    <header>
-        <h1>recHERsion</h1>
-        <nav><a href="/">Home</a></nav>
-    </header>
-    <main>
-        <h2>Privacy</h2>
-        <p>Data stays in the local SQLite DB. No names/emails/phone stored. anonymous_user_id is kept in the browser cookie.</p>
-        <p>If an LLM key is set, de-identified message text may be sent to the LLM provider.</p>
-        <p>{{disclaimer}}</p>
-    </main>
+<body class="site-page privacy-page">
+{% include "_nav.html" %}
+
+<main class="page-shell">
+  <div class="page-head">
+    <p class="eyebrow">Privacy</p>
+    <h1>Private by default, plain about limits.</h1>
+    <p>recHERsion is a screening and awareness support tool, not a diagnosis. Here is what stays in your browser, what is stored locally, and what leaves this device.</p>
+  </div>
+
+  <section class="privacy-grid" aria-label="Privacy details">
+    <article class="privacy-card">
+      <span class="chip">Browser</span>
+      <h2>Anonymous session</h2>
+      <p>A random anonymous ID is kept in a browser cookie so your journal and summary stay together. It is not your name, email or phone number.</p>
+      <p>An optional display name is stored only in a cookie on this device. It is not written to the SQLite database.</p>
+    </article>
+
+    <article class="privacy-card">
+      <span class="chip">Local database</span>
+      <h2>Saved check-ins</h2>
+      <p>Check-ins that the app decides to save are stored in a local SQLite database. Distress messages are not written to the saved-entry database.</p>
+      <p>You can clear saved entries from the journal or from the chat page.</p>
+    </article>
+
+    <article class="privacy-card">
+      <span class="chip">Your music</span>
+      <h2>Sound uploads</h2>
+      <p>Audio files you add on the sound page stay in this browser using private local storage. They are not uploaded to recHERsion.</p>
+      <p>Removing a track deletes it from this browser. Clearing site data also removes your uploaded tracks.</p>
+    </article>
+
+    <article class="privacy-card">
+      <span class="chip">Network</span>
+      <h2>Maps and AI</h2>
+      <p>Map searches open in Google Maps. Your location is requested only when you press the location button, and it is not sent to recHERsion.</p>
+      <p>If an LLM key is configured, de-identified message text may be sent to that provider. Without a key, the app uses rule-based fallbacks.</p>
+    </article>
+
+    <article class="privacy-card">
+      <span class="chip">Local logs</span>
+      <h2>Debug trace</h2>
+      <p>The local agent trace can contain short input and output summaries to explain how an answer was produced. It stays on this machine and is not shown to other users.</p>
+      <p>Do not run a shared deployment without reviewing trace retention and access.</p>
+    </article>
+
+    <article class="privacy-card">
+      <span class="chip">Limits</span>
+      <h2>Not a medical record</h2>
+      <p>This app does not diagnose, prescribe or replace a clinician. It cites the knowledge base it uses and encourages you to talk to a doctor about anything that worries you.</p>
+      <p><a href="/support">Find urgent and nearby support</a></p>
+    </article>
+  </section>
+
+  <div class="privacy-note">
+    <p>{{ disclaimer }}</p>
+  </div>
+
+  <div class="privacy-actions">
+    <a class="button" href="/">Open the chat</a>
+    <a class="button ghost" href="/sounds">Open the sound library</a>
+    <a class="button ghost" href="/timeline">Open my journal</a>
+  </div>
+</main>
+
+<footer class="site-footer">Screening support only. Not a diagnosis.</footer>
 </body>
 </html>
