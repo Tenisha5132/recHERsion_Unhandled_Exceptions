@@ -1,0 +1,5 @@
+* text=auto eol=lf
+*.wav binary
+*.pdf binary
+*.db binary
+*.mmd text eol=lf
