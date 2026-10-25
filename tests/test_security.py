@@ -5,7 +5,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from security import NoStoreMiddleware, SECURITY_HEADERS, SecurityHeadersMiddleware
+from security import NoStoreMiddleware, RequestSizeLimitMiddleware, SECURITY_HEADERS, SecurityHeadersMiddleware
 
 
 async def _run(messages):
@@ -88,6 +88,51 @@ class TestNoStoreMiddleware(unittest.TestCase):
         asyncio.run(NoStoreMiddleware(inner)({'type': 'http', 'path': '/api/chat'}, None, send))
         values = [value for key, value in sent[0]['headers'] if key == b'cache-control']
         self.assertEqual(values, [b'public, max-age=60'])
+
+
+async def _limited_response(content_length):
+    async def inner(scope, receive, send):
+        await send({'type': 'http.response.start', 'status': 200, 'headers': []})
+        await send({'type': 'http.response.body', 'body': b'ok'})
+
+    headers = []
+    if content_length is not None:
+        headers.append((b'content-length', str(content_length).encode('ascii')))
+    sent = []
+
+    async def send(message):
+        sent.append(message)
+
+    await RequestSizeLimitMiddleware(inner, max_bytes=1024)({'type': 'http', 'headers': headers}, None, send)
+    return sent
+
+
+class TestRequestSizeLimit(unittest.TestCase):
+    def test_small_request_reaches_the_app(self):
+        sent = asyncio.run(_limited_response(512))
+        self.assertEqual(sent[0]['status'], 200)
+
+    def test_request_without_length_is_allowed(self):
+        sent = asyncio.run(_limited_response(None))
+        self.assertEqual(sent[0]['status'], 200)
+
+    def test_oversized_request_is_rejected(self):
+        sent = asyncio.run(_limited_response(1025))
+        self.assertEqual(sent[0]['status'], 413)
+        self.assertIn(b'too large', sent[1]['body'])
+
+    def test_invalid_length_is_not_treated_as_oversized(self):
+        async def inner(scope, receive, send):
+            await send({'type': 'http.response.start', 'status': 200, 'headers': []})
+
+        sent = []
+
+        async def send(message):
+            sent.append(message)
+
+        asyncio.run(RequestSizeLimitMiddleware(inner, max_bytes=1024)(
+            {'type': 'http', 'headers': [(b'content-length', b'not-a-number')]}, None, send))
+        self.assertEqual(sent[0]['status'], 200)
 
 
 if __name__ == '__main__':

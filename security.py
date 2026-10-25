@@ -65,3 +65,36 @@ class NoStoreMiddleware:
             await send(message)
 
         await self.app(scope, receive, send_with_cache_headers)
+
+
+class RequestSizeLimitMiddleware:
+    def __init__(self, app, max_bytes):
+        self.app = app
+        self.max_bytes = max(1, int(max_bytes))
+
+    async def __call__(self, scope, receive, send):
+        if scope.get('type') != 'http':
+            await self.app(scope, receive, send)
+            return
+
+        headers = dict(scope.get('headers') or [])
+        raw_length = headers.get(b'content-length', b'').strip()
+        if raw_length:
+            try:
+                length = int(raw_length)
+            except ValueError:
+                length = 0
+            if length > self.max_bytes:
+                body = b'{"error":"request body is too large"}'
+                await send({
+                    'type': 'http.response.start',
+                    'status': 413,
+                    'headers': [
+                        (b'content-type', b'application/json'),
+                        (b'content-length', str(len(body)).encode('ascii')),
+                    ],
+                })
+                await send({'type': 'http.response.body', 'body': body})
+                return
+
+        await self.app(scope, receive, send)

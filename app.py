@@ -9,18 +9,19 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
-from config import STATIC_DIR, TEMPLATES_DIR, ANON_ID_COOKIE, DISPLAY_NAME_COOKIE, SOUNDS_DIR, MAX_MESSAGE_CHARS, COOKIE_MAX_AGE, COOKIE_SECURE
+from config import STATIC_DIR, TEMPLATES_DIR, ANON_ID_COOKIE, DISPLAY_NAME_COOKIE, SOUNDS_DIR, MAX_MESSAGE_CHARS, MAX_REQUEST_BYTES, COOKIE_MAX_AGE, COOKIE_SECURE
 from orchestrator import Orchestrator
 from tracker import delete_entries, get_entries, init_db
 from disclaimer import DISCLAIMER
 from health import health_snapshot
 from observability import RequestIdMiddleware
-from security import NoStoreMiddleware, SecurityHeadersMiddleware
+from security import NoStoreMiddleware, RequestSizeLimitMiddleware, SecurityHeadersMiddleware
 from support import EMERGENCY_INDIA, FIND_A_HELPLINE, TELE_MANAS, build_support
 from validation import validate_message
 from sounds import SOUND_PROFILES, ensure_builtin_sounds, sound_cards, write_sound
 
 app = FastAPI(title="recHERsion MVP")
+app.add_middleware(RequestSizeLimitMiddleware, max_bytes=MAX_REQUEST_BYTES)
 app.add_middleware(SecurityHeadersMiddleware)
 app.add_middleware(RequestIdMiddleware)
 app.add_middleware(NoStoreMiddleware)
