@@ -160,6 +160,20 @@ SOUND_PROFILES = [
         'volume': 0.5,
         'drift': 0.16,
     },
+    {
+        'slug': 'morning-light',
+        'title': 'Morning light',
+        'category': 'Uplift',
+        'icon': '☀️',
+        'description': 'A brighter pad with soft, spaced chimes.',
+        'kind': 'chime',
+        'duration': 16.0,
+        'frequencies': [261.6, 329.6, 392.0],
+        'volume': 0.46,
+        'drift': 0.14,
+        'chimes': [0.6, 4.4, 8.2, 12.1],
+        'chime_frequencies': [523.25, 659.25, 783.99],
+    },
 ]
 
 
