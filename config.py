@@ -1,7 +1,26 @@
+import math
 import os
 from pathlib import Path
 
 BASE_DIR = Path(__file__).parent
+
+
+def env_float(name, default, minimum=None, maximum=None):
+    raw = os.getenv(name)
+    if raw is None or not str(raw).strip():
+        value = float(default)
+    else:
+        try:
+            value = float(str(raw).strip())
+        except (TypeError, ValueError):
+            value = float(default)
+    if not math.isfinite(value):
+        value = float(default)
+    if minimum is not None:
+        value = max(float(minimum), value)
+    if maximum is not None:
+        value = min(float(maximum), value)
+    return value
 
 
 def _load_env_file(path):
@@ -38,7 +57,7 @@ DB_PATH = DATA_DIR / "app.db"
 LLM_API_KEY = os.getenv("LLM_API_KEY", "")
 LLM_MODEL = os.getenv("LLM_MODEL", "gpt-4o-mini")
 LLM_BASE_URL = os.getenv("LLM_BASE_URL", "")
-LLM_TIMEOUT = float(os.getenv("LLM_TIMEOUT", "10"))
+LLM_TIMEOUT = env_float("LLM_TIMEOUT", 10.0, minimum=1.0, maximum=120.0)
 
 # Helplines (TODO_VERIFY)
 HELPLINE_NUMBER = os.getenv("HELPLINE_NUMBER", "TODO_VERIFY")
@@ -50,6 +69,6 @@ REDIS_URL = os.getenv("REDIS_URL", "")
 
 # Retrieval
 TOP_K = 3
-MIN_RETRIEVAL_SCORE = float(os.getenv("MIN_RETRIEVAL_SCORE", "0.30"))
+MIN_RETRIEVAL_SCORE = env_float("MIN_RETRIEVAL_SCORE", 0.30, minimum=0.0, maximum=1.0)
 CHUNK_WORDS = 170
 EMBED_MODEL = "all-MiniLM-L6-v2"
