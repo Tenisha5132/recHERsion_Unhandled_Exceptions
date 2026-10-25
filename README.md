@@ -5,6 +5,21 @@
 ## Problem
 recHERsion MVP is a multi-agent RAG app for PS1 "Women's Healthcare" (gaps in diagnosis, symptom tracking, health awareness, access to clinical insights). This app is screening/awareness support only — not a diagnosis.
 
+## Contents
+- [Problem](#problem)
+- [Architecture](#architecture-ascii)
+- [Setup](#setup)
+- [Run](#run)
+- [Scope-aware replies](#scope-aware-replies)
+- [LLM / SLM setup](#llm--slm-setup)
+- [Deployment](#deployment)
+- [Tests](#tests)
+- [Pages](#pages)
+- [Workflows](#workflows)
+- [Operations and troubleshooting](#operations-and-troubleshooting)
+- [Privacy & Limitations](#privacy--limitations)
+- [Demo script](docs/DEMO_SCRIPT.md)
+
 ## Architecture (ASCII)
 ```
 User (Browser) -> FastAPI (app.py)
@@ -77,9 +92,9 @@ pip install -r requirements.txt
 uvicorn app:app --host 0.0.0.0 --port $PORT
 ```
 
-Set `LLM_API_KEY`, `LLM_MODEL`, `LLM_BASE_URL`, `LLM_TIMEOUT`, `MIN_RETRIEVAL_SCORE` and `COOKIE_SECURE` in the host environment. Do not commit `.env`. Attach a persistent disk if saved journal entries must survive restarts, because SQLite is stored at `data/app.db`.
+Set `LLM_API_KEY`, `LLM_MODEL`, `LLM_BASE_URL`, `LLM_TIMEOUT`, `MIN_RETRIEVAL_SCORE`, `MAX_REQUEST_BYTES` and `COOKIE_SECURE` in the host environment. Do not commit `.env`. Attach a persistent disk if saved journal entries must survive restarts, because SQLite is stored at `data/app.db`.
 
-The health endpoint is `GET /healthz`. After deployment, verify the running app:
+The health endpoint is `GET /healthz` and also reports whether the journal database is reachable. The app refuses oversized request bodies and disallows crawling with `GET /robots.txt` and `X-Robots-Tag`. After deployment, verify the running app:
 
 ```bash
 python scripts/smoke_test.py --base-url https://your-host
@@ -100,17 +115,22 @@ make check
 python -m unittest discover -s tests -v
 ```
 
-The suite covers extraction, scope routing, retrieval relevance, general replies, config parsing, LLM fallbacks, cookies, tracker access, deployment health, security headers and page contracts. GitHub Actions runs it on Python 3.11 and 3.12.
+The 110-test suite covers extraction, scope routing, retrieval relevance, general replies, config parsing, LLM fallbacks, cookies, tracker access, deployment health, security headers, request limits, journal export and page contracts. GitHub Actions runs it on Python 3.11 and 3.12.
 
 ## Pages
 The app is split into focused pages instead of one long screen:
 
 - `/` — private chat, mood theming and support cards
 - `/sounds` — built-in soundscapes plus your own local music uploads
-- `/timeline` — saved journal entries, PDF summary and delete controls
+- `/timeline` — saved journal entries, JSON/PDF downloads and delete controls
 - `/support` — emergency numbers, helplines and nearby-care map searches
 - `/privacy` — what is stored, what stays in the browser and what leaves the device
+- `/export.json` — JSON copy of the current anonymous journal
+- `/robots.txt` — crawl exclusion for this private health tool
 - `/login` — optional display-name cookie; no password or email
+
+## Demo
+A timed 6:30 recording script with narration, expected outputs and fallback lines is in [docs/DEMO_SCRIPT.md](docs/DEMO_SCRIPT.md).
 
 ## Workflows
 Source files: [multi-agent workflow](docs/multi_agent_workflow.mmd) and [features and guardrails](docs/features_and_guardrails.mmd).
@@ -191,14 +211,14 @@ flowchart LR
         SOUNDS["Sound library<br/>15 ambient profiles"]
         PLAYER["Player controls<br/>volume, loop, sleep timer"]
         UPLOAD["Own music<br/>IndexedDB uploads, 20 MB limit"]
-        JOURNAL["Journal<br/>timeline, PDF summary, delete"]
+        JOURNAL["Journal<br/>timeline, JSON/PDF export, delete"]
         SUPPORT["Support page<br/>112, Tele-MANAS, findahelpline, maps"]
         LOGIN["Name-only login<br/>display-name cookie"]
         PRIVACY["Privacy page<br/>plain-language disclosures"]
         WARM["Generated WAV route<br/>background warmup, gitignored audio"]
         HEALTH["Deployment checks<br/>GET /healthz and smoke script"]
         OPS["Docker image and CI<br/>Python 3.11 and 3.12"]
-        SECURE["Hardened transport<br/>security headers, request IDs, cookies"]
+        SECURE["Hardened transport<br/>CSP, request limits, request IDs, cookies"]
     end
 
     subgraph GUARDRAILS["Guardrails kept"]
@@ -218,7 +238,7 @@ flowchart LR
         G13["Anonymous ID cookie<br/>no password, email, or phone"]
         G14["Local debug trace<br/>disclosed on the privacy page"]
         G15["Not-a-diagnosis disclaimer<br/>on relevant pages"]
-        G16["94 automated tests<br/>scope, safety, support, login, sounds, pages"]
+        G16["110 automated tests<br/>scope, safety, support, login, sounds, pages"]
         G17["Sound framed as comfort<br/>not treatment"]
         G18["Under-18 support adds<br/>adolescent-friendly care options"]
         G19["General and off-topic replies<br/>skip unrelated period retrieval"]
