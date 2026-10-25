@@ -49,6 +49,20 @@ SOUND_PROFILES = [
         'volume': 0.5,
         'drift': 0.12,
     },
+    {
+        'slug': 'four-six-breath',
+        'title': 'Four-six breathing',
+        'category': 'Breathe',
+        'icon': '🌬️',
+        'description': 'A soft swell that guides a slower out-breath.',
+        'kind': 'swell',
+        'duration': 20.0,
+        'frequencies': [130.8, 196.0, 261.6],
+        'volume': 0.44,
+        'drift': 0.06,
+        'breath_cycles': 2,
+        'noise': 0.04,
+    },
 ]
 
 
