@@ -90,6 +90,21 @@ SOUND_PROFILES = [
         'noise_mode': 'brown',
         'noise_tone': 196.0,
     },
+    {
+        'slug': 'ocean-breath',
+        'title': 'Ocean breath',
+        'category': 'Nature',
+        'icon': '🌊',
+        'description': 'Slow wave swells with a low, rounded tone.',
+        'kind': 'ocean',
+        'duration': 20.0,
+        'frequencies': [65.4, 98.0, 130.8],
+        'volume': 0.5,
+        'drift': 0.12,
+        'noise': 0.5,
+        'noise_mode': 'brown',
+        'noise_tone': 98.0,
+    },
 ]
 
 
