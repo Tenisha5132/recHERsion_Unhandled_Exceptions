@@ -88,9 +88,17 @@ class Retriever:
             q = q + ' PMOS polyendocrine metabolic ovarian syndrome'
         if 'pmos' in ql and 'pcos' not in ql:
             q = q + ' PCOS polycystic ovary syndrome'
+        if 'heavy' in ql or 'bleed' in ql or 'clot' in ql or 'soak' in ql:
+            q = q + ' heavy periods menorrhagia NHS'
+        if 'irregular' in ql or 'miss' in ql or 'cycle' in ql:
+            q = q + ' irregular periods cycle NHS'
+        if 'endometri' in ql or ('pain' in ql and 'pelvic' in ql) or 'sex' in ql:
+            q = q + ' endometriosis'
+        if 'thyroid' in ql or ('tired' in ql and 'cold' in ql) or 'hypothyroid' in ql:
+            q = q + ' underactive thyroid hypothyroidism'
         return q
 
-    def query(self, q, top_k=TOP_K):
+    def query(self, q, top_k=5):
         q_exp = self.expand_query(q)
         results = []
         if self.model is not None and self.embeddings is not None and len(self.chunks) > 0:

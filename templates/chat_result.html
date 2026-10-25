@@ -26,6 +26,7 @@
                 <div>Flag: {{result.insight.flag_level}}</div>
                 <div>Pattern: {{result.insight.pattern}}</div>
                 <div>Disclaimer: {{result.insight.disclaimer}}</div>
+                {% if result.insight.citations %}
                 <div>Citations:
                     <ul>
                     {% for c in result.insight.citations %}
@@ -33,6 +34,8 @@
                     {% endfor %}
                     </ul>
                 </div>
+                {% endif %}
+                {% if result.insight.questions_for_doctor %}
                 <div>Questions for doctor:
                     <ul>
                     {% for q in result.insight.questions_for_doctor %}
@@ -40,25 +43,50 @@
                     {% endfor %}
                     </ul>
                 </div>
+                {% endif %}
             </div>
             {% endif %}
-            {% if result.remedy %}
+            {% if result.remedy and result.remedy.advice %}
             <div class="remedy">
-                <h3>Remedy (safe self-care)</h3>
+                <h3>Self-care from the knowledge base</h3>
                 <ul>
                 {% for a in result.remedy.advice %}
-                <li>{{a}}</li>
+                <li>
+                    {{a.text}}
+                    {% if a.source_url %}<a href="{{a.source_url}}">[{{a.title}}]</a>{% endif %}
+                </li>
                 {% endfor %}
                 </ul>
             </div>
             {% endif %}
-            {% if result.mood and result.mood.joke %}
-            <div class="mood">Mood: {{result.mood.emoji}} {{result.mood.joke}}</div>
             {% endif %}
+            {% if result.mood %}
+            <div class="mood">Mood: {{result.mood.emoji}} {{result.mood.theme}}{% if result.mood.joke %} — {{result.mood.joke}}{% endif %}</div>
             {% endif %}
-            <details class="trace">
+            <details class="trace" open>
                 <summary>Agent trace</summary>
-                <pre>{{result | tojson(indent=2)}}</pre>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Agent</th>
+                            <th>Mode</th>
+                            <th>Input</th>
+                            <th>Output</th>
+                            <th>ms</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for t in result.trace %}
+                        <tr>
+                            <td>{{t.agent}}</td>
+                            <td>{{t.mode}}</td>
+                            <td>{{t.input_summary}}</td>
+                            <td>{{t.output_summary}}</td>
+                            <td>{{t.ms}}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
             </details>
         </section>
     </main>
