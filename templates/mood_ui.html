@@ -3,7 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>recHERsion</title>
+<title>Talk · recHERsion</title>
+<link rel="stylesheet" href="/static/site.css">
 <style>
 /* Registered so colours animate smoothly when the mood changes */
 @property --bg1 { syntax: '<color>'; inherits: true; initial-value: #f4f1fb; }
@@ -118,21 +119,17 @@ button:disabled { opacity: .55; cursor: wait; }
 <body>
 <div class="bar">Screening support only. Not a diagnosis. Talk to a doctor about anything that worries you.</div>
 <div class="bar" id="urgentBar" role="alert" hidden></div>
+{% include "_nav.html" %}
 
 <header class="top">
   <div class="orb" id="orb" aria-hidden="true">🌸</div>
   <div class="brand">
-    <h1>rec<b>HER</b>sion</h1>
+    <h1>How are you feeling?</h1>
     <p id="moodLabel" aria-live="polite">Tell me how you have been feeling.</p>
   </div>
   <div class="top-actions">
     <button type="button" class="ghost" id="soundBtn" aria-pressed="false">Play calm sound</button>
-    {% if display_name %}
-    <span class="user-chip" title="{{ display_name }}">Hi, {{ display_name }}</span>
-    <form method="post" action="/logout"><button type="submit" class="ghost">Log out</button></form>
-    {% else %}
-    <a class="ghost-link" href="/login">Sign in</a>
-    {% endif %}
+    <a class="ghost-link" href="/sounds">Sound library</a>
   </div>
 </header>
 
