@@ -1,17 +1,19 @@
+import asyncio
 import re
 import uuid
 from urllib.parse import quote, unquote
 
-from fastapi import FastAPI, Request, Form
+from fastapi import FastAPI, Request, Form, HTTPException
 from fastapi.responses import HTMLResponse, FileResponse, RedirectResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
-from config import STATIC_DIR, TEMPLATES_DIR, ANON_ID_COOKIE, DISPLAY_NAME_COOKIE
+from config import STATIC_DIR, TEMPLATES_DIR, ANON_ID_COOKIE, DISPLAY_NAME_COOKIE, SOUNDS_DIR
 from orchestrator import Orchestrator
 from tracker import get_entries, init_db
 from disclaimer import DISCLAIMER
 from support import build_support
+from sounds import SOUND_PROFILES, ensure_builtin_sounds, sound_cards, write_sound
 
 app = FastAPI(title="recHERsion MVP")
 app.mount("/static", StaticFiles(directory=str(STATIC_DIR)), name="static")
@@ -42,6 +44,11 @@ THEME_EMOJI = {
 @app.on_event("startup")
 async def startup():
     init_db()
+
+    async def warm_sounds():
+        await asyncio.to_thread(ensure_builtin_sounds)
+
+    asyncio.create_task(warm_sounds())
 
 
 def get_anon_id(request: Request):
@@ -234,6 +241,30 @@ async def index(request: Request):
     resp = templates.TemplateResponse(request, "mood_ui.html", {"display_name": get_display_name(request)})
     resp.set_cookie(ANON_ID_COOKIE, anon)
     return resp
+
+
+@app.get("/sounds", response_class=HTMLResponse)
+async def sounds_page(request: Request):
+    anon = get_anon_id(request)
+    resp = templates.TemplateResponse(request, "sounds.html", {
+        "sounds": sound_cards(),
+        "display_name": get_display_name(request),
+        "nav_page": "sounds",
+        "disclaimer": DISCLAIMER
+    })
+    resp.set_cookie(ANON_ID_COOKIE, anon)
+    return resp
+
+
+@app.get("/media/sounds/{slug}.wav")
+async def builtin_sound(slug: str):
+    profile = next((item for item in SOUND_PROFILES if item["slug"] == slug), None)
+    if not profile:
+        raise HTTPException(status_code=404, detail="Sound not found")
+    path = SOUNDS_DIR / f"{slug}.wav"
+    if not path.exists():
+        await asyncio.to_thread(write_sound, profile)
+    return FileResponse(path, media_type="audio/wav", headers={"Cache-Control": "public, max-age=86400"})
 
 
 @app.get("/login", response_class=HTMLResponse)

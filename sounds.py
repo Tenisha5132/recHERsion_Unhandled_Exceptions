@@ -361,7 +361,7 @@ def sound_cards():
     return [
         {
             **profile,
-            'url': f"/static/sounds/{profile['slug']}.wav",
+            'url': f"/media/sounds/{profile['slug']}.wav",
         }
         for profile in SOUND_PROFILES
     ]

@@ -37,7 +37,7 @@ class TestSoundLibrary(unittest.TestCase):
 
     def test_sound_cards_have_urls(self):
         for card in sound_cards():
-            self.assertEqual(card['url'], f"/static/sounds/{card['slug']}.wav")
+            self.assertEqual(card['url'], f"/media/sounds/{card['slug']}.wav")
 
     def test_short_wave_file_is_valid(self):
         with tempfile.TemporaryDirectory() as directory:
