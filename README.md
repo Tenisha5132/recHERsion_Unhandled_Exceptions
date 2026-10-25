@@ -10,7 +10,7 @@ User (Browser) -> FastAPI (app.py)
                         |-> router -> safety(1) -> extraction -> tracker(save) -> retriever -> insight -> remedy -> mood -> safety(2)
                     |-> SQLite (tracker.py)
                     |-> RAG (ingest.py, retriever.py) using knowledge_base/ + embeddings/BM25
-                    |-> Templates/Static (HTML/CSS/JS, canvas charts)
+                    |-> Templates/Static (HTML/CSS/JS pages)
                     |-> PDF summary (summary_pdf.py via reportlab)
 ```
 
@@ -108,5 +108,5 @@ All knowledge-base files are my-own-words summaries. Licences respected.
 1. Start app, go to home
 2. Send urgent-like message (e.g. soaking hourly for 2h + faint) -> urgent banner
 3. Send PMOS-related message -> insight with citations
-4. View timeline + chart, download PDF summary
+4. Open the journal, download the PDF summary, try the sound library
 5. Check agent trace panel
