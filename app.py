@@ -10,7 +10,7 @@ from fastapi.templating import Jinja2Templates
 
 from config import STATIC_DIR, TEMPLATES_DIR, ANON_ID_COOKIE, DISPLAY_NAME_COOKIE, SOUNDS_DIR, MAX_MESSAGE_CHARS, COOKIE_MAX_AGE, COOKIE_SECURE
 from orchestrator import Orchestrator
-from tracker import get_entries, init_db
+from tracker import delete_entries, get_entries, init_db
 from disclaimer import DISCLAIMER
 from health import health_snapshot
 from observability import RequestIdMiddleware
@@ -427,12 +427,7 @@ async def summary_pdf(request: Request):
 @app.post("/delete")
 async def delete_data(request: Request):
     anon = get_anon_id(request)
-    from tracker import get_conn
-    conn = get_conn()
-    cur = conn.cursor()
-    cur.execute('DELETE FROM entries WHERE anonymous_user_id=?', (anon,))
-    conn.commit()
-    conn.close()
+    delete_entries(anon)
     resp = RedirectResponse(url='/', status_code=303)
     resp.delete_cookie(ANON_ID_COOKIE, secure=COOKIE_SECURE, samesite='lax')
     return resp
