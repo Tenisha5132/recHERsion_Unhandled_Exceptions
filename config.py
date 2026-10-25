@@ -5,6 +5,7 @@ BASE_DIR = Path(__file__).parent
 DATA_DIR = BASE_DIR / "data"
 KB_DIR = BASE_DIR / "knowledge_base"
 STATIC_DIR = BASE_DIR / "static"
+SOUNDS_DIR = STATIC_DIR / "sounds"
 TEMPLATES_DIR = BASE_DIR / "templates"
 
 DB_PATH = DATA_DIR / "app.db"
