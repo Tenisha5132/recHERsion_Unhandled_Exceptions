@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Sign in · recHERsion</title>
+<link rel="stylesheet" href="/static/site.css">
 <style>
 :root {
   --bg1: #f4f1fb; --bg2: #e6defa; --accent: #5b3fb0; --line: #d5cbf0;
@@ -18,8 +19,8 @@ body {
     radial-gradient(circle at 12% 8%, #ffffff 0, transparent 34%),
     radial-gradient(circle at 88% 18%, #fff3e6 0, transparent 30%),
     linear-gradient(160deg, var(--bg1), var(--bg2));
-  display: grid; place-items: center; padding: 24px;
 }
+.login-shell { min-height: calc(100vh - 64px); display: grid; place-items: center; padding: 24px; }
 .wrap { width: 100%; max-width: 480px; }
 .card {
   background: color-mix(in srgb, var(--paper) 92%, transparent);
@@ -56,13 +57,14 @@ button, .primary { border: 2px solid var(--accent); background: var(--accent); c
 .privacy { margin: 18px 0 0; color: var(--muted); font-size: .84rem; }
 .disclaimer { margin: 20px 0 0; padding-top: 16px; border-top: 1px solid var(--line); color: var(--muted); font-size: .78rem; }
 @media (max-width: 520px) {
-  body { padding: 14px; align-items: start; }
-  .card { padding: 22px 20px; border-radius: 20px; margin-top: 8vh; }
+  .login-shell { padding: 14px; align-items: start; }
+  .card { padding: 22px 20px; border-radius: 20px; margin-top: 3vh; }
 }
 </style>
 </head>
-<body>
-<main class="wrap">
+<body class="site-page login-page">
+{% include "_nav.html" %}
+<main class="wrap login-shell">
   <section class="card">
     <div class="brandmark">rec<b>HER</b>sion</div>
     <h1>{% if display_name %}Welcome back{% else %}A quieter place to start{% endif %}</h1>
