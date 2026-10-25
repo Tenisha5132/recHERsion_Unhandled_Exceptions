@@ -135,6 +135,19 @@ SOUND_PROFILES = [
         'noise_mode': 'pink',
         'noise_tone': 82.5,
     },
+    {
+        'slug': 'study-pulse',
+        'title': 'Study pulse',
+        'category': 'Focus',
+        'icon': '📚',
+        'description': 'A gentle repeating pulse for reading or planning.',
+        'kind': 'pulse',
+        'duration': 16.0,
+        'frequencies': [146.8, 220.0, 293.7],
+        'volume': 0.42,
+        'drift': 0.06,
+        'beat': 0.75,
+    },
 ]
 
 
