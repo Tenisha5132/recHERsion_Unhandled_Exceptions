@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="en" data-mood="neutral">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>recHERsion</title>
+<style>
+/* Registered so colours animate smoothly when the mood changes */
+@property --bg1 { syntax: '<color>'; inherits: true; initial-value: #f4f1fb; }
+@property --bg2 { syntax: '<color>'; inherits: true; initial-value: #e6defa; }
+@property --accent { syntax: '<color>'; inherits: true; initial-value: #5b3fb0; }
+@property --line { syntax: '<color>'; inherits: true; initial-value: #d5cbf0; }
+
+:root {
+  --bg1: #f4f1fb; --bg2: #e6defa; --accent: #5b3fb0; --line: #d5cbf0;
+  --ink: #1d1a2b; --muted: #55506b; --paper: #ffffff;
+  transition: --bg1 .9s ease, --bg2 .9s ease, --accent .9s ease, --line .9s ease;
+}
+/* Mood palettes: change these 4 values per mood, everything else follows */
+html[data-mood="mild"]     { --bg1:#fff3e6; --bg2:#ffdfc0; --accent:#a8501a; --line:#efcfae; }
+html[data-mood="low"]      { --bg1:#eef1fc; --bg2:#d9e1f7; --accent:#3f56a8; --line:#c5d0ee; }
+html[data-mood="discuss"]  { --bg1:#e8f7f3; --bg2:#cfeee6; --accent:#12705c; --line:#b5e0d5; }
+html[data-mood="urgent"]   { --bg1:#fff0ef; --bg2:#ffd9d6; --accent:#a8231b; --line:#f3bbb7; }
+html[data-mood="distress"] { --bg1:#e9f0f7; --bg2:#d3e2f1; --accent:#345f8a; --line:#bdd1e5; }
+
+* { box-sizing: border-box; }
+html, body { height: 100%; margin: 0; }
+body {
+  font-family: ui-rounded, "Nunito", "Segoe UI", system-ui, sans-serif;
+  color: var(--ink); line-height: 1.55;
+  background: linear-gradient(165deg, var(--bg1), var(--bg2)) fixed;
+  display: flex; flex-direction: column; min-height: 100%;
+}
+.bar { background: var(--accent); color: #fff; text-align: center; padding: 8px 14px; font-size: .88rem; font-weight: 600; }
+.bar[hidden] { display: none; }
+#urgentBar { background: #8f1810; font-size: 1rem; padding: 12px 16px; }
+
+header.top { display: flex; align-items: center; gap: 18px; padding: 22px 22px 8px; max-width: 880px; width: 100%; margin: 0 auto; }
+.orb {
+  flex: none; width: 76px; height: 76px; border-radius: 50%; display: grid; place-items: center;
+  font-size: 2.3rem; background: var(--paper); border: 3px solid var(--accent);
+  box-shadow: 0 0 0 10px color-mix(in srgb, var(--accent) 14%, transparent);
+  transition: border-color .9s, box-shadow .9s;
+}
+.orb.pop { animation: pop .55s ease; }
+@keyframes pop { 0% { transform: scale(.7) rotate(-8deg); } 60% { transform: scale(1.12); } 100% { transform: scale(1); } }
+.brand h1 { margin: 0; font-size: 1.7rem; letter-spacing: -.01em; }
+.brand h1 b { color: var(--accent); transition: color .9s; }
+.brand p { margin: 2px 0 0; color: var(--muted); font-size: .95rem; }
+
+main { flex: 1; width: 100%; max-width: 880px; margin: 0 auto; padding: 8px 22px 22px; display: flex; flex-direction: column; gap: 14px; }
+#log { flex: 1; display: flex; flex-direction: column; gap: 14px; min-height: 280px; }
+.msg { max-width: 92%; padding: 11px 15px; border-radius: 16px; background: var(--paper); border: 1px solid var(--line); overflow-wrap: anywhere; }
+.msg.user { align-self: flex-end; background: var(--accent); color: #fff; border-color: transparent; border-bottom-right-radius: 4px; transition: background .9s; }
+.msg.bot { align-self: flex-start; border-bottom-left-radius: 4px; }
+.msg.bot > * + * { margin-top: 10px; }
+.tag { display: inline-block; font-size: .8rem; font-weight: 700; padding: 2px 10px; border-radius: 99px; background: var(--accent); color: #fff; transition: background .9s; }
+.insight { border-left: 4px solid var(--accent); padding-left: 12px; transition: border-color .9s; }
+.insight h3 { margin: 6px 0 2px; font-size: .95rem; }
+.insight ul { margin: 4px 0 0; padding-left: 20px; }
+.insight a { color: var(--accent); }
+.notice { font-size: .82rem; color: var(--muted); }
+.safety { border-radius: 12px; padding: 12px 14px; border: 2px solid var(--accent); background: color-mix(in srgb, var(--accent) 8%, #fff); }
+.joke { font-style: italic; color: var(--muted); }
+.preview-tag { font-size: .75rem; background: #fff3c4; color: #5c4600; border-radius: 6px; padding: 2px 8px; display: inline-block; }
+
+.breath { width: 54px; height: 54px; border-radius: 50%; background: var(--accent); opacity: .55; margin: 6px 0; animation: breathe 8s ease-in-out infinite; }
+@keyframes breathe { 0%, 100% { transform: scale(.7); } 50% { transform: scale(1.15); } }
+
+details.trace { font-size: .85rem; color: var(--muted); }
+details.trace summary { cursor: pointer; font-weight: 700; }
+.trace ol { margin: 6px 0 0; padding-left: 20px; }
+.trace code { background: #00000010; border-radius: 4px; padding: 0 5px; }
+
+.typing { display: flex; gap: 5px; padding: 4px 2px; }
+.typing i { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); opacity: .5; animation: blink 1s infinite; }
+.typing i:nth-child(2) { animation-delay: .15s; } .typing i:nth-child(3) { animation-delay: .3s; }
+@keyframes blink { 50% { opacity: 1; transform: translateY(-3px); } }
+
+form.send { display: flex; gap: 10px; }
+textarea {
+  flex: 1; resize: none; min-height: 52px; max-height: 140px; padding: 13px 15px; font: inherit; color: var(--ink);
+  border: 2px solid var(--line); border-radius: 14px; background: var(--paper);
+}
+button { font: inherit; cursor: pointer; border-radius: 12px; border: 2px solid var(--accent); padding: 11px 18px; font-weight: 700; background: var(--accent); color: #fff; transition: background .9s, border-color .9s; }
+button.ghost { background: transparent; color: var(--accent); }
+button:disabled { opacity: .55; cursor: wait; }
+:focus-visible { outline: 3px solid #1d6fd8; outline-offset: 2px; }
+
+.actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.try { font-size: .85rem; color: var(--muted); }
+.try button { padding: 4px 10px; font-size: .82rem; margin: 3px 4px 0 0; font-weight: 600; }
+
+@media (max-width: 560px) {
+  header.top { padding: 16px 14px 4px; gap: 12px; } .orb { width: 60px; height: 60px; font-size: 1.8rem; }
+  main { padding: 6px 14px 16px; } .msg { max-width: 100%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+</style>
+</head>
+<body>
+<div class="bar">Screening support only. Not a diagnosis. Talk to a doctor about anything that worries you.</div>
+<div class="bar" id="urgentBar" role="alert" hidden></div>
+
+<header class="top">
+  <div class="orb" id="orb" aria-hidden="true">🌸</div>
+  <div class="brand">
+    <h1>rec<b>HER</b>sion</h1>
+    <p id="moodLabel" aria-live="polite">Tell me how you have been feeling.</p>
+  </div>
+</header>
+
+<main>
+  <div id="log" role="log" aria-live="polite" aria-label="Conversation"></div>
+
+  <form class="send" id="form">
+    <label for="msg" class="notice" style="position:absolute;left:-9999px">Describe your symptoms</label>
+    <textarea id="msg" rows="1" placeholder="For example: my periods are 50 days apart and I feel tired" required></textarea>
+    <button id="sendBtn" type="submit">Send</button>
+  </form>
+
+  <div class="actions">
+    <a href="/summary.pdf" style="text-decoration:none"><button type="button" class="ghost">Download doctor summary</button></a>
+    <button type="button" class="ghost" id="delBtn">Delete my data</button>
+    <a href="/privacy" style="align-self:center;color:var(--accent)">Privacy</a>
+  </div>
+
+  <div class="try" id="try">Design preview, tap to see each mood:</div>
+</main>
+
+<script>
+/* ---------- Config ---------- */
+const API_URL = '/api/chat';   // backend JSON endpoint (contract is described below)
+const MOODS = {
+  neutral:  { emoji: '🌸', label: 'Tell me how you have been feeling.' },
+  mild:     { emoji: '☕', label: 'Easy day. Rest up.' },
+  low:      { emoji: '🫂', label: 'Taking it gently.' },
+  discuss:  { emoji: '🩺', label: 'Worth a conversation with a doctor.' },
+  urgent:   { emoji: '⚠️', label: 'This needs medical attention.' },
+  distress: { emoji: '🤍', label: 'You are not alone.' }
+};
+/* Backend response contract (JSON):
+{
+  mood:    { theme: 'neutral|mild|low|discuss|urgent|distress', emoji: '☕', joke: 'optional string' },
+  safety:  { action: 'ok|urgent_override|distress_support', message: '...' },
+  insight: { flag_level: 'none|discuss|urgent', pattern: '...', reasoning: '...',
+             citations: [{title, source_url}], questions_for_doctor: ['...'] },
+  remedy:  { advice: ['...'], citations: [{title, source_url}] },
+  trace:   [{ agent, mode: 'rules|llm|fallback', summary, ms }]
+} */
+
+const $ = id => document.getElementById(id);
+const log = $('log'), form = $('form'), msg = $('msg'), sendBtn = $('sendBtn');
+function h(tag, cls, text) { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
+function safeUrl(u) { return /^https?:\/\//i.test(u || '') ? u : null; }
+
+/* ---------- Mood engine ---------- */
+function applyMood(theme, emoji) {
+  if (!MOODS[theme]) theme = 'neutral';
+  document.documentElement.dataset.mood = theme;
+  const orb = $('orb'); orb.textContent = emoji || MOODS[theme].emoji;
+  orb.classList.remove('pop'); void orb.offsetWidth; orb.classList.add('pop');
+  $('moodLabel').textContent = MOODS[theme].label;
+  $('urgentBar').hidden = theme !== 'urgent';
+}
+
+/* ---------- Rendering ---------- */
+function addUser(text) { log.appendChild(h('div', 'msg user', text)); scrollDown(); }
+function scrollDown() { window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' }); }
+function links(list) {
+  const seen = new Set(), ul = h('ul');
+  (list || []).forEach(c => {
+    const u = safeUrl(c.source_url); if (!u || seen.has(u)) return; seen.add(u);
+    const li = h('li'), a = h('a', null, c.title || u); a.href = u; a.target = '_blank'; a.rel = 'noopener noreferrer';
+    li.appendChild(a); ul.appendChild(li);
+  });
+  return ul.children.length ? ul : null;
+}
+function renderBot(r) {
+  const theme = (r.mood && r.mood.theme) || 'neutral';
+  const box = h('div', 'msg bot');
+  const sf = r.safety || {};
+  if (r.preview) box.appendChild(h('span', 'preview-tag', 'Preview mode: simulated reply, not from the backend'));
+
+  if (sf.action === 'urgent_override' || sf.action === 'distress_support') {
+    const s = h('div', 'safety'); s.appendChild(h('p', null, sf.message || ''));
+    if (sf.action === 'distress_support') { s.appendChild(h('div', 'breath')); s.appendChild(h('span', 'notice', 'Breathe in as the circle grows, out as it shrinks.')); }
+    box.appendChild(s);
+  } else {
+    const ins = r.insight || {};
+    const sec = h('div', 'insight');
+    sec.appendChild(h('span', 'tag', ins.flag_level === 'discuss' ? 'Worth discussing with a doctor' : 'No pattern flagged'));
+    if (ins.pattern) sec.appendChild(h('p', null, ins.pattern));
+    if (ins.reasoning) sec.appendChild(h('p', 'notice', ins.reasoning));
+    const q = (ins.questions_for_doctor || []).filter(Boolean);
+    if (q.length) { sec.appendChild(h('h3', null, 'Questions to ask your doctor')); const ul = h('ul'); q.forEach(x => ul.appendChild(h('li', null, x))); sec.appendChild(ul); }
+    const adv = ((r.remedy || {}).advice || []).filter(Boolean);
+    if (adv.length) { sec.appendChild(h('h3', null, 'Self-care from the sources')); const ul = h('ul'); adv.forEach(x => ul.appendChild(h('li', null, x))); sec.appendChild(ul); }
+    const cites = links([].concat(ins.citations || [], (r.remedy || {}).citations || []));
+    if (cites) { sec.appendChild(h('h3', null, 'Sources')); sec.appendChild(cites); }
+    box.appendChild(sec);
+    // Jokes: shown only on the mild theme, never alongside urgent, distress or a flag
+    if (theme === 'mild' && ins.flag_level !== 'discuss' && r.mood && r.mood.joke) box.appendChild(h('p', 'joke', r.mood.joke));
+  }
+
+  if (Array.isArray(r.trace) && r.trace.length) {
+    const d = h('details', 'trace'); d.appendChild(h('summary', null, 'How this was answered (' + r.trace.length + ' agents)'));
+    const ol = h('ol');
+    r.trace.forEach(t => { const li = h('li'); li.appendChild(h('code', null, t.agent)); li.appendChild(document.createTextNode(' ' + (t.mode || 'rules') + (t.ms != null ? ', ' + t.ms + ' ms' : '') + (t.summary ? ': ' + t.summary : ''))); ol.appendChild(li); });
+    d.appendChild(ol); box.appendChild(d);
+  }
+  box.appendChild(h('p', 'notice', 'Screening support, not a diagnosis.'));
+  log.appendChild(box); scrollDown();
+  applyMood(theme, r.mood && r.mood.emoji);
+}
+
+/* ---------- Preview mode (used only when the backend JSON endpoint is missing) ---------- */
+function simulate(text) {
+  const t = text.toLowerCase(), base = { preview: true };
+  const trace = [{ agent: 'router', mode: 'rules', ms: 1 }, { agent: 'safety', mode: 'rules', ms: 2 }];
+  if (/(soak|pad.*hour|faint|can'?t stop bleeding|chest pain|can'?t breathe)/.test(t))
+    return { ...base, mood: { theme: 'urgent' }, safety: { action: 'urgent_override', message: 'This could be serious. Please go to the nearest emergency department or call your local emergency number now. If you feel faint, do not go alone.' }, trace };
+  if (/(don'?t want to live|end it all|suicid|kill myself|jeene ka mann)/.test(t))
+    return { ...base, mood: { theme: 'distress' }, safety: { action: 'distress_support', message: 'I am really sorry you feel this way, and I am glad you said it. Please reach out to someone you trust right now. If you might act on these thoughts, call your local emergency number or go to the nearest emergency department.' }, trace };
+  if (/(\d{2,3}\s*days|irregular|acne|late period|missed|no period)/.test(t))
+    return { ...base, mood: { theme: 'discuss' }, safety: { action: 'ok' }, insight: { flag_level: 'discuss', pattern: 'Pattern worth discussing with a doctor.', reasoning: 'Cycle gap above 35 days is outside the NHS range of 21 to 35 days.', questions_for_doctor: ['Are blood tests such as thyroid or hormone levels appropriate for me?'], citations: [{ title: 'NHS: Irregular periods', source_url: 'https://www.nhs.uk/conditions/irregular-periods/' }] }, trace };
+  if (/(cold|runny|flu|cough|tired|slept badly)/.test(t))
+    return { ...base, mood: { theme: 'mild', joke: 'Tea and a blanket: the unofficial first-line treatment.' }, safety: { action: 'ok' }, insight: { flag_level: 'none', pattern: 'No pattern flagged from what you have shared.' }, trace };
+  if (/(sad|stress|anxious|overwhelm|low mood)/.test(t))
+    return { ...base, mood: { theme: 'low' }, safety: { action: 'ok' }, insight: { flag_level: 'none', pattern: 'That sounds hard. Tell me more whenever you want to.' }, trace };
+  return { ...base, mood: { theme: 'neutral' }, safety: { action: 'ok' }, insight: { flag_level: 'none', pattern: 'No pattern flagged from what you have shared.' }, trace };
+}
+
+/* ---------- Send ---------- */
+async function send(text) {
+  addUser(text);
+  const typing = h('div', 'msg bot'); const dots = h('div', 'typing'); dots.append(h('i'), h('i'), h('i')); typing.appendChild(dots);
+  log.appendChild(typing); scrollDown(); sendBtn.disabled = true;
+  let r;
+  try {
+    const res = await fetch(API_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ message: text }) });
+    if (!res.ok || !(res.headers.get('content-type') || '').includes('json')) throw new Error('no json endpoint');
+    r = await res.json();
+  } catch (e) { r = simulate(text); }
+  typing.remove(); renderBot(r); sendBtn.disabled = false; msg.focus();
+}
+form.addEventListener('submit', e => { e.preventDefault(); const v = msg.value.trim(); if (!v) return; msg.value = ''; send(v); });
+msg.addEventListener('keydown', e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); form.requestSubmit(); } });
+
+$('delBtn').addEventListener('click', async () => {
+  if (!confirm('Delete all your saved entries? This cannot be undone.')) return;
+  try { await fetch('/delete', { method: 'POST' }); } catch (e) {}
+  log.innerHTML = ''; applyMood('neutral'); greet('Your data was deleted.');
+});
+
+/* Design preview chips */
+Object.keys(MOODS).forEach(k => { const b = h('button', 'ghost', k); b.type = 'button'; b.addEventListener('click', () => applyMood(k)); $('try').appendChild(b); });
+
+function greet(extra) {
+  const b = h('div', 'msg bot'); b.appendChild(h('p', null, (extra ? extra + ' ' : '') + 'Describe your symptoms in your own words. I will log them, look for patterns, and cite the sources I use.'));
+  log.appendChild(b);
+}
+greet();
+</script>
+</body>
+</html>
