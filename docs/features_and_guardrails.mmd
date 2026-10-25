@@ -15,6 +15,9 @@ flowchart LR
         LOGIN["Name-only login<br/>display-name cookie"]
         PRIVACY["Privacy page<br/>plain-language disclosures"]
         WARM["Generated WAV route<br/>background warmup, gitignored audio"]
+        HEALTH["Deployment checks<br/>GET /healthz and smoke script"]
+        OPS["Docker image and CI<br/>Python 3.11 and 3.12"]
+        SECURE["Hardened transport<br/>security headers, request IDs, cookies"]
     end
 
     subgraph GUARDRAILS["Guardrails kept"]
@@ -34,10 +37,11 @@ flowchart LR
         G13["Anonymous ID cookie<br/>no password, email, or phone"]
         G14["Local debug trace<br/>disclosed on the privacy page"]
         G15["Not-a-diagnosis disclaimer<br/>on relevant pages"]
-        G16["61 automated tests<br/>scope, safety, support, login, sounds, pages"]
+        G16["94 automated tests<br/>scope, safety, support, login, sounds, pages"]
         G17["Sound framed as comfort<br/>not treatment"]
         G18["Under-18 support adds<br/>adolescent-friendly care options"]
         G19["General and off-topic replies<br/>skip unrelated period retrieval"]
+        G20["HTTP-only SameSite cookies<br/>security headers on every response"]
     end
 
     CHAT --> G1
@@ -66,8 +70,12 @@ flowchart LR
     PRIVACY --> G14
     PRIVACY --> G15
     NAV --> G16
+    HEALTH --> G16
+    OPS --> G16
+    SECURE --> G13
+    SECURE --> G20
 
     classDef feature fill:#e8f7f3,stroke:#12705c,color:#0b3b30
     classDef guard fill:#ffe8e5,stroke:#b33a2b,color:#5c160e
-    class NAV,CHAT,SCOPE,MODEL,MOOD,KBQ,SOUNDS,PLAYER,UPLOAD,JOURNAL,SUPPORT,LOGIN,PRIVACY,WARM feature
-    class G1,G2,G3,G4,G5,G6,G7,G8,G9,G10,G11,G12,G13,G14,G15,G16,G17,G18,G19 guard
+    class NAV,CHAT,SCOPE,MODEL,MOOD,KBQ,SOUNDS,PLAYER,UPLOAD,JOURNAL,SUPPORT,LOGIN,PRIVACY,WARM,HEALTH,OPS,SECURE feature
+    class G1,G2,G3,G4,G5,G6,G7,G8,G9,G10,G11,G12,G13,G14,G15,G16,G17,G18,G19,G20 guard
