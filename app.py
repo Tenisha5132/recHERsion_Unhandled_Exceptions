@@ -1,15 +1,15 @@
 import re
 import uuid
+from urllib.parse import quote, unquote
 
 from fastapi import FastAPI, Request, Form
 from fastapi.responses import HTMLResponse, FileResponse, RedirectResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
-from config import BASE_DIR, STATIC_DIR, TEMPLATES_DIR, ANON_ID_COOKIE
+from config import STATIC_DIR, TEMPLATES_DIR, ANON_ID_COOKIE, DISPLAY_NAME_COOKIE
 from orchestrator import Orchestrator
 from tracker import get_entries, init_db
-from curated_loader import load_curated
 from disclaimer import DISCLAIMER
 from support import build_support
 
@@ -49,6 +49,16 @@ def get_anon_id(request: Request):
     if not anon:
         anon = str(uuid.uuid4())
     return anon
+
+
+def _clean_display_name(value):
+    text = re.sub(r'\s+', ' ', str(value or '')).strip()
+    text = ''.join(ch for ch in text if ch.isprintable() and ch not in '<>')
+    return text[:40]
+
+
+def get_display_name(request: Request):
+    return _clean_display_name(unquote(request.cookies.get(DISPLAY_NAME_COOKIE) or ''))
 
 
 def _sanitize(value):
@@ -221,8 +231,44 @@ def build_api_payload(res, message):
 @app.get("/", response_class=HTMLResponse)
 async def index(request: Request):
     anon = get_anon_id(request)
-    resp = templates.TemplateResponse(request, "mood_ui.html", {})
+    resp = templates.TemplateResponse(request, "mood_ui.html", {"display_name": get_display_name(request)})
     resp.set_cookie(ANON_ID_COOKIE, anon)
+    return resp
+
+
+@app.get("/login", response_class=HTMLResponse)
+async def login_page(request: Request):
+    resp = templates.TemplateResponse(request, "login.html", {
+        "display_name": get_display_name(request),
+        "disclaimer": DISCLAIMER
+    })
+    return resp
+
+
+@app.post("/login")
+async def login(request: Request, display_name: str = Form(...)):
+    name = _clean_display_name(display_name)
+    if not name:
+        return templates.TemplateResponse(request, "login.html", {
+            "display_name": "",
+            "error": "Please enter a name before continuing.",
+            "disclaimer": DISCLAIMER
+        }, status_code=400)
+    resp = RedirectResponse(url='/', status_code=303)
+    resp.set_cookie(
+        DISPLAY_NAME_COOKIE,
+        quote(name, safe=''),
+        max_age=60 * 60 * 24 * 30,
+        httponly=True,
+        samesite='lax'
+    )
+    return resp
+
+
+@app.post("/logout")
+async def logout():
+    resp = RedirectResponse(url='/login', status_code=303)
+    resp.delete_cookie(DISPLAY_NAME_COOKIE)
     return resp
 
 

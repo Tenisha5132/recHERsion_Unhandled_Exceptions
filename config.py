@@ -19,6 +19,7 @@ HELPLINE_NUMBER = os.getenv("HELPLINE_NUMBER", "TODO_VERIFY")
 
 # Tracking
 ANON_ID_COOKIE = "rechers_anon_id"
+DISPLAY_NAME_COOKIE = "rechers_name"
 REDIS_URL = os.getenv("REDIS_URL", "")
 
 # Retrieval

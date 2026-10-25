@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sign in · recHERsion</title>
+<style>
+:root {
+  --bg1: #f4f1fb; --bg2: #e6defa; --accent: #5b3fb0; --line: #d5cbf0;
+  --ink: #1d1a2b; --muted: #55506b; --paper: #ffffff;
+}
+* { box-sizing: border-box; }
+html, body { min-height: 100%; margin: 0; }
+body {
+  font-family: ui-rounded, "Nunito", "Segoe UI", system-ui, sans-serif;
+  color: var(--ink); line-height: 1.55;
+  background:
+    radial-gradient(circle at 12% 8%, #ffffff 0, transparent 34%),
+    radial-gradient(circle at 88% 18%, #fff3e6 0, transparent 30%),
+    linear-gradient(160deg, var(--bg1), var(--bg2));
+  display: grid; place-items: center; padding: 24px;
+}
+.wrap { width: 100%; max-width: 480px; }
+.card {
+  background: color-mix(in srgb, var(--paper) 92%, transparent);
+  border: 1px solid var(--line); border-radius: 26px;
+  padding: 30px 30px 26px;
+  box-shadow: 0 24px 70px #33215a24, 0 2px 0 #ffffffcc inset;
+  backdrop-filter: blur(10px);
+}
+.brandmark { font-size: 1.3rem; font-weight: 800; letter-spacing: -.01em; }
+.brandmark b { color: var(--accent); }
+h1 { margin: 18px 0 6px; font-size: clamp(1.75rem, 5vw, 2.2rem); line-height: 1.15; letter-spacing: -.02em; }
+.lede { margin: 0 0 20px; color: var(--muted); }
+.signed { margin: 0 0 20px; padding: 12px 14px; border-radius: 12px; background: #f3effd; border: 1px solid var(--line); }
+.signed strong { color: var(--accent); }
+.login-form { display: grid; gap: 9px; }
+label { font-size: .9rem; font-weight: 700; }
+input {
+  width: 100%; min-height: 50px; padding: 12px 14px; font: inherit; color: var(--ink);
+  border: 2px solid var(--line); border-radius: 13px; background: #fff;
+}
+input:focus-visible, button:focus-visible, a:focus-visible { outline: 3px solid #1d6fd8; outline-offset: 2px; }
+button, .primary, .ghost {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-height: 46px; padding: 10px 18px; border-radius: 12px;
+  font: inherit; font-weight: 700; text-decoration: none; cursor: pointer;
+}
+button, .primary { border: 2px solid var(--accent); background: var(--accent); color: #fff; }
+.login-form button { width: 100%; margin-top: 4px; }
+.ghost { border: 2px solid var(--accent); background: transparent; color: var(--accent); }
+.actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.actions form { margin: 0; }
+.guest { display: inline-block; margin-top: 16px; color: var(--accent); font-weight: 700; }
+.error { margin: 0 0 14px; padding: 10px 12px; border-radius: 10px; background: #fff0ef; border: 1px solid #f3bbb7; color: #8f1810; }
+.privacy { margin: 18px 0 0; color: var(--muted); font-size: .84rem; }
+.disclaimer { margin: 20px 0 0; padding-top: 16px; border-top: 1px solid var(--line); color: var(--muted); font-size: .78rem; }
+@media (max-width: 520px) {
+  body { padding: 14px; align-items: start; }
+  .card { padding: 22px 20px; border-radius: 20px; margin-top: 8vh; }
+}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <section class="card">
+    <div class="brandmark">rec<b>HER</b>sion</div>
+    <h1>{% if display_name %}Welcome back{% else %}A quieter place to start{% endif %}</h1>
+
+    {% if display_name %}
+    <p class="signed">You are signed in as <strong>{{ display_name }}</strong>.</p>
+    <div class="actions">
+      <a class="primary" href="/">Back to chat</a>
+      <form method="post" action="/logout"><button class="ghost" type="submit">Log out</button></form>
+    </div>
+    <p class="privacy">Your name is kept in a cookie on this device. Logging out does not delete your chat data; you can delete that from the chat page.</p>
+    {% else %}
+    <p class="lede">Set a name for this private space. No password, no email, and your name is not stored on our server.</p>
+    {% if error %}<p class="error">{{ error }}</p>{% endif %}
+    <form method="post" action="/login" class="login-form">
+      <label for="display_name">What should we call you?</label>
+      <input id="display_name" name="display_name" type="text" maxlength="40" autocomplete="nickname" placeholder="e.g. Asha" required autofocus>
+      <button type="submit">Continue</button>
+    </form>
+    <a class="guest" href="/">Continue as guest</a>
+    <p class="privacy">Your name is kept in a cookie on this device only. You can log out anytime.</p>
+    {% endif %}
+
+    <p class="disclaimer">{{ disclaimer }}</p>
+  </section>
+</main>
+</body>
+</html>
