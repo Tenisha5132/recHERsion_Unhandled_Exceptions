@@ -9,7 +9,7 @@ WORKDIR /app
 RUN useradd --create-home --shell /usr/sbin/nologin app
 
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir --timeout 60 --retries 5 -r requirements.txt
 
 COPY . .
 RUN mkdir -p data static/sounds && chown -R app:app /app
