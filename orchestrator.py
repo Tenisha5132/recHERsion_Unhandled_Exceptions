@@ -7,6 +7,7 @@ try:
     from .insight import InsightAgent
     from .remedy import RemedyAgent
     from .mood import MoodAgent
+    from .general import GeneralAgent
 except Exception:
     from agents.base import BaseAgent
     from agents.router import RouterAgent
@@ -16,6 +17,7 @@ except Exception:
     from agents.insight import InsightAgent
     from agents.remedy import RemedyAgent
     from agents.mood import MoodAgent
+    from agents.general import GeneralAgent
 from tracker import save_entry
 
 
@@ -32,6 +34,7 @@ class Orchestrator:
         self.insight = InsightAgent()
         self.remedy = RemedyAgent()
         self.mood = MoodAgent()
+        self.general = GeneralAgent()
 
     def run(self, message, anon_id=None):
         ctx = {'message': message, 'input_summary': message, 'anon_id': anon_id}
@@ -79,6 +82,25 @@ class Orchestrator:
         e = self.extraction.run(ctx)
         ctx['extracted'] = e.get('extracted')
         add_trace('extraction', message, e)
+
+        category = (r.get('category') or '').strip()
+        if category in ('general_health', 'off_topic'):
+            g = self.general.run(ctx)
+            ctx['general'] = g
+            add_trace('general', message, g)
+            m = self.mood.run(ctx)
+            add_trace('mood', message, m)
+            s2 = self.safety.run(ctx)
+            add_trace('safety_final', message, s2)
+            return {
+                'route': r,
+                'safety': s1,
+                'safety_final': s2,
+                'extraction': e,
+                'general': g,
+                'mood': m,
+                'trace': trace
+            }
 
         try:
             save_entry(anon_id, message, ctx['extracted'] or {})

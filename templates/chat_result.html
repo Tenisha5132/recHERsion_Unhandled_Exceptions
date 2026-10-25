@@ -22,6 +22,12 @@
             {% elif result.override == 'distress' %}
             <div class="distress">{{result.safety.message}}</div>
             {% else %}
+            {% if result.general %}
+            <div class="insight-card">
+                <h3>General guidance</h3>
+                <p>{{ result.general.reply }}</p>
+            </div>
+            {% endif %}
             {% if result.insight %}
             <div class="insight-card">
                 <h3>Insight</h3>

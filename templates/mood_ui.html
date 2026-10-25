@@ -117,7 +117,6 @@ button:disabled { opacity: .55; cursor: wait; }
 </style>
 </head>
 <body>
-<div class="bar">Screening support only. Not a diagnosis. Talk to a doctor about anything that worries you.</div>
 <div class="bar" id="urgentBar" role="alert" hidden></div>
 {% include "_nav.html" %}
 
@@ -169,6 +168,7 @@ const MOODS = {
   insight: { flag_level: 'none|discuss|urgent', pattern: '...', reasoning: '...',
              citations: [{title, source_url}], questions_for_doctor: ['...'] },
   remedy:  { advice: ['...'], citations: [{title, source_url}] },
+  general: { reply: '...', mode: 'rules|llm|fallback', scope: 'general_health|off_topic' },
   support: { title: '...', note: '...', location_note: '...',
              options: [{ kind: 'phone|maps|link', label: '...', description: '...',
                          phone: 'optional', maps_query: 'optional', url: '...' }] },
@@ -394,6 +394,12 @@ function renderBot(r) {
     const s = h('div', 'safety'); s.appendChild(h('p', null, sf.message || ''));
     if (sf.action === 'distress_support') { s.appendChild(h('div', 'breath')); s.appendChild(h('span', 'notice', 'Breathe in as the circle grows, out as it shrinks.')); }
     box.appendChild(s);
+  } else if (r.general && r.general.reply) {
+    const sec = h('div', 'insight');
+    sec.appendChild(h('span', 'tag', r.general.scope === 'general_health' ? 'General guidance' : 'Outside scope'));
+    sec.appendChild(h('p', null, r.general.reply));
+    box.appendChild(sec);
+    if (theme === 'mild' && r.mood && r.mood.joke) box.appendChild(h('p', 'joke', r.mood.joke));
   } else {
     const ins = r.insight || {};
     const sec = h('div', 'insight');
@@ -420,7 +426,6 @@ function renderBot(r) {
     r.trace.forEach(t => { const li = h('li'); li.appendChild(h('code', null, t.agent)); li.appendChild(document.createTextNode(' ' + (t.mode || 'rules') + (t.ms != null ? ', ' + t.ms + ' ms' : '') + (t.summary ? ': ' + t.summary : ''))); ol.appendChild(li); });
     d.appendChild(ol); box.appendChild(d);
   }
-  box.appendChild(h('p', 'notice', 'Screening support, not a diagnosis.'));
   log.appendChild(box); scrollDown();
   applyMood(theme, r.mood && r.mood.emoji);
 }
@@ -436,7 +441,7 @@ function simulate(text) {
   if (/(\d{2,3}\s*days|irregular|acne|late period|missed|no period)/.test(t))
     return { ...base, mood: { theme: 'discuss' }, safety: { action: 'ok' }, insight: { flag_level: 'discuss', pattern: 'Pattern worth discussing with a doctor.', reasoning: 'Cycle gap above 35 days is outside the NHS range of 21 to 35 days.', questions_for_doctor: ['Are blood tests such as thyroid or hormone levels appropriate for me?'], citations: [{ title: 'NHS: Irregular periods', source_url: 'https://www.nhs.uk/conditions/irregular-periods/' }] }, trace };
   if (/(cold|runny|flu|cough|tired|slept badly)/.test(t))
-    return { ...base, mood: { theme: 'mild', joke: 'Tea and a blanket: the unofficial first-line treatment.' }, safety: { action: 'ok' }, insight: { flag_level: 'none', pattern: 'No pattern flagged from what you have shared.' }, trace };
+    return { ...base, mood: { theme: 'mild', joke: 'Tea and a blanket: the unofficial first-line treatment.' }, safety: { action: 'ok' }, general: { reply: "I don't have a cold-specific source in my cited knowledge base, so I won't attach unrelated advice. A pharmacist or GP can advise on general symptoms. Seek urgent care for trouble breathing, chest pain, fainting, or symptoms that are severe or getting worse.", scope: 'general_health', mode: 'rules' }, trace };
   if (/(sad|stress|anxious|overwhelm|low mood)/.test(t))
     return { ...base, mood: { theme: 'low' }, safety: { action: 'ok' }, insight: { flag_level: 'none', pattern: 'That sounds hard. Tell me more whenever you want to.' }, trace };
   return { ...base, mood: { theme: 'neutral' }, safety: { action: 'ok' }, insight: { flag_level: 'none', pattern: 'No pattern flagged from what you have shared.' }, trace };

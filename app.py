@@ -103,6 +103,13 @@ def _theme_for(res, message):
     if (insight.get('flag_level') or '').lower() == 'discuss':
         return 'discuss'
 
+    text = (message or '').lower()
+    category = (res.get('route') or {}).get('category')
+    if category == 'off_topic':
+        return 'neutral'
+    if category == 'general_health':
+        return 'low' if LOW_MOOD.search(text) else 'mild'
+
     extracted = ((res.get('extraction') or {}).get('extracted') or {})
     symptoms = [str(s).lower() for s in (extracted.get('symptoms') or [])]
     severity = extracted.get('severity')
@@ -111,7 +118,6 @@ def _theme_for(res, message):
     except Exception:
         severity_value = 0.0
 
-    text = (message or '').lower()
     has_cycle_or_pain = bool(PAIN_OR_CYCLE.search(text)) or any(
         s in symptoms for s in ['pain', 'cramp', 'cramps', 'bleed', 'bleeding', 'heavy'])
     mild = any(word in text for word in MILD_WORDS) or any(
@@ -199,6 +205,16 @@ def _remedy_payload(res):
     return {'advice': advice, 'citations': _clean_citations(remedy.get('citations'))}
 
 
+def _general_payload(res):
+    general = res.get('general') or {}
+    category = (res.get('route') or {}).get('category') or ''
+    return {
+        'reply': _sanitize(general.get('reply') or ''),
+        'mode': general.get('mode') or 'fallback',
+        'scope': category,
+    }
+
+
 def _trace_payload(res):
     entries = []
     for item in res.get('trace') or []:
@@ -220,6 +236,8 @@ def _trace_payload(res):
 
 
 def _support_payload(res, theme):
+    if ((res.get('route') or {}).get('category') or '') == 'off_topic':
+        return None
     return build_support(theme, res)
 
 
@@ -230,6 +248,7 @@ def build_api_payload(res, message):
         'safety': _safety_payload(res),
         'insight': _insight_payload(res),
         'remedy': _remedy_payload(res),
+        'general': _general_payload(res),
         'support': _support_payload(res, theme),
         'trace': _trace_payload(res)
     }
