@@ -29,6 +29,16 @@ make run
 uvicorn app:app --host 0.0.0.0 --port 8000
 ```
 
+## Pages
+The app is split into focused pages instead of one long screen:
+
+- `/` — private chat, mood theming and support cards
+- `/sounds` — built-in soundscapes plus your own local music uploads
+- `/timeline` — saved journal entries, PDF summary and delete controls
+- `/support` — emergency numbers, helplines and nearby-care map searches
+- `/privacy` — what is stored, what stays in the browser and what leaves the device
+- `/login` — optional display-name cookie; no password or email
+
 ## Seed
 ```bash
 make seed
