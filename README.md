@@ -112,9 +112,155 @@ The app is split into focused pages instead of one long screen:
 - `/privacy` — what is stored, what stays in the browser and what leaves the device
 - `/login` — optional display-name cookie; no password or email
 
-## Diagrams
-- [Multi-agent workflow](docs/multi_agent_workflow.mmd) — request path through router, safety, extraction, the women's-health RAG branch, the general/off-topic branch, mood and final safety.
-- [Features and guardrails](docs/features_and_guardrails.mmd) — what was added and the safety/privacy protections kept in place.
+## Workflows
+Source files: [multi-agent workflow](docs/multi_agent_workflow.mmd) and [features and guardrails](docs/features_and_guardrails.mmd).
+
+### Multi-agent workflow
+```mermaid
+flowchart TD
+    USER["User in the browser"] --> UI["Talk page<br/>templates/mood_ui.html"]
+    UI --> API["FastAPI<br/>POST /api/chat"]
+    API --> ORCH["Orchestrator<br/>run"]
+    ORCH --> ROUTER["RouterAgent<br/>scope and safety intent"]
+    ROUTER --> SAFETY1["SafetyAgent<br/>first safety pass"]
+
+    SAFETY1 -->|"urgent red flags"| URGENT["Urgent override"]
+    SAFETY1 -->|"distress language"| DISTRESS["Distress support path"]
+    SAFETY1 -->|"no override"| EXTRACT["ExtractionAgent<br/>age, cycle, symptoms"]
+
+    URGENT --> SAVEURGENT[("Urgent check-in<br/>data/app.db")]
+    URGENT --> MOODURGENT["MoodAgent<br/>brief urgent reply"]
+    DISTRESS --> MOODDISTRESS["MoodAgent<br/>supportive reply"]
+
+    EXTRACT --> SCOPE{"Route category"}
+    SCOPE -->|"women's health"| TRACKER[("Tracker<br/>save anonymous check-in")]
+    SCOPE -->|"general health or off-topic"| GENERAL["GeneralAgent<br/>scoped reply"]
+    GENERAL <--> LLM["Optional LLM or SLM<br/>OpenAI-compatible endpoint"]
+
+    TRACKER --> RECENT[("Recent 5 entries<br/>context for patterns")]
+    TRACKER --> RETRIEVER["RetrieverAgent<br/>top 3 relevant chunks"]
+    RECENT --> RETRIEVER
+    RETRIEVER <--> KB[("Knowledge base<br/>embeddings or BM25<br/>plus relevance floor")]
+    RETRIEVER --> INSIGHT["InsightAgent<br/>patterns and citations"]
+    INSIGHT --> REMEDY["RemedyAgent<br/>source-backed self-care"]
+
+    REMEDY --> MOOD["MoodAgent<br/>mood-aware response"]
+    GENERAL --> MOODGEN["MoodAgent<br/>general reply theme"]
+    MOODURGENT --> SAFETY2["SafetyAgent<br/>final safety pass"]
+    MOODDISTRESS --> SAFETY2
+    MOOD --> SAFETY2
+    MOODGEN --> SAFETY2
+
+    SAFETY2 --> RESPONSE["Response builder<br/>theme, support, trace"]
+    RESPONSE --> SUPPORT["build_support<br/>care options by theme"]
+    RESPONSE -.-> TRACE[("Local trace<br/>data/agent_trace.jsonl")]
+    RESPONSE --> API
+    API --> UI
+
+    NOTE["Guardrail: urgent and distress paths skip extraction, retrieval and normal saving"]
+    NOTE2["Guardrail: general and off-topic paths skip period retrieval, insight, remedy and normal saving"]
+    SAFETY1 -.-> NOTE
+    NOTE -.-> SAFETY2
+    SCOPE -.-> NOTE2
+    NOTE2 -.-> SAFETY2
+
+    classDef ui fill:#e8f7f3,stroke:#12705c,color:#0b3b30
+    classDef agent fill:#eef2ff,stroke:#4052b5,color:#1e2a78
+    classDef safety fill:#ffe8e5,stroke:#b33a2b,color:#5c160e
+    classDef store fill:#fff4d6,stroke:#9a6b00,color:#4d3500
+    classDef api fill:#f2f2f2,stroke:#555555,color:#222222
+
+    class USER,UI ui
+    class ROUTER,EXTRACT,SCOPE,RETRIEVER,INSIGHT,REMEDY,MOOD,MOODURGENT,MOODDISTRESS,MOODGEN,GENERAL,SUPPORT agent
+    class SAFETY1,SAFETY2,URGENT,DISTRESS,NOTE,NOTE2 safety
+    class TRACKER,SAVEURGENT,RECENT,KB,TRACE store
+    class API,ORCH,RESPONSE,LLM api
+```
+
+### Features and guardrails
+```mermaid
+flowchart LR
+    subgraph FEATURES["Features added"]
+        direction TB
+        NAV["Multi-page shell<br/>Talk, Sounds, Journal, Support, Privacy"]
+        CHAT["Chat screening<br/>POST /api/chat"]
+        SCOPE["Scope-aware routing<br/>women's health, general health, off-topic"]
+        MODEL["Optional LLM or SLM<br/>OpenAI-compatible endpoint"]
+        MOOD["Mood-aware UI<br/>result cards and gentle audio"]
+        KBQ["Knowledge-base insight and remedy<br/>patterns, questions, sources"]
+        SOUNDS["Sound library<br/>15 ambient profiles"]
+        PLAYER["Player controls<br/>volume, loop, sleep timer"]
+        UPLOAD["Own music<br/>IndexedDB uploads, 20 MB limit"]
+        JOURNAL["Journal<br/>timeline, PDF summary, delete"]
+        SUPPORT["Support page<br/>112, Tele-MANAS, findahelpline, maps"]
+        LOGIN["Name-only login<br/>display-name cookie"]
+        PRIVACY["Privacy page<br/>plain-language disclosures"]
+        WARM["Generated WAV route<br/>background warmup, gitignored audio"]
+        HEALTH["Deployment checks<br/>GET /healthz and smoke script"]
+        OPS["Docker image and CI<br/>Python 3.11 and 3.12"]
+        SECURE["Hardened transport<br/>security headers, request IDs, cookies"]
+    end
+
+    subgraph GUARDRAILS["Guardrails kept"]
+        direction TB
+        G1["Safety passes before<br/>and after the agents"]
+        G2["Urgent red flags<br/>override the normal flow"]
+        G3["Distress is not saved<br/>only the urgent override persists"]
+        G4["No diagnosis<br/>diagnostic claims are stripped"]
+        G5["No medication advice<br/>unsafe remedy text is filtered"]
+        G6["Clinical advice stays KB-grounded<br/>with source citations"]
+        G7["Rule-based agents work<br/>without an LLM key"]
+        G8["Optional LLM path documents<br/>de-identified text sharing"]
+        G9["Verified helplines only<br/>TODO placeholders are hidden"]
+        G10["Map results marked unvetted<br/>location stays in the browser"]
+        G11["Uploads stay local<br/>never sent to the server"]
+        G12["No autoplay<br/>urgent state skips audio"]
+        G13["Anonymous ID cookie<br/>no password, email, or phone"]
+        G14["Local debug trace<br/>disclosed on the privacy page"]
+        G15["Not-a-diagnosis disclaimer<br/>on relevant pages"]
+        G16["94 automated tests<br/>scope, safety, support, login, sounds, pages"]
+        G17["Sound framed as comfort<br/>not treatment"]
+        G18["Under-18 support adds<br/>adolescent-friendly care options"]
+        G19["General and off-topic replies<br/>skip unrelated period retrieval"]
+        G20["HTTP-only SameSite cookies<br/>security headers on every response"]
+    end
+
+    CHAT --> G1
+    CHAT --> G2
+    CHAT --> G7
+    CHAT --> G8
+    SCOPE --> G7
+    SCOPE --> G19
+    MODEL --> G8
+    KBQ --> G4
+    KBQ --> G5
+    KBQ --> G6
+    KBQ --> G15
+    MOOD --> G12
+    SOUNDS --> G12
+    PLAYER --> G12
+    WARM --> G12
+    SOUNDS --> G17
+    UPLOAD --> G11
+    JOURNAL --> G3
+    JOURNAL --> G13
+    SUPPORT --> G9
+    SUPPORT --> G10
+    SUPPORT --> G18
+    LOGIN --> G13
+    PRIVACY --> G14
+    PRIVACY --> G15
+    NAV --> G16
+    HEALTH --> G16
+    OPS --> G16
+    SECURE --> G13
+    SECURE --> G20
+
+    classDef feature fill:#e8f7f3,stroke:#12705c,color:#0b3b30
+    classDef guard fill:#ffe8e5,stroke:#b33a2b,color:#5c160e
+    class NAV,CHAT,SCOPE,MODEL,MOOD,KBQ,SOUNDS,PLAYER,UPLOAD,JOURNAL,SUPPORT,LOGIN,PRIVACY,WARM,HEALTH,OPS,SECURE feature
+    class G1,G2,G3,G4,G5,G6,G7,G8,G9,G10,G11,G12,G13,G14,G15,G16,G17,G18,G19,G20 guard
+```
 
 ## Seed
 ```bash
