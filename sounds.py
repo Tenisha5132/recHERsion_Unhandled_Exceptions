@@ -37,6 +37,18 @@ SOUND_PROFILES = [
         'drift': 0.08,
         'beat': 0.5,
     },
+    {
+        'slug': 'sleep-drift',
+        'title': 'Sleep drift',
+        'category': 'Sleep',
+        'icon': '🌙',
+        'description': 'A very low, slow pad for winding down at night.',
+        'kind': 'pad',
+        'duration': 20.0,
+        'frequencies': [65.4, 98.0, 130.8, 196.0],
+        'volume': 0.5,
+        'drift': 0.12,
+    },
 ]
 
 
