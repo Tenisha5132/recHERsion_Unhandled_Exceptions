@@ -189,6 +189,21 @@ SOUND_PROFILES = [
         'noise_mode': 'brown',
         'noise_tone': 65.4,
     },
+    {
+        'slug': 'forest-air',
+        'title': 'Forest air',
+        'category': 'Nature',
+        'icon': '🍃',
+        'description': 'A leafy, mid-range wash with a soft harmonic bed.',
+        'kind': 'noise',
+        'duration': 16.0,
+        'frequencies': [98.0, 146.8, 196.0],
+        'volume': 0.44,
+        'drift': 0.1,
+        'noise': 0.5,
+        'noise_mode': 'pink',
+        'noise_tone': 146.8,
+    },
 ]
 
 
