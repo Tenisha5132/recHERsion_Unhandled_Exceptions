@@ -12,3 +12,6 @@ embedding_cache/
 .DS_Store
 raw_data/
 credentials.json
+
+# Generated ambient loops
+static/sounds/*.wav
