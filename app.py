@@ -286,7 +286,9 @@ async def http_error_handler(request: Request, exc: StarletteHTTPException):
 
 @app.get("/healthz")
 async def healthz():
-    return JSONResponse(health_snapshot(), headers={'Cache-Control': 'no-store'})
+    snapshot = health_snapshot()
+    status_code = 200 if snapshot.get('status') == 'ok' else 503
+    return JSONResponse(snapshot, status_code=status_code, headers={'Cache-Control': 'no-store'})
 
 
 @app.get("/", response_class=HTMLResponse)

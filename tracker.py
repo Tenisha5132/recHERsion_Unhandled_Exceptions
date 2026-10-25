@@ -78,3 +78,13 @@ def delete_entries(anon_id):
         cur.execute('DELETE FROM entries WHERE anonymous_user_id=?', (anon_id,))
         conn.commit()
         return cur.rowcount
+
+
+def database_ok():
+    try:
+        init_db()
+        with db_connection() as conn:
+            conn.execute('SELECT 1 FROM entries LIMIT 1').fetchone()
+        return True
+    except sqlite3.Error:
+        return False
