@@ -1,8 +1,8 @@
 flowchart TD
     USER["User in the browser"] --> UI["Talk page<br/>templates/mood_ui.html"]
     UI --> API["FastAPI<br/>POST /api/chat"]
-    API --> ORCH["Orchestrator<br/>run_screening"]
-    ORCH --> ROUTER["RouterAgent<br/>detect theme"]
+    API --> ORCH["Orchestrator<br/>run"]
+    ORCH --> ROUTER["RouterAgent<br/>scope and safety intent"]
     ROUTER --> SAFETY1["SafetyAgent<br/>first safety pass"]
 
     SAFETY1 -->|"urgent red flags"| URGENT["Urgent override"]
@@ -13,18 +13,24 @@ flowchart TD
     URGENT --> MOODURGENT["MoodAgent<br/>brief urgent reply"]
     DISTRESS --> MOODDISTRESS["MoodAgent<br/>supportive reply"]
 
-    EXTRACT --> TRACKER[("Tracker<br/>save anonymous check-in")]
+    EXTRACT --> SCOPE{"Route category"}
+    SCOPE -->|"women's health"| TRACKER[("Tracker<br/>save anonymous check-in")]
+    SCOPE -->|"general health or off-topic"| GENERAL["GeneralAgent<br/>scoped reply"]
+    GENERAL <--> LLM["Optional LLM or SLM<br/>OpenAI-compatible endpoint"]
+
     TRACKER --> RECENT[("Recent 5 entries<br/>context for patterns")]
-    TRACKER --> RETRIEVER["RetrieverAgent<br/>top 3 knowledge chunks"]
+    TRACKER --> RETRIEVER["RetrieverAgent<br/>top 3 relevant chunks"]
     RECENT --> RETRIEVER
-    RETRIEVER <--> KB[("Knowledge base<br/>embeddings and BM25")]
+    RETRIEVER <--> KB[("Knowledge base<br/>embeddings or BM25<br/>plus relevance floor")]
     RETRIEVER --> INSIGHT["InsightAgent<br/>patterns and citations"]
     INSIGHT --> REMEDY["RemedyAgent<br/>source-backed self-care"]
 
     REMEDY --> MOOD["MoodAgent<br/>mood-aware response"]
+    GENERAL --> MOODGEN["MoodAgent<br/>general reply theme"]
     MOODURGENT --> SAFETY2["SafetyAgent<br/>final safety pass"]
     MOODDISTRESS --> SAFETY2
     MOOD --> SAFETY2
+    MOODGEN --> SAFETY2
 
     SAFETY2 --> RESPONSE["Response builder<br/>theme, support, trace"]
     RESPONSE --> SUPPORT["build_support<br/>care options by theme"]
@@ -32,9 +38,12 @@ flowchart TD
     RESPONSE --> API
     API --> UI
 
-    NOTE["Guardrail: urgent and distress paths skip extraction, retrieval, and normal saving"]
+    NOTE["Guardrail: urgent and distress paths skip extraction, retrieval and normal saving"]
+    NOTE2["Guardrail: general and off-topic paths skip period retrieval, insight, remedy and normal saving"]
     SAFETY1 -.-> NOTE
     NOTE -.-> SAFETY2
+    SCOPE -.-> NOTE2
+    NOTE2 -.-> SAFETY2
 
     classDef ui fill:#e8f7f3,stroke:#12705c,color:#0b3b30
     classDef agent fill:#eef2ff,stroke:#4052b5,color:#1e2a78
@@ -43,7 +52,7 @@ flowchart TD
     classDef api fill:#f2f2f2,stroke:#555555,color:#222222
 
     class USER,UI ui
-    class ROUTER,EXTRACT,RETRIEVER,INSIGHT,REMEDY,MOOD,MOODURGENT,MOODDISTRESS,SUPPORT agent
-    class SAFETY1,SAFETY2,URGENT,DISTRESS,NOTE safety
+    class ROUTER,EXTRACT,SCOPE,RETRIEVER,INSIGHT,REMEDY,MOOD,MOODURGENT,MOODDISTRESS,MOODGEN,GENERAL,SUPPORT agent
+    class SAFETY1,SAFETY2,URGENT,DISTRESS,NOTE,NOTE2 safety
     class TRACKER,SAVEURGENT,RECENT,KB,TRACE store
-    class API,ORCH,RESPONSE api
+    class API,ORCH,RESPONSE,LLM api

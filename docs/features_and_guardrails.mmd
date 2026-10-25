@@ -3,6 +3,8 @@ flowchart LR
         direction TB
         NAV["Multi-page shell<br/>Talk, Sounds, Journal, Support, Privacy"]
         CHAT["Chat screening<br/>POST /api/chat"]
+        SCOPE["Scope-aware routing<br/>women's health, general health, off-topic"]
+        MODEL["Optional LLM or SLM<br/>OpenAI-compatible endpoint"]
         MOOD["Mood-aware UI<br/>result cards and gentle audio"]
         KBQ["Knowledge-base insight and remedy<br/>patterns, questions, sources"]
         SOUNDS["Sound library<br/>15 ambient profiles"]
@@ -32,15 +34,19 @@ flowchart LR
         G13["Anonymous ID cookie<br/>no password, email, or phone"]
         G14["Local debug trace<br/>disclosed on the privacy page"]
         G15["Not-a-diagnosis disclaimer<br/>on relevant pages"]
-        G16["45 automated tests<br/>safety, support, login, sounds, pages"]
+        G16["61 automated tests<br/>scope, safety, support, login, sounds, pages"]
         G17["Sound framed as comfort<br/>not treatment"]
         G18["Under-18 support adds<br/>adolescent-friendly care options"]
+        G19["General and off-topic replies<br/>skip unrelated period retrieval"]
     end
 
     CHAT --> G1
     CHAT --> G2
     CHAT --> G7
     CHAT --> G8
+    SCOPE --> G7
+    SCOPE --> G19
+    MODEL --> G8
     KBQ --> G4
     KBQ --> G5
     KBQ --> G6
@@ -63,5 +69,5 @@ flowchart LR
 
     classDef feature fill:#e8f7f3,stroke:#12705c,color:#0b3b30
     classDef guard fill:#ffe8e5,stroke:#b33a2b,color:#5c160e
-    class NAV,CHAT,MOOD,KBQ,SOUNDS,PLAYER,UPLOAD,JOURNAL,SUPPORT,LOGIN,PRIVACY,WARM feature
-    class G1,G2,G3,G4,G5,G6,G7,G8,G9,G10,G11,G12,G13,G14,G15,G16,G17,G18 guard
+    class NAV,CHAT,SCOPE,MODEL,MOOD,KBQ,SOUNDS,PLAYER,UPLOAD,JOURNAL,SUPPORT,LOGIN,PRIVACY,WARM feature
+    class G1,G2,G3,G4,G5,G6,G7,G8,G9,G10,G11,G12,G13,G14,G15,G16,G17,G18,G19 guard
